@@ -18,19 +18,20 @@
 #
 # psuedo-code - might be the wrong syntax for bash
 
-project_name="dotfiles"
+github_user="BullShark"
+github_project="dotfiles"
 
-list = { "~/.bashrc",
+files = { "~/.bashrc",
          "~/.bash_profile", 
          "~/bin/pod" }
 
 dir = "/var/tmp"
-repo= "git://github.com/BullShark/$project_name.git"
+repo= "git://github.com/$github_user/$github_project.git"
 
 cd $dir
 git clone $repo
 
-dir="$dir/$project_name"
+dir="$dir/$github_project"
 
 for each in list
 do
@@ -40,5 +41,5 @@ done
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
-if $dir = '^/tmp/.+|/var/tmp/.+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
+if $dir =~ '^/tmp/.+|/var/tmp/.+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
 
