@@ -46,3 +46,17 @@ git push
 
 if $dir =~ '^(/tmp/.+|/var/tmp/).+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
 
+# Set debugging options
+function debug {
+  set -o nounset
+  set -o xtrace
+  set -o verbose
+}
+
+# Unset debugging options
+function xdebug {
+  set +o nounset
+  set +o xtrace
+  set +o verbose
+}
+
