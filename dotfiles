@@ -45,5 +45,5 @@ done
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
-if $dir =~ '^/tmp/.+|/var/tmp/.+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
+if $dir =~ '^(/tmp/.+|/var/tmp/).+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
 
