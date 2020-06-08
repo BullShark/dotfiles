@@ -23,28 +23,28 @@ github_project="dotfiles"
 dir="/var/tmp"
 repo="git://github.com/$github_user/$github_project.git"
 
-files = { "~/bin/dotfiles", # Including this script
-          "~/.bashrc",
-          "~/.bash_profile", 
-          "~/.vimrc",
-          "~/.gvimrc",
-          "~/bin/podw",
-          "~/bin/pod" }
+files = ( "~/bin/dotfiles" # Including this script
+          "~/.bashrc"
+          "~/.bash_profile"
+          "~/.vimrc"
+          "~/.gvimrc"
+          "~/bin/podw"
+          "~/bin/pod" )
 
-cd $dir
-git clone $repo
+cd "$dir"
+git clone "$repo"
 
 dir="$dir/$github_project"
 
-for each in list
+for each in "${files[@]}"
 do
-  rsync -opts $each $dir/
+   rsync -av "$each" "$dir"
 done
 
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
-if $dir =~ '^(/tmp/.+|/var/tmp/).+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
+if "$dir" =~ '^(/tmp/.+|/var/tmp/).+' && rm -rf "$dir" || echo "Could not execute rm -rf $dir because it's not a tmp directory"
 
 # Set debugging options
 function debug {
