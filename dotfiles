@@ -36,7 +36,7 @@ git clone $repo
 
 dir="$dir/$github_project"
 
-for each in list
+for each in files
 do
   rsync -opts $each $dir/
 done
