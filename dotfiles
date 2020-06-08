@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+#
+# This script avoids making the entire home folder into a git repo
+# To upload a few scripts and configs to a public git repository
+#
+# Avoid zsh from having a git prompt while anywhere in the user's home directory
+#
+# Steps:
+#   1. Make a list of path/files to be tracked and store in a bash array or w/e is most efficient
+#   2. Make a temporary directory, mkdir -p path/directory
+#   3. Cd to that directory and git clone repo with scripts and configs
+#   4. Copy the list/array of path/files from step 1 into the directory created in step 2
+#        And overwrite any existing files because they are tracked remotely anyways
+#   5. Git commit -a, commit all files with changes
+#   6. Git push those changes
+#   7. Now that all the files and their changes are tracked, delete the temporary directdory from step 1
+         With all the files in it because it will be recreated when needed
+#
+# psuedo-code - might be the wrong syntax for bash
+
+list = { "~/.bashrc",
+         "~/.bash_profile", 
+         "~/bin/pod" }
+
+dir = "/var/tmp/dotfiles"
+repo= "git://github.com/user/dotfiles.git"
+
+cd $dir
+git clone $repo
+
+for each in list
+do
+  rsync -opts $each $dir/
+done
+
+git commit -a -m "Updated"
+git push
+
+if $dir = '^/tmp/.+|/var/tmp/.+' && rm -rf $dir || echo "Could not execute rm -rf $dir because it's not a tmp directory"
+
