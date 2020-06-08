@@ -14,7 +14,7 @@
 #   5. Git commit -a, commit all files with changes
 #   6. Git push those changes
 #   7. Now that all the files and their changes are tracked, delete the temporary directdory from step 1
-         With all the files in it because it will be recreated when needed
+#         With all the files in it because it will be recreated when needed
 #
 # psuedo-code - might be the wrong syntax for bash
 
