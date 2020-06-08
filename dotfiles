@@ -36,11 +36,7 @@ git clone "$repo"
 
 dir="$dir/$github_project"
 
-<<<<<<< HEAD
 for each in "${files[@]}"
-=======
-for each in files
->>>>>>> 0a53718892a1a335e4ea7fff99c83b111e9c4f52
 do
    rsync -av "$each" "$dir"
 done
@@ -63,4 +59,3 @@ function xdebug {
   set +o xtrace
   set +o verbose
 }
-
