@@ -37,6 +37,7 @@ do
   rsync -av "$each" "$dir"
 done
 
+git add *
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 

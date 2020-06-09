@@ -1,0 +1,3 @@
+#!/bin/bash
+# podw - podcast wrapper
+/usr/bin/flock -n /tmp/pod.lock /home/bullshark/bin/pod
