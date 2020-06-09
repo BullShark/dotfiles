@@ -22,7 +22,7 @@ set -e
 github_user="BullShark"
 github_project="dotfiles"
 dir="/var/tmp"
-repo="git://github.com/$github_user/$github_project.git"
+repo="https://github.com/$github_user/$github_project.git"
 
 files=(~/bin/dotfiles ~/.bashrc ~/.bash_profile ~/.vimrc ~/.gvimrc ~/bin/podw ~/bin/pod)
 
@@ -30,6 +30,7 @@ cd "$dir"
 git clone "$repo"
 
 dir="$dir/$github_project"
+cd "$dir"
 
 for each in "${files[@]}"
 do
