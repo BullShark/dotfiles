@@ -16,9 +16,9 @@
 #   7. Now that all the files and their changes are tracked, delete the temporary directdory from step 1
 #         With all the files in it because it will be recreated when needed
 #
-# psuedo-code - might be the wrong syntax for bash
 set -e
 
+# Set the vars here
 github_user="BullShark"
 github_project="dotfiles"
 dir="/var/tmp"
@@ -28,24 +28,27 @@ repo="https://github.com/$github_user/$github_project.git"
 GLOBIGNORE=".:.."
 shopt -u dotglob
 
+# Add files to be tracked here
 files=(~/bin/dotfiles ~/.bashrc ~/.bash_profile ~/.vimrc ~/.gvimrc ~/bin/podw ~/bin/pod)
 
+# Retrieve the project folder and change to it
 cd "$dir"
 git clone "$repo"
-
 dir="$dir/$github_project"
 cd "$dir"
 
+# Copy the files over to the temp directory for use with git
 for each in "${files[@]}"
 do
   rsync -av "$each" "$dir"
 done
 
+# Add, commit, and push
 git add * .
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
-
+# Do not delete if we have the wrong directory
 if [[ $dir =~ ^(/tmp/.+|/var/tmp/).+ ]]; then
   rm -rf "$dir"
 fi
@@ -63,4 +66,3 @@ function xdebug {
   set +o xtrace
   set +o verbose
 }
-
