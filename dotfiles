@@ -49,7 +49,7 @@ git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
 # Do not delete if we have the wrong directory
-if [[ $dir =~ ^(/tmp/.+|/var/tmp/).+ ]]; then
+if [[ $dir =~ ^(/tmp/|/var/tmp/).+ ]]; then
   rm -rf "$dir"
 fi
 
