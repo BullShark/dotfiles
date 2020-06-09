@@ -23,7 +23,7 @@ github_project="dotfiles"
 dir="/var/tmp"
 repo="git://github.com/$github_user/$github_project.git"
 
-files=("~/bin/dotfiles" "~/.bashrc" "~/.bash_profile" "~/.vimrc" "~/.gvimrc" "~/bin/podw" "~/bin/pod")
+files=(~/bin/dotfiles ~/.bashrc ~/.bash_profile ~/.vimrc ~/.gvimrc ~/bin/podw ~/bin/pod)
 
 cd "$dir"
 git clone "$repo"
@@ -38,7 +38,10 @@ done
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
-if "$dir" =~ '^(/tmp/.+|/var/tmp/).+' && rm -rf "$dir" || echo "Could not execute rm -rf $dir because it's not a tmp directory"
+
+if [[ $dir =~ ^(/tmp/.+|/var/tmp/).+ ]]; then
+  rm -rv "$dir"
+fi
 
 # Set debugging options
 function debug {
