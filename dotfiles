@@ -23,13 +23,7 @@ github_project="dotfiles"
 dir="/var/tmp"
 repo="git://github.com/$github_user/$github_project.git"
 
-files = ( "~/bin/dotfiles" # Including this script
-          "~/.bashrc"
-          "~/.bash_profile"
-          "~/.vimrc"
-          "~/.gvimrc"
-          "~/bin/podw"
-          "~/bin/pod" )
+files=("~/bin/dotfiles" "~/.bashrc" "~/.bash_profile" "~/.vimrc" "~/.gvimrc" "~/bin/podw" "~/bin/pod")
 
 cd "$dir"
 git clone "$repo"
