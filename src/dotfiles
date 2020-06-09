@@ -28,21 +28,36 @@ repo="https://github.com/$github_user/$github_project.git"
 GLOBIGNORE=".:.."
 shopt -u dotglob
 
-# Add files to be tracked here
-files=(~/bin/dotfiles ~/.bashrc ~/.bash_profile ~/.vimrc ~/.gvimrc ~/bin/podw ~/bin/pod)
+files=()
+files[0]=~/bin/dotfiles
+files[1]=~/bin/podw
+files[2]=~/bin/pod
+files[3]=~/bin/konsolewrapper
+files[4]=~/bin/matrix.sh
+files[1]=~/.bashrc
+files[2]=~/.bash_profile
+files[5]=~/.zshrc
+files[6]=~/.zprofile
+files[7]=~/.profile
+files[8]=~/.vimrc
+files[9]=~/.gvimrc
+files[10]=~/.vim/colors/molokai.vim
+files[11]=~/.vim/colors/aldmeris.vim
+files[12]=~/.vim/colors/darkspectrum.vim
 
 # Retrieve the project folder and change to it
 cd "$dir"
 git clone "$repo"
 dir="$dir/$github_project"
 cd "$dir"
+mkdir -p "$dir/src"
 
 # Copy the files over to the temp directory for use with git
 for each in "${files[@]}"
 do
-  rsync -av "$each" "$dir"
+  rsync -av "$each" "$dir/src"
 done
-
+read # set a breakpoint
 # Add, commit, and push
 git add * .*
 git commit -a -m "Updated" # Made to run as non-interactive by cron
