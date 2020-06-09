@@ -8,4 +8,4 @@
 # https://wiki.archlinux.org/index.php/Zsh
 # http://zsh.sourceforge.net/Doc/Release/zsh_toc.html
 
-[[ -a 
+source /usr/share/doc/pkgfile/command-not-found.zsh
