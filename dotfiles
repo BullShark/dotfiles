@@ -33,7 +33,7 @@ dir="$dir/$github_project"
 
 for each in "${files[@]}"
 do
-   rsync -av "$each" "$dir"
+  rsync -av "$each" "$dir"
 done
 
 git commit -a -m "Updated" # Made to run as non-interactive by cron
@@ -57,3 +57,4 @@ function xdebug {
   set +o xtrace
   set +o verbose
 }
+
