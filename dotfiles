@@ -17,6 +17,7 @@
 #         With all the files in it because it will be recreated when needed
 #
 # psuedo-code - might be the wrong syntax for bash
+set -e
 
 github_user="BullShark"
 github_project="dotfiles"
@@ -40,7 +41,7 @@ git push
 
 
 if [[ $dir =~ ^(/tmp/.+|/var/tmp/).+ ]]; then
-  rm -rv "$dir"
+  rm -rf "$dir"
 fi
 
 # Set debugging options
