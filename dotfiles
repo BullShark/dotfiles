@@ -44,7 +44,7 @@ do
 done
 
 # Add, commit, and push
-git add * .
+git add * .*
 git commit -a -m "Updated" # Made to run as non-interactive by cron
 git push
 
