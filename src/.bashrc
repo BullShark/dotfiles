@@ -7,7 +7,7 @@
 colors() {
 	local fgc bgc vals seq0
 
-	printf "Color escapes are %s\n" '\e[${value};...;${value}m'
+	printf "Color escapes are %s\n" "\e[${value};...;${value}m"
 	printf "Values 30..37 are \e[33mforeground colors\e[m\n"
 	printf "Values 40..47 are \e[43mbackground colors\e[m\n"
 	printf "Value  1 gives a  \e[1mbold-faced look\e[m\n\n"
@@ -90,7 +90,7 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-alias cp="cp -i"                          # confirm before overwriting something
+alias cp='cp -i'                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 #alias np='nano -w PKGBUILD'
@@ -122,19 +122,19 @@ shopt -s autocd
 # # usage: ex <file>
 ex ()
 {
-  if [ -f $1 ] ; then
+  if [ -f "$1" ] ; then
     case $1 in
-      *.tar.bz2)   tar xjf $1   ;;
-      *.tar.gz)    tar xzf $1   ;;
-      *.bz2)       bunzip2 $1   ;;
-      *.rar)       unrar x $1     ;;
-      *.gz)        gunzip $1    ;;
-      *.tar)       tar xf $1    ;;
-      *.tbz2)      tar xjf $1   ;;
-      *.tgz)       tar xzf $1   ;;
-      *.zip)       unzip $1     ;;
-      *.Z)         uncompress $1;;
-      *.7z)        7z x $1      ;;
+      *.tar.bz2)   tar xjf "$1"   ;;
+      *.tar.gz)    tar xzf "$1"   ;;
+      *.bz2)       bunzip2 "$1"   ;;
+      *.rar)       unrar x "$1"   ;;
+      *.gz)        gunzip "$1"    ;;
+      *.tar)       tar xf "$1"    ;;
+      *.tbz2)      tar xjf "$1"   ;;
+      *.tgz)       tar xzf "$1"   ;;
+      *.zip)       unzip "$1"     ;;
+      *.Z)         uncompress "$1";;
+      *.7z)        7z x "$1"      ;;
       *)           echo "'$1' cannot be extracted via ex()" ;;
     esac
   else
@@ -247,7 +247,7 @@ function psgrep {
 # Gets TOR ip
 function torip {
   http_proxy="http://localhost:8118" wget -q http://ipchicken.com -O- | \
-    egrep -o '([0-9]{1,3}\.){3}[0-9]{1,3}){1}' | \
+    grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}){1}' | \
     tr -d '[:space:]'
   echo
 }
