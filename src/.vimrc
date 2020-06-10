@@ -136,6 +136,7 @@ set title               " show title in console title bar
 
 "set makeprg=gcc\ %
 "set makeprg=javac\ %
+set makeprg=shellcheck\ %
 
 " <Ctrl-l> redraws the screen and removes any search highlighting.
 nnoremap <silent> <C-l> :nohl<CR><C-l>
