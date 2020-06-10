@@ -24,6 +24,7 @@ files[1]=~/bin/podw
 files[2]=~/bin/pod
 files[3]=~/bin/konsolewrapper
 files[4]=~/bin/matrix.sh
+files[4]=~/bin/gibson
 files[1]=~/.bashrc
 files[2]=~/.bash_profile
 files[5]=~/.zshrc

