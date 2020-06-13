@@ -90,12 +90,8 @@ fi
 
 unset use_color safe_term match_lhs sh
 
-alias cp='cp -i'                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-#alias np='nano -w PKGBUILD'
-alias vp='vim PKGBUILD'
-alias more=less
+# Mimic Zsh run-help ability (Alt + h)
+bind '"\eh": "\C-a\eb\ed\C-y\e#man \C-y\C-m\C-p\C-p\C-a\C-d\C-e"'
 
 xhost +local:root > /dev/null 2>&1
 
@@ -105,6 +101,7 @@ complete -cf sudo
 # Enable checkwinsize so that bash will check the terminal size when
 # it regains control.  #65623
 # http://cnswww.cns.cwru.edu/~chet/bash/FAQ (E11)
+# Auto-resize, check and adjust column width and height after each command
 shopt -s checkwinsize
 
 shopt -s expand_aliases
@@ -116,6 +113,92 @@ shopt -s histappend
 
 # Auto cd when entering just a path
 shopt -s autocd
+
+##############################################################
+# ALIASES
+#
+
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias vp='vim PKGBUILD'
+alias more='less'
+
+alias h='history'
+alias hv='history | view -' # Pipe history to read-only VIM
+alias hg='history | grep -iE --' # History grep/search
+
+# Added safety and verbose
+alias rm='rm -iv'
+alias mv='mv -iv'
+alias cp='cp -iv'
+
+# Lazy typing
+alias ..='cd ..'
+alias ...='cd ../..'
+alias -- -='cd $-' # Back to previous dir
+alias cls='clear'
+alias _='sudo' # Simple sudo
+alias sl='ls'
+
+# LS Fu
+alias ls='ls --color=auto'
+alias la='ls -lhaZ'
+alias lsa='ls -shaCF' # Does not show SE info
+
+# Gets WAN ip
+#alias myip='dig myip.opendns.com @resolver1.opendns.com +short'
+alias myip='curl -4 icanhazip.com'
+alias myip6='curl -6 icanhazip.com'
+
+# Weather info in colors
+alias weather='curl wttr.in'
+
+# Moon Phase
+alias moon='curl wttr.in/Moon'
+
+# Run youtube-dl for music without looking at --help every time
+alias yt-audio='youtube-dl -x --audio-quality 0 --audio-format mp3 --add-metadata'
+
+# Use larger units
+alias iostat='iostat --human'
+
+# See what flags native enables on your machine
+alias gcc-info='gcc -march=native -v -Q --help=target'
+
+# What GCC "native" know about the CPU
+alias gcc-native='gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | grep /cc1'
+
+#-------------------------------------------------------------
+# ss: socket statistics
+# -a all
+# -l listening
+# -o timer info
+# -e extended/detailed socket info
+# -m memory info
+# -p processes using socket
+# -i internal tcp info
+# -r try to resolve numeric port/addr
+# -s summary statistics
+# -Z Implies -p with SE Audit info
+# -z Implies -Z with more SE Fu, more verbose
+# -n numeric, no resolve
+# -b bpf (berkeley pcap/tcpdump filters), -4, -6, -0 packet (-f link),
+# -t tcp, -u udp, -d dccp, -w raw, -x unix (-f unix)
+# -- family, socket tables, ...
+#-------------------------------------------------------------
+alias sss='sudo ss -aloempisn'
+
+#-------------------------------------------------------------
+# lsof: list open files
+# -i Without args, selects the listing of all IP network files
+# -n Prevent conversion of net numbers to net names
+# -P Prevent conversion of port numbers to port names
+#-------------------------------------------------------------
+alias lsofnet='sudo lsof -i -n -P'
+
+##############################################################
+# FUNCTIONS
+#
 
 #
 # # ex - archive extractor
@@ -156,79 +239,39 @@ function xdebug {
   set +o verbose
 }
 
-#-------------------------------------------------------------
-# ss: socket statistics
-# -a all
-# -l listening
-# -o timer info
-# -e extended/detailed socket info
-# -m memory info
-# -p processes using socket
-# -i internal tcp info
-# -r try to resolve numeric port/addr
-# -s summary statistics
-# -Z Implies -p with SE Audit info
-# -z Implies -Z with more SE Fu, more verbose
-# -n numeric, no resolve
-# -b bpf (berkeley pcap/tcpdump filters), -4, -6, -0 packet (-f link),
-# -t tcp, -u udp, -d dccp, -w raw, -x unix (-f unix)
-# -- family, socket tables, ...
-#-------------------------------------------------------------
-alias sss='sudo ss -aloempisn'
+# Bash Power Prompt - AskApache.org
+# http://www.askapache.com/linux/bash-power-prompt.html
+#export AA_P="export PVE=\"\\033[m\\033[38;5;2m\"\$(( \`sed -n \"s/MemFree:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\" /proc/meminfo\` / 1024 ))\"\\033[38;5;22m/\"\$((\`sed -n \"s/MemTotal:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\" /proc/meminfo\`/ 1024 ))MB\"\\t\\033[m\\033[38;5;55m\$(< /proc/loadavg)\\033[m\";echo -en \"\"" \
+#export PROMPT_COMMAND="history -a;((\$SECONDS % 10==0 ))&&eval \"\$AA_P\";echo -en \"\$PVE\";" \
+#export PS1="\\[\\e[m\\n\\e[1;30m\\][\$\$:\$PPID \\j:\\!\\[\\e[1;30m\\]]\\[\\e[0;36m\\] \\T \\d \\[\\e[1;30m\\][\\[\\e[1;34m\\]\\u@\\H\\[\\e[1;30m\\]:\\[\\e[0;37m\\]\${SSH_TTY} \\[\\e[0;32m\\]+\${SHLVL}\\[\\e[1;30m\\]] \\[\\e[1;37m\\]\\w\\[\\e[0;37m\\] \\n(\$SHLVL:\\!)\\\$ " \
+#export PVE="\\033[m\\033[38;5;2m813\\033[38;5;22m/1024MB\\t\\033[m\\033[38;5;55m0.25 0.22 0.18 1/66 26820\\033[m" && eval $AA_P
 
-#-------------------------------------------------------------
-# lsof: list open files
-# -i Without args, selects the listing of all IP network files
-# -n Prevent conversion of net numbers to net names
-# -P Prevent conversion of port numbers to port names
-#-------------------------------------------------------------
-alias lsofnet='sudo lsof -i -n -P'
+# Send a google query for search results
+#XXX Colors and text formatting
+function google {
+  query="$*"
+  goog_url='https://www.google.it/search?tbs=li:1&q='
+  agent="Mozilla/4.0"
+  stream=$(curl -A "$agent" -skLm 10 "${goog_url}${query//\ /+}" | \
+  grep -oP '\/url\?q=.+?&amp' | \
+  sed 's|/url?q=||'; 's|&amp||')
+  echo -e "${stream//\%/\x}" # now display it
+}
 
-# LS Fu
-alias ls='ls --color=auto'
-alias la='ls -lhaZ'
-alias lsa='ls -shaCF' # Does not show SE info
+# Google Translate
+#XXX Needs testing
+function gt() {
+  to="${1}";
+  text=$(echo "${*}" | sed -e "s/^.. //" -e "s/[\"'<>]//g");
+  res=$(wget -U "Mozilla/5.0" -qO - "http://translate.google.com/translate_a/t?client=t&text=${text}&sl=auto&tl=${to}" | sed 's/\[\[\[\"//' | cut -d \" -f 1);
+  echo "${res}";
+}
 
-# Gets WAN ip
-#alias myip='dig myip.opendns.com @resolver1.opendns.com +short'
-alias myip='curl -4 icanhazip.com'
-alias myip6='curl -6 icanhazip.com'
-
-# Clears the screen
-alias cls='clear'
-
-# Simple sudo
-alias _='sudo'
-
-# History in one
-alias h='history'
-
-# Be verbose
-alias rm='rm -iv'
-alias cp='cp -iv'
-alias mv='mv -iv'
-
-# Less typing
-alias ..='cd ../'
-alias ...='cd ../..'
-
-# Weather info in colors
-alias weather='curl wttr.in'
-
-# Moon Phase
-alias moon='curl wttr.in/Moon'
-
-# Run youtube-dl for music without looking at --help every time
-alias yt-audio='youtube-dl -x --audio-quality 0 --audio-format mp3 --add-metadata'
-
-# Use larger units
-alias iostat='iostat --human'
-
-# See what flags native enables on your machine
-alias gcc-info='gcc -march=native -v -Q --help=target'
-
-# What GCC "native" know about the CPU
-alias gcc-native='gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | grep /cc1'
+function useless_name {
+  ram=`cat /proc/meminfo | grep "MemFree" | awk -F" " '{print $2}'`
+  swap=`cat /proc/meminfo | grep "SwapFree" | awk -F" " '{print $2}'`
+  echo -n "${RAM}kb/ram ${SWAP}kb/swap"
+}
 
 # Print the first line, column names, of ps output
 # Search and output the argument 

@@ -1,0 +1,29 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# https://wiki.archlinux.org/index.php/CPU_frequency_scaling
+# Disabling Turbo Boost
+#echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
+#echo 0 > /sys/devices/system/cpu/cpufreq/boost
+
+rm -rf /home/bullshark/.googleearth/Cache/*
+rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
+rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
+rm -rf /home/bullshark/.cache/*
+rm -rf /root/.cache/*
+rm -rf /tmp/*
+rm -rf /var/tmp/*
+rm -rf /var/cache/*
+
+exit 0
+

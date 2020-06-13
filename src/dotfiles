@@ -35,6 +35,7 @@ files[9]=~/.gvimrc
 files[10]=~/.vim/colors/molokai.vim
 files[11]=~/.vim/colors/aldmeris.vim
 files[12]=~/.vim/colors/darkspectrum.vim
+files[13]=/etc/rc.local
 
 # Set the vars here
 github_user="BullShark"
