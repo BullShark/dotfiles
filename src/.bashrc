@@ -267,12 +267,6 @@ function gt() {
   echo "${res}";
 }
 
-function useless_name {
-  ram=`cat /proc/meminfo | grep "MemFree" | awk -F" " '{print $2}'`
-  swap=`cat /proc/meminfo | grep "SwapFree" | awk -F" " '{print $2}'`
-  echo -n "${RAM}kb/ram ${SWAP}kb/swap"
-}
-
 # Print the first line, column names, of ps output
 # Search and output the argument 
 # TODO http://mywiki.wooledge.org/BashFAQ/035
