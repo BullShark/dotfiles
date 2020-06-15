@@ -20,24 +20,26 @@ set -e
 set -x
 
 # Files to be tracked
-files[0]=~/bin/dotfiles
-files[1]=~/bin/podw
-files[2]=~/bin/pod
-files[3]=~/bin/konsolewrapper
-files[5]=~/bin/matrix.sh
-files[6]=~/bin/gibson
-files[7]=~/.bashrc
-files[8]=~/.bash_profile
-files[9]=~/.zshrc
-files[10]=~/.zprofile
-files[11]=~/.profile
-files[12]=~/.vimrc
-files[13]=~/.gvimrc
-files[14]=~/.LESS_TERMCAP
-files[15]=~/.vim/colors/molokai.vim
-files[16]=~/.vim/colors/aldmeris.vim
-files[17]=~/.vim/colors/darkspectrum.vim
-files[18]=/etc/rc.local
+files=(
+  ~/bin/dotfiles
+  ~/bin/podw
+  ~/bin/pod
+  ~/bin/konsolewrapper
+  ~/bin/matrix.sh
+  ~/bin/gibson
+  ~/.bashrc
+  ~/.bash_profile
+  ~/.zshrc
+  ~/.zprofile
+  ~/.profile
+  ~/.vimrc
+  ~/.gvimrc
+  ~/.LESS_TERMCAP
+  ~/.vim/colors/molokai.vim
+  ~/.vim/colors/aldmeris.vim
+  ~/.vim/colors/darkspectrum.vim
+  /etc/rc.local
+)
 
 # Set the vars here
 github_user="BullShark"
