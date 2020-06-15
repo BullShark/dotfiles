@@ -17,6 +17,7 @@
 #         With all the files in it because it will be recreated when needed
 #
 set -e
+set -x
 
 # Files to be tracked
 files[0]=~/bin/dotfiles
@@ -71,16 +72,3 @@ if [[ $dir =~ ^(/tmp/|/var/tmp/).+ ]]; then
   rm -rf "$dir"
 fi
 
-# Set debugging options
-function debug {
-  set -o nounset
-  set -o xtrace
-  set -o verbose
-}
-
-# Unset debugging options
-function xdebug {
-  set +o nounset
-  set +o xtrace
-  set +o verbose
-}
