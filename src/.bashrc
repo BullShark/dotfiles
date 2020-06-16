@@ -290,16 +290,30 @@ function exeicon {
 
 # Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
 function sweep {
-  sudo -i -u root bash << EOF             # Execute all as root
+  sudo -i -u root bash << 'EOF'             # Execute all as root
   # Remove cache files if yay is not running
   killall -q -0 yay || rm -rvf $HOME/.cache/yay/* /root/.cache/yay/*
+
   # Clear all pacman download cache and databases
   pacman -Scc --noconfirm
+
+  # Clear logs older than 3 days
+  journalctl --vacuum-time=3d
+
+  # Removes old revisions of snaps
+  # CLOSE ALL SNAPS BEFORE RUNNING THIS
+  snap list --all | awk '/disabled/{print $1, $3}' |
+    while read snapname revision; do
+        snap remove "$snapname" --revision="$revision"
+    done
 EOF
+  # Yay and pamac cleanup
   yes | yay -Scc
   pamac clean -k 0
-  # flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
-  #XXX snap
+
+  # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
+
+  # Homebrew cleanup
   brew cleanup
   brew cleanup --prune 0
   brew cleanup -s
