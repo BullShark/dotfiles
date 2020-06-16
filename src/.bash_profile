@@ -4,7 +4,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ -f ~/usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
+[[ -f /usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
@@ -32,7 +32,4 @@ export LESS="--RAW-CONTROL-CHARS"	# Get color support for 'less'
 export EDITOR="vim"
 export MANGOHUD=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=0
-
-# Environment variables are conventionally placed in ~/.profile or /etc/profile so that other Bourne-compatible shells can use them. 
-# XXX Move non-bash specific stuff to ~/.profile, so zsh can use it too.
 
