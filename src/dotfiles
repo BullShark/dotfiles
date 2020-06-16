@@ -39,6 +39,8 @@ files=(
   ~/.vim/colors/aldmeris.vim
   ~/.vim/colors/darkspectrum.vim
   /etc/rc.local
+  /etc/default/grub
+  /etc/xdg/plasma-workspace/env/envars.sh
 )
 
 # Set the vars here

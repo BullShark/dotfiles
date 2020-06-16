@@ -124,7 +124,7 @@ alias vp='vim PKGBUILD'
 alias more='less'
 
 alias h='history'
-alias hv='history | view -' # Pipe history to read-only VIM
+#alias hv='history | view -' # Pipe history to read-only VIM
 alias hg='history | grep -iE --' # History grep/search
 
 # Added safety and verbose
