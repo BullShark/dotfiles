@@ -186,7 +186,7 @@ alias gcc-native='gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | gre
 # -t tcp, -u udp, -d dccp, -w raw, -x unix (-f unix)
 # -- family, socket tables, ...
 #-------------------------------------------------------------
-alias sss='sudo ss -aloempisn'
+alias sss='sudo ss -aloempin'
 
 #-------------------------------------------------------------
 # lsof: list open files
