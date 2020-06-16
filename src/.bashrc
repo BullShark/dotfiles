@@ -225,6 +225,13 @@ ex ()
   fi
 }
 
+# Bash Power Prompt - AskApache.org
+# http://www.askapache.com/linux/bash-power-prompt.html
+#export AA_P="export PVE=\"\\033[m\\033[38;5;2m\"\$(( \`sed -n \"s/MemFree:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\" /proc/meminfo\` / 1024 ))\"\\033[38;5;22m/\"\$((\`sed -n \"s/MemTotal:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\" /proc/meminfo\`/ 1024 ))MB\"\\t\\033[m\\033[38;5;55m\$(< /proc/loadavg)\\033[m\";echo -en \"\"" \
+#export PROMPT_COMMAND="history -a;((\$SECONDS % 10==0 ))&&eval \"\$AA_P\";echo -en \"\$PVE\";" \
+#export PS1="\\[\\e[m\\n\\e[1;30m\\][\$\$:\$PPID \\j:\\!\\[\\e[1;30m\\]]\\[\\e[0;36m\\] \\T \\d \\[\\e[1;30m\\][\\[\\e[1;34m\\]\\u@\\H\\[\\e[1;30m\\]:\\[\\e[0;37m\\]\${SSH_TTY} \\[\\e[0;32m\\]+\${SHLVL}\\[\\e[1;30m\\]] \\[\\e[1;37m\\]\\w\\[\\e[0;37m\\] \\n(\$SHLVL:\\!)\\\$ " \
+#export PVE="\\033[m\\033[38;5;2m813\\033[38;5;22m/1024MB\\t\\033[m\\033[38;5;55m0.25 0.22 0.18 1/66 26820\\033[m" && eval $AA_P
+
 # Set debugging options
 function debug {
   set -o nounset
@@ -239,38 +246,7 @@ function xdebug {
   set +o verbose
 }
 
-# Bash Power Prompt - AskApache.org
-# http://www.askapache.com/linux/bash-power-prompt.html
-#export AA_P="export PVE=\"\\033[m\\033[38;5;2m\"\$(( \`sed -n \"s/MemFree:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\" /proc/meminfo\` / 1024 ))\"\\033[38;5;22m/\"\$((\`sed -n \"s/MemTotal:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\" /proc/meminfo\`/ 1024 ))MB\"\\t\\033[m\\033[38;5;55m\$(< /proc/loadavg)\\033[m\";echo -en \"\"" \
-#export PROMPT_COMMAND="history -a;((\$SECONDS % 10==0 ))&&eval \"\$AA_P\";echo -en \"\$PVE\";" \
-#export PS1="\\[\\e[m\\n\\e[1;30m\\][\$\$:\$PPID \\j:\\!\\[\\e[1;30m\\]]\\[\\e[0;36m\\] \\T \\d \\[\\e[1;30m\\][\\[\\e[1;34m\\]\\u@\\H\\[\\e[1;30m\\]:\\[\\e[0;37m\\]\${SSH_TTY} \\[\\e[0;32m\\]+\${SHLVL}\\[\\e[1;30m\\]] \\[\\e[1;37m\\]\\w\\[\\e[0;37m\\] \\n(\$SHLVL:\\!)\\\$ " \
-#export PVE="\\033[m\\033[38;5;2m813\\033[38;5;22m/1024MB\\t\\033[m\\033[38;5;55m0.25 0.22 0.18 1/66 26820\\033[m" && eval $AA_P
-
-# Send a google query for search results
-#XXX Colors and text formatting
-function google {
-  query="$*"
-  goog_url='https://www.google.it/search?tbs=li:1&q='
-  agent="Mozilla/4.0"
-  stream=$(curl -A "$agent" -skLm 10 "${goog_url}${query//\ /+}" | \
-  grep -oP '\/url\?q=.+?&amp' | \
-  sed 's|/url?q=||'; 's|&amp||')
-  echo -e "${stream//\%/\x}" # now display it
-}
-
-# Google Translate
-#XXX Needs testing
-function gt() {
-  to="${1}";
-  text=$(echo "${*}" | sed -e "s/^.. //" -e "s/[\"'<>]//g");
-  res=$(wget -U "Mozilla/5.0" -qO - "http://translate.google.com/translate_a/t?client=t&text=${text}&sl=auto&tl=${to}" | sed 's/\[\[\[\"//' | cut -d \" -f 1);
-  echo "${res}";
-}
-
-# Print the first line, column names, of ps output
-# Search and output the argument 
-# TODO http://mywiki.wooledge.org/BashFAQ/035
-# TODO http://mywiki.wooledge.org/ProcessManagement
+# Grep ps output and always display the first line from ps, the column names
 function psgrep {
   if [[ $# -eq 1 && $1 != '-h' && $1 != '--help' ]]
   then
@@ -330,7 +306,7 @@ EOF
   rm -rvf "$(brew --cache)"
 }
 
-# View manpages in vim with nice syntax highlighting
+# View manpages in vim with vim's color scheme and less macros
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then

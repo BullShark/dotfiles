@@ -53,6 +53,7 @@ shopt -u dotglob
 
 # Retrieve the project folder and change to it
 cd "$dir"
+#XXX if $dir/$github is under /tmp or /var/tmp and it already exists, delete it
 git clone "$repo"
 dir="$dir/$github_project"
 cd "$dir"
