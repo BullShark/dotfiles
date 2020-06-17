@@ -27,6 +27,8 @@ files=(
   ~/bin/konsolewrapper
   ~/bin/matrix.sh
   ~/bin/gibson
+  ~/bin/vpaste
+  ~/bin/retroarchw
   ~/.bashrc
   ~/.bash_profile
   ~/.zshrc

@@ -1,0 +1,18 @@
+#!/bin/bash
+# retroarchw - retroarch wrapper
+#
+# Used by Kodi with IAGL external launcher
+#
+# Determine the file-type and load the libretro library
+# Example:
+#   Load mupen64plus_next_libretro.so or parallel_n64_libretro.so when the filetype is n64
+
+# libretro libraries
+#desmume_libretro.so  
+#dolphin_libretro.so  
+#mednafen_psx_libretro.so  
+#melonds_libretro.so       
+#mupen64plus_next_libretro.so
+#parallel_n64_libretro.so
+
+retroarch -f -L /usr/lib/libretro/parallel_n64_libretro.so "$@"
