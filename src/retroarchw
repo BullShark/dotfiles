@@ -15,4 +15,8 @@
 #mupen64plus_next_libretro.so
 #parallel_n64_libretro.so
 
+echo "args: $@" >> ~/kodi-retroarch.log
+echo "date: $(date)" >> ~/kodi-retroarch.log
+echo "command: retroarch -f -L /usr/lib/libretro/parallel_n64_libretro.so $@" >> ~/kodi-retroarch.log
+
 retroarch -f -L /usr/lib/libretro/parallel_n64_libretro.so "$@"

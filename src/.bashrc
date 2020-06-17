@@ -165,6 +165,9 @@ alias iostat='iostat --human'
 # What GCC "native" know about the CPU and what flags native enables on your machine
 alias gcc-info='gcc -march=native -v -Q --help=target; echo; gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | grep /cc1'
 
+# List of the top ten most used commands
+alias most-often='history | awk '{print $2}' | sort | uniq -c | sort -rn | head'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all
