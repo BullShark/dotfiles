@@ -306,6 +306,7 @@ function sweep {
     while read snapname revision; do
         snap remove "$snapname" --revision="$revision"
     done
+  #XXX http://mywiki.wooledge.org/BashProgramming/05
 EOF
   # Yay and pamac cleanup
   yes | yay -Scc

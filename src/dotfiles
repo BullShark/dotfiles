@@ -40,6 +40,7 @@ files=(
   ~/.vim/colors/molokai.vim
   ~/.vim/colors/aldmeris.vim
   ~/.vim/colors/darkspectrum.vim
+  ~/Templates/Chococooky.ttf
   /etc/rc.local
   /etc/default/grub
   /etc/xdg/plasma-workspace/env/envars.sh
