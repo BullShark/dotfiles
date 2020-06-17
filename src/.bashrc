@@ -162,11 +162,8 @@ alias yt-audio='youtube-dl -x --audio-quality 0 --audio-format mp3 --add-metadat
 # Use larger units
 alias iostat='iostat --human'
 
-# See what flags native enables on your machine
-alias gcc-info='gcc -march=native -v -Q --help=target'
-
-# What GCC "native" know about the CPU
-alias gcc-native='gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | grep /cc1'
+# What GCC "native" know about the CPU and what flags native enables on your machine
+alias gcc-info='gcc -march=native -v -Q --help=target; echo; gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | grep /cc1'
 
 #-------------------------------------------------------------
 # ss: socket statistics
