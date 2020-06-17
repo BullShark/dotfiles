@@ -10,7 +10,7 @@ router=192.168.1.1
 target6=
 router6=
 
-sudo -i -u root bash << EOF		# Execute all as root
+sudo -i -u root bash << 'EOF'		# Execute all as root
   nft flush ruleset
   echo 1 > /proc/sys/net/ipv4/ip_forward
   iptables-translate -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port $redirect_port
