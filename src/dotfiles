@@ -45,7 +45,7 @@ files=(
   ~/.local/share/konsole/Sweet.colorscheme
   ~/.local/share/konsole/Sweet-Mars.colorscheme
   ~/.local/share/konsole/Sweet.profile
-  ~/.local/share/konsole/
+  ~/.local/share/konsole/Sweet-Mars.profile
   ~/Templates/Chococooky.ttf
   /etc/rc.local
   /etc/default/grub
