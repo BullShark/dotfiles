@@ -29,6 +29,7 @@ files=(
   ~/bin/gibson
   ~/bin/vpaste
   ~/bin/retroarchw
+  ~/bin/pkgfile-update
   ~/.bashrc
   ~/.bash_profile
   ~/.zshrc
