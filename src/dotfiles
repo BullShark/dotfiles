@@ -42,6 +42,10 @@ files=(
   ~/.vim/colors/molokai.vim
   ~/.vim/colors/aldmeris.vim
   ~/.vim/colors/darkspectrum.vim
+  ~/.local/share/konsole/Sweet.colorscheme
+  ~/.local/share/konsole/Sweet-Mars.colorscheme
+  ~/.local/share/konsole/Sweet.profile
+  ~/.local/share/konsole/
   ~/Templates/Chococooky.ttf
   /etc/rc.local
   /etc/default/grub
