@@ -47,6 +47,7 @@ files=(
   ~/.local/share/konsole/Sweet.profile
   ~/.local/share/konsole/Sweet-Mars.profile
   ~/.config/audacious/eq.preseteq.preset
+  ~/.local/share/audacious/Skins/n3ON_.wsz
   ~/Templates/Chococooky.ttf
   /etc/rc.local
   /etc/default/grub
