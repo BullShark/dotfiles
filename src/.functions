@@ -60,6 +60,7 @@ function restartkde {
 }
 
 # Re-detect sound devices
+#XXX https://forum.manjaro.org/t/2-bugs-in-manjaro-kde/148548
 function soundfix {
   pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
 }
