@@ -24,6 +24,7 @@ alias -- -='cd $-' # Back to previous dir
 alias cls='clear'
 alias _='sudo' # Simple sudo
 alias sl='ls'
+alias dmesg='dmesg -T'
 
 # LS Fu
 alias ls='ls --color=auto'
