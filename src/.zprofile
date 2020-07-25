@@ -2,7 +2,7 @@
 # ~/.zprofile
 #
 
-[[ -e ~/.zshrc ]] && source ~/.zshrc
+#[[ -e ~/.zshrc ]] && source ~/.zshrc
 
 [[ -e ~/.profile ]] && emulate sh -c 'source ~/.profile'
 
