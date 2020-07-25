@@ -103,3 +103,7 @@ source $ZSH/oh-my-zsh.sh
 # Bash-like history expansion
 unsetopt hist_verify
 
+[[ -e ~/.aliases ]] && . ~/.aliases
+
+[[ -e ~/.functions ]] && . ~/.functions
+

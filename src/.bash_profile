@@ -6,10 +6,6 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-[[ -e ~/.aliases ]] && . ~/.aliases
-
-[[ -e ~/.functions ]] && . ~/.functions
-
 [[ -f /usr/share/doc/pkgfile/command-not-found.bash ]] && . /usr/share/doc/pkgfile/command-not-found.bash
 
 # set PATH so it includes user's private bin if it exists

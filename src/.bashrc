@@ -143,3 +143,9 @@ function xdebug {
   set +o verbose
 }
 
+##############################################################
+
+[[ -e ~/.aliases ]] && . ~/.aliases
+
+[[ -e ~/.functions ]] && . ~/.functions
+
