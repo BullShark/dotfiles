@@ -1,0 +1,83 @@
+#
+# ~/.aliases
+#
+# Aliases shared between bash and zsh
+
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias vp='vim PKGBUILD'
+alias more='less'
+
+alias h='history'
+#alias hv='history | view -' # Pipe history to read-only VIM
+alias hg='history | grep -iE --' # History grep/search
+
+# Added safety and verbose
+alias rm='rm -iv'
+alias mv='mv -iv'
+alias cp='cp -iv'
+
+# Lazy typing
+alias ..='cd ..'
+alias ...='cd ../..'
+alias -- -='cd $-' # Back to previous dir
+alias cls='clear'
+alias _='sudo' # Simple sudo
+alias sl='ls'
+
+# LS Fu
+alias ls='ls --color=auto'
+alias la='ls -lhaZ'
+alias lsa='ls -shaCF' # Does not show SE info
+
+# Gets WAN ip
+#alias myip='dig myip.opendns.com @resolver1.opendns.com +short'
+alias myip='curl -4 icanhazip.com'
+alias myip6='curl -6 icanhazip.com'
+
+# Weather info in colors
+alias weather='curl wttr.in'
+
+# Moon Phase
+alias moon='curl wttr.in/Moon'
+
+# Run youtube-dl for music without looking at --help every time
+alias yt-audio='youtube-dl -x --audio-quality 0 --audio-format mp3 --add-metadata'
+
+# Use larger units
+alias iostat='iostat --human'
+
+# What GCC "native" know about the CPU and what flags native enables on your machine
+alias gcc-info='gcc -march=native -v -Q --help=target; echo; gcc -v -E -x c /dev/null -o /dev/null -march=native 2>&1 | grep /cc1'
+
+# List of the top ten most used commands
+alias most-often='history | awk '"'"'{print $2}'"'"' | sort | uniq -c | sort -rn | head'
+
+#-------------------------------------------------------------
+# ss: socket statistics
+# -a all
+# -l listening
+# -o timer info
+# -e extended/detailed socket info
+# -m memory info
+# -p processes using socket
+# -i internal tcp info
+# -r try to resolve numeric port/addr
+# -s summary statistics
+# -Z Implies -p with SE Audit info
+# -z Implies -Z with more SE Fu, more verbose
+# -n numeric, no resolve
+# -b bpf (berkeley pcap/tcpdump filters), -4, -6, -0 packet (-f link),
+# -t tcp, -u udp, -d dccp, -w raw, -x unix (-f unix)
+# -- family, socket tables, ...
+#-------------------------------------------------------------
+alias sss='sudo ss -aloempin'
+
+#-------------------------------------------------------------
+# lsof: list open files
+# -i Without args, selects the listing of all IP network files
+# -n Prevent conversion of net numbers to net names
+# -P Prevent conversion of port numbers to port names
+#-------------------------------------------------------------
+alias lsofnet='sudo lsof -i -n -P'
+

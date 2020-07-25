@@ -1,0 +1,117 @@
+#
+# ~/.functions
+#
+# Functions shared between bash and zsh
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex ()
+{
+  if [ -f "$1" ] ; then
+    case $1 in
+      *.tar.bz2)   tar xjf "$1"   ;;
+      *.tar.gz)    tar xzf "$1"   ;;
+      *.bz2)       bunzip2 "$1"   ;;
+      *.rar)       unrar x "$1"   ;;
+      *.gz)        gunzip "$1"    ;;
+      *.tar)       tar xf "$1"    ;;
+      *.tbz2)      tar xjf "$1"   ;;
+      *.tgz)       tar xzf "$1"   ;;
+      *.zip)       unzip "$1"     ;;
+      *.Z)         uncompress "$1";;
+      *.7z)        7z x "$1"      ;;
+      *)           echo "'$1' cannot be extracted via ex()" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
+}
+
+# Grep ps output and always display the first line from ps, the column names
+function psgrep {
+  if [[ $# -eq 1 && $1 != '-h' && $1 != '--help' ]]
+  then
+    ps aux | head -n 1
+    ps aux | awk '{if(NR>1)print}' | grep -Ei "$1"
+  else
+    echo "Usage: $0 [GREP_OPTIONS] regexp"
+  fi
+}
+
+# Gets TOR ip
+function torip {
+  http_proxy="http://localhost:8118" wget -q http://ipchicken.com -O- | \
+    grep -Eo '([0-9]{1,3}\.){3}[0-9]{1,3}){1}' | \
+    tr -d '[:space:]'
+  echo
+}
+
+# Renew TOR ip
+function renewtorip {
+  sudo systemctl restart tor
+  sudo systemctl restart privoxy
+}
+
+# Restart KDE; Useful if hung
+function restartkde {
+  kquitapp5 plasmashell
+  kstart5 plasmashell
+}
+
+# Re-detect sound devices
+function soundfix {
+  pacmd unload-module module-udev-detect && pacmd load-module module-udev-detect
+}
+
+# Extract icon from exe
+function exeicon {
+  7z x "$*" .rsrc/ICON
+  mv .rsrc dotrsrc # Unhide it
+}
+
+# Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
+function sweep {
+  sudo -i -u root bash << 'EOF'             # Execute all as root
+  # Remove cache files if yay is not running
+  killall -q -0 yay || rm -rvf $HOME/.cache/yay/* /root/.cache/yay/*
+
+  # Clear all pacman download cache and databases
+  pacman -Scc --noconfirm
+
+  # Clear logs older than 3 days
+  journalctl --vacuum-time=3d
+
+  # Removes old revisions of snaps
+  # CLOSE ALL SNAPS BEFORE RUNNING THIS
+  snap list --all | awk '/disabled/{print $1, $3}' |
+    while read snapname revision; do
+        snap remove "$snapname" --revision="$revision"
+    done
+  #XXX http://mywiki.wooledge.org/BashProgramming/05
+EOF
+  # Yay and pamac cleanup
+  yes | yay -Scc
+  pamac clean -k 0
+
+  # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
+
+  # Homebrew cleanup
+  brew cleanup
+  brew cleanup --prune 0
+  brew cleanup -s
+  rm -rvf "$(brew --cache)"
+}
+
+# View manpages in vim with vim's color scheme and less macros
+function man {
+  if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
+  then
+    /usr/bin/man "$@" | \
+      col -b | \
+      /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+  else
+    man "$@"
+  fi
+}
+

@@ -32,6 +32,8 @@ files=(
   ~/bin/pkgfile-update
   ~/.bashrc
   ~/.bash_profile
+  ~/.aliases
+  ~/.functions
   ~/.zshrc
   ~/.zprofile
   ~/.profile
