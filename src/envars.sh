@@ -2,4 +2,4 @@
 
 export EDITOR=/usr/bin/vim
 export BROWSER=/usr/bin/firefox
-export GTK_USE_PORTAL=1
+# export GTK_USE_PORTAL=1

@@ -1,10 +1,11 @@
 GRUB_DEFAULT=saved
-GRUB_TIMEOUT=10
+GRUB_TIMEOUT=0
+#GRUB_TIMEOUT=10
 GRUB_TIMEOUT_STYLE=hidden
 #GRUB_TIMEOUT_STYLE=menu
 GRUB_DISTRIBUTOR="Manjaro"
-#GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=cd8e4099-ea11-4b00-aeac-f891dedfdadc:luks-cd8e4099-ea11-4b00-aeac-f891dedfdadc root=/dev/mapper/luks-cd8e4099-ea11-4b00-aeac-f891dedfdadc resume=/dev/mapper/luks-cd8e4099-ea11-4b00-aeac-f891dedfdadc apparmor=1 security=apparmor udev.log_priority=3" # idle=poll selinux=1 security=selinux
-GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=cd8e4099-ea11-4b00-aeac-f891dedfdadc:luks-cd8e4099-ea11-4b00-aeac-f891dedfdadc root=/dev/mapper/luks-cd8e4099-ea11-4b00-aeac-f891dedfdadc resume=/dev/mapper/luks-cd8e4099-ea11-4b00-aeac-f891dedfdadc apparmor=1 security=apparmor udev.log_priority=3 idle=poll sysrq_always_enabled=1 audit=1"
+#GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3 idle=poll sysrq_always_enabled=1 audit=1"
 GRUB_CMDLINE_LINUX=""
 
 # If you want to enable the save default function, uncomment the following

@@ -44,4 +44,5 @@ stuff "su -\n"
 #stuff "repeat 'curl wttr.in' 60\n"
 #screen	-t music	2 mocp
 #screen	-t asciiquarium	2 asciiquarium
-screen			1
+screen -t zsh		1 zsh
+
