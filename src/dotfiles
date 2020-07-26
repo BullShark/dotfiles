@@ -55,6 +55,7 @@ files=(
   /etc/rc.local
   /etc/default/grub
   /etc/xdg/plasma-workspace/env/envars.sh
+  /usr/bin/netbeans
 )
 
 # Set the vars here
