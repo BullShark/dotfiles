@@ -1,7 +1,7 @@
 term screen-256color	# Lots of colors
 truecolor on		# 24-bit of colors; Works in version 5
 defbce on		# Background color erase
-defshell bash		# The dash (-bash) makes it a login shell
+#defshell bash		# The dash (-bash) makes it a login shell
 defscrollback 2024	# Lots of scroll-back
 bind ' ' windowlist -b	# Space displays the list of windows
 bind '^b' '^a^a'	# Bind ^b for nested screens that would do ^a^a

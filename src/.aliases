@@ -27,9 +27,16 @@ alias sl='ls'
 alias dmesg='dmesg -T'
 
 # LS Fu
-alias ls='ls --color=auto'
-alias la='ls -lhaZ'
-alias lsa='ls -shaCF' # Does not show SE info
+#alias ls='ls --color=auto'
+#alias la='ls -lhaZ'
+#alias lsa='ls -shaCF' # Does not show SE info
+
+# LSDeluxe
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 
 # Gets WAN ip
 #alias myip='dig myip.opendns.com @resolver1.opendns.com +short'
@@ -81,4 +88,5 @@ alias sss='sudo ss -aloempin'
 # -P Prevent conversion of port numbers to port names
 #-------------------------------------------------------------
 alias lsofnet='sudo lsof -i -n -P'
+
 
