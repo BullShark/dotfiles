@@ -115,3 +115,8 @@ function man {
   fi
 }
 
+# Find hosts on the lan
+function lan {
+  nmap -n -sn 192.168.0.0/23 -oG - 2>&1 | awk '/Up$/{print $2}'
+}
+
