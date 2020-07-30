@@ -61,6 +61,9 @@ alias gcc-info='gcc -march=native -v -Q --help=target; echo; gcc -v -E -x c /dev
 # List of the top ten most used commands
 alias most-often='history | awk '"'"'{print $2}'"'"' | sort | uniq -c | sort -rn | head'
 
+# Find hosts on the lan
+alias lan="nmap -n -sn 192.168.0.0/23 -oG - | awk '/Up$/{print $2}'"
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all
@@ -88,5 +91,4 @@ alias sss='sudo ss -aloempin'
 # -P Prevent conversion of port numbers to port names
 #-------------------------------------------------------------
 alias lsofnet='sudo lsof -i -n -P'
-
 
