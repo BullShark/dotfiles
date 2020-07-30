@@ -3,20 +3,22 @@
 # /etc/rc.local clears out /var/cache/* and pkgfile won't update without this directory
 # The pkgfile database is used by bash and zsh for command-not-found
 
-dir="/var/cache/pkgfile"
-user=$(awk -F: '{print $1}' <<< $(getent passwd 1000))
-group=$(awk -F: '{print $1}' <<< $(getent group 1000))
-
 # Fix permissions to allow updating the pkgfile database as a non-root user
 sudo -i -u root bash << 'EOF'             # Execute all as root
+  dir="/var/cache/pkgfile"
+  user=$(awk -F: '{print $1}' <<< $(getent passwd 1000))
+  group=$(awk -F: '{print $1}' <<< $(getent group 1000))
+
   [ -d $dir ] || mkdir -p $dir
   chown -R $user:$group $dir
   chmod 775 $dir
   # Do not delete if we have the wrong directory
   if [[ $dir =~ ^(/tmp/|/var/tmp/|/var/cache/).+ ]]; then
-    rm -ri "$dir"/*
+    echo "Delete directory $dir is true."
+    rm -rvf "$dir"/*
   fi
+
+  # Prevent running as root when in root's crontab
+  sudo -u $user pkgfile -u
 EOF
-# Prevent running as root when in root's crontab
-sudo -u $user pkgfile -u
 
