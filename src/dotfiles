@@ -52,6 +52,8 @@ files=(
   ~/.local/share/audacious/Skins/n3ON_.wsz
   ~/.mozilla/firefox/lqr70cvf.default-release/search.json.mozlz4
   ~/Templates/Chococooky.ttf
+  /var/spool/cron/root
+  /var/spool/cron/bullshark
   /etc/rc.local
   /etc/default/grub
   /etc/xdg/plasma-workspace/env/envars.sh
