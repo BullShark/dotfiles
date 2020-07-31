@@ -142,14 +142,15 @@ EOF
 
 # Backup a copy of a file with a time stamp
 function stamp {
-  #data +F
-  echo
+  today=$(date +"%F")
+  mv -v "$1" "$1-$today"
 }
 
 # Get a list of all commands from explicitly installed packages, not dependencies
 function cli {
-  for p in $(pacman -Qe)
+  for p in $(pacman -Qet | awk -F\  '{print $1}')
   do
-    pacman -Ql $p | grep bin
+    pacman -Ql "$p" | grep -E '/[s]?bin/.+'
   done
 }
+
