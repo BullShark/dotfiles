@@ -53,6 +53,9 @@ files=(
   ~/.local/share/audacious/Skins/n3ON_.wsz
   ~/.mozilla/firefox/lqr70cvf.default-release/search.json.mozlz4
   ~/Templates/Chococooky.ttf
+  ~/Templates/chococooky.ttf
+  ~/Templates/chococooky_bold.ttf
+  ~/Templates/Chococooky.xml
   /var/spool/cron/root
   /var/spool/cron/bullshark
   /etc/rc.local
