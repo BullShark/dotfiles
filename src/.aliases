@@ -61,6 +61,12 @@ alias gcc-info='gcc -march=native -v -Q --help=target; echo; gcc -v -E -x c /dev
 # List of the top ten most used commands
 alias most-often='history | awk '"'"'{print $2}'"'"' | sort | uniq -c | sort -rn | head'
 
+# Chol's time in Australia
+alias chol='TZ=Australia/Brisbane date'
+
+# Gabe's time in Italy
+alias gabe='TZ=Europe/Rome date'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all

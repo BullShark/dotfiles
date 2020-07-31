@@ -14,7 +14,7 @@ setenv DISPLAY ':0'	# No more issues launching GUI apps
 #reptyr pid		# Attach a process in screen that was started outside of screen
 
 # Hardstatus and caption string for version 0.5 git
-#hardstatus off
+hardstatus off
 hardstatus firstline	# Statusbar at top
 backtick 0 5 5 "/bin/date" '+%a %d %b %Y%t%t%T'
 hardstatus string '%{#ffffff;#1d99f3}%-Lw%{#ffffff;#ff0000}%50>%n%f* %t%{#ffffff;#1d99f3}%+Lw%< %{#ffffff;#1d99f3}%-=%{#ffffff;#1d99f3}%0`%{-}'

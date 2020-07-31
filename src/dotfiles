@@ -50,12 +50,12 @@ files=(
   ~/.local/share/konsole/Sweet-Mars.profile
   ~/.config/audacious/eq.preset
   ~/.local/share/audacious/Skins/n3ON_.wsz
-#  ~/.mozilla/firefox/lqr70cvf.default-release/search.json.mozlz4
-#  ~/Templates/Chococooky.ttf
-#  /etc/rc.local
-#  /etc/default/grub
-#  /etc/xdg/plasma-workspace/env/envars.sh
-#  /usr/bin/netbeans
+  ~/.mozilla/firefox/lqr70cvf.default-release/search.json.mozlz4
+  ~/Templates/Chococooky.ttf
+  /etc/rc.local
+  /etc/default/grub
+  /etc/xdg/plasma-workspace/env/envars.sh
+  /usr/bin/netbeans
 )
 
 # Set the vars here
@@ -68,21 +68,11 @@ repo="https://github.com/$github_user/$github_project.git"
 GLOBIGNORE=".:.."
 shopt -u dotglob
 
-# Move to tmp
-cd "$dir"
-
-# Delete it if it exists, so we can recreate it
-echo "Check: $dir/$github_project"
-if [[ $dir/$github_project =~ ^(/tmp/|/var/tmp/).+ ]]; then
-  echo "Delete: $dir/$github_project"
-  rm -rvf "$dir/$github_project"
-fi
-
 # Retrieve the project folder and change to it
+cd "$dir"
+#XXX if $dir/$github is under /tmp or /var/tmp and it already exists, delete it
 git clone "$repo"
 dir="$dir/$github_project"
-
-# Switch to it
 cd "$dir"
 mkdir -p "$dir/src"
 

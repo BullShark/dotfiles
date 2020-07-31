@@ -55,6 +55,7 @@ function renewtorip {
 
 # Restart KDE; Useful if hung
 function restartkde {
+  export DISPLAY=:0
   kquitapp5 plasmashell
   kstart5 plasmashell
 }
@@ -137,5 +138,11 @@ function enable_ipv6 {
   sysctl -w net.ipv6.conf.lo.disable_ipv6=0
   systemctl restart NetworkManager.service
 EOF
+}
+
+# Backup a copy of a file with a time stamp
+function stamp {
+  #data +F
+  echo
 }
 
