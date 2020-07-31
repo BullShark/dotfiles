@@ -146,3 +146,10 @@ function stamp {
   echo
 }
 
+# Get a list of all commands from explicitly installed packages, not dependencies
+function cli {
+  for p in $(pacman -Qe)
+  do
+    pacman -Ql $p | grep bin
+  done
+}
