@@ -30,6 +30,7 @@ files=(
   ~/bin/vpaste
   ~/bin/retroarchw
   ~/bin/pkgfile-update
+  ~/bin/backup
   ~/.bashrc
   ~/.bash_profile
   ~/.aliases
