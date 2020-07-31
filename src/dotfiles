@@ -53,9 +53,9 @@ files=(
   ~/.local/share/audacious/Skins/n3ON_.wsz
   ~/.mozilla/firefox/lqr70cvf.default-release/search.json.mozlz4
   ~/Templates/Chococooky.ttf
+  ~/Templates/Chococooky.xml
   ~/Templates/chococooky.ttf
   ~/Templates/chococooky_bold.ttf
-  ~/Templates/Chococooky.xml
   /var/spool/cron/root
   /var/spool/cron/bullshark
   /etc/rc.local
@@ -74,11 +74,22 @@ repo="https://github.com/$github_user/$github_project.git"
 GLOBIGNORE=".:.."
 shopt -u dotglob
 
-# Retrieve the project folder and change to it
+
+# Move to tmp
 cd "$dir"
-#XXX if $dir/$github is under /tmp or /var/tmp and it already exists, delete it
+
+# Delete it if it exists, so we can recreate it
+echo "Check: $dir/$github_project"
+if [[ $dir/$github_project =~ ^(/tmp/|/var/tmp/).+ ]]; then
+  echo "Delete: $dir/$github_project"
+  rm -rvf "$dir/$github_project"
+fi
+
+# Retrieve the project folder and change to it
 git clone "$repo"
 dir="$dir/$github_project"
+
+# Switch to it
 cd "$dir"
 mkdir -p "$dir/src"
 
