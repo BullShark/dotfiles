@@ -16,8 +16,7 @@
 #echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
 #echo 0 > /sys/devices/system/cpu/cpufreq/boost
 
-user=$(awk -F: '{print $1}' <<< $(getent passwd 1000))
-group=$(awk -F: '{print $1}' <<< $(getent group 1000))
+user=$(id -un -- 1000) # user with uid 1000
 
 rm -rf "/home/$user/.googleearth/Cache/*"
 rm -rf "/home/$user/.local/share/Steam/config/htmlcache/Cache/*"

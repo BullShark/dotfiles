@@ -74,14 +74,11 @@ repo="https://github.com/$github_user/$github_project.git"
 GLOBIGNORE=".:.."
 shopt -u dotglob
 
-
 # Move to tmp
 cd "$dir"
 
 # Delete it if it exists, so we can recreate it
-echo "Check: $dir/$github_project"
 if [[ $dir/$github_project =~ ^(/tmp/|/var/tmp/).+ ]]; then
-  echo "Delete: $dir/$github_project"
   rm -rvf "$dir/$github_project"
 fi
 
