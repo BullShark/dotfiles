@@ -67,6 +67,9 @@ alias chol='TZ=Australia/Brisbane date'
 # Gabe's time in Italy
 alias gabe='TZ=Europe/Rome date'
 
+# Show time
+alias dmesg='sudo dmesg -T'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all
