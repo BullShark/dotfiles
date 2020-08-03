@@ -22,3 +22,5 @@ sudo -i -u root bash << 'EOF'             # Execute all as root
   sudo -u $user pkgfile -u
 EOF
 
+# vi: ft=sh
+

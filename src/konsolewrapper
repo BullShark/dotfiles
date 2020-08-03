@@ -6,3 +6,5 @@ else
   konsole "$dimensions" -e "screen -x"
 fi
 
+# vi: ft=sh
+

@@ -17,3 +17,5 @@ tar --listed-incremental=/run/media/bullshark/Storage/Backup/snapshot \
   -cJpf /run/media/bullshark/Storage/Backup/home-backup-`date +%d-%m-%Y`.tar.xz \
   /home/bullshark/{Documents,Downloads,Pictures,Music,.config,.Xresources,.xinitrc,.i3,.mozilla,.zshrc}
 
+# vi: ft=sh
+

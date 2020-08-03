@@ -144,3 +144,6 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 " Always default yank to system clipboard
 " http://stackoverflow.com/questions/3961859/how-to-copy-to-clipboard-using-vim
 set clipboard=unnamedplus
+
+# vi: ft=vim
+

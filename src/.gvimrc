@@ -63,3 +63,6 @@ set bg=dark
 colorscheme molokai
 "colorscheme darkspectrum 
 set guifont=Consolas\ 12
+
+# vi: ft=vim
+

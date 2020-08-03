@@ -143,7 +143,7 @@ EOF
 # Backup a copy of a file with a time stamp
 function stamp {
   today=$(date +"%F")
-  mv -v "$1" "$1-$today"
+  cp -v "$1" "$1-$today"
 }
 
 # Get a list of all commands from explicitly installed packages, not dependencies
@@ -153,4 +153,6 @@ function cli {
     pacman -Ql "$p" | grep -E '/[s]?bin/.+'
   done
 }
+
+# vi: ft=sh
 

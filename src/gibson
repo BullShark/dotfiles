@@ -25,3 +25,5 @@ EOF
 
 sslstrip -a -k -f -l $redirect_port -w "$logfile"
 
+# vi: ft=sh
+

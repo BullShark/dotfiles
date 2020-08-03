@@ -25,3 +25,5 @@ export EDITOR="vim"
 export MANGOHUD=1
 export HOMEBREW_CLEANUP_MAX_AGE_DAYS=0
 
+# vi: ft=sh
+

@@ -98,3 +98,5 @@ alias sss='sudo ss -aloempin'
 #-------------------------------------------------------------
 alias lsofnet='sudo lsof -i -n -P'
 
+# vi: ft=sh
+
