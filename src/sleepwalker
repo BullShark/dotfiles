@@ -64,6 +64,7 @@ echo '
 
 echo "Using yay config: $(yay --show --currentconfig)"
 
+yay -Y --gendb
 yay -Syy
 yay -S ungoogled-chromium
 yay -Su
