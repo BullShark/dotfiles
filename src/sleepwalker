@@ -9,21 +9,24 @@
 # XXX Check if the computer has been idling for 30 minutes
 # XXX Continue if it has. Else sleep and check again.
 
+export XDG_CONFIG_HOME="/var/tmp/"
+export XDG_CACHE_HOME="/var/tmp/"
+
 mkdir -p /var/tmp/yay
 
 echo '
 
 {
         "aururl": "https://aur.archlinux.org",
-        "buildDir": "/home/bullshark/.cache/yay",
-        "absdir": "/home/bullshark/.cache/yay/abs",
+        "buildDir": "/var/tmp/yay",
+        "absdir": "/var/tmp/yay/abs",
         "editor": "gvim",
         "editorflags": "-p",
         "makepkgbin": "makepkg",
         "makepkgconf": "/etc/makepkg.conf",
         "pacmanbin": "pacman",
         "pacmanconf": "/etc/pacman.conf",
-        "redownload": "no",
+        "redownload": "yes",
         "rebuild": "yes",
         "answerclean": "All",
         "answerdiff": "None",
@@ -49,17 +52,15 @@ echo '
         "provides": false,
         "pgpfetch": true,
         "upgrademenu": true,
-        "cleanmenu": true,
-        "diffmenu": true,
+        "cleanmenu": false,
+        "diffmenu": false,
         "editmenu": false,
         "combinedupgrade": false,
-        "useask": false,
+        "useask": true,
         "batchinstall": true
 }
 
 ' > /var/tmp/yay/config.json
-
-export XDG_CONFIG_HOME="/var/tmp/"
 
 echo "Using yay config: $(yay --show --currentconfig)"
 
