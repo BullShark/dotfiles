@@ -68,8 +68,8 @@ alias chol='TZ=Australia/Brisbane date'
 alias gabe='TZ=Europe/Rome date'
 
 # Supress gtk warning messages
-alias gvim='gvim $@ 2>&1'
-alias gedit='gedit $@ 2>&1'
+alias gvim='gvim $@ 2>/dev/null'
+alias gedit='gedit $@ 2>/dev/null'
 
 #alias most-often='history | awk '"'"'{print $2}'"'"' | sort | uniq -c | sort -rn | head'
 #alias example='awk '"'"'/Up$/{print $2}'"'"' 2>&1'

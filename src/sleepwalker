@@ -6,7 +6,65 @@
 # Launch yay with all the options needed to make it build non-interactively
 #
 
-yay --no-confirm
+# XXX Check if the computer has been idling for 30 minutes
+# XXX Continue if it has. Else sleep and check again.
+
+mkdir -p /var/tmp/yay
+
+echo '
+
+{
+        "aururl": "https://aur.archlinux.org",
+        "buildDir": "/home/bullshark/.cache/yay",
+        "absdir": "/home/bullshark/.cache/yay/abs",
+        "editor": "gvim",
+        "editorflags": "-p",
+        "makepkgbin": "makepkg",
+        "makepkgconf": "/etc/makepkg.conf",
+        "pacmanbin": "pacman",
+        "pacmanconf": "/etc/pacman.conf",
+        "redownload": "no",
+        "rebuild": "yes",
+        "answerclean": "All",
+        "answerdiff": "None",
+        "answeredit": "None",
+        "answerupgrade": "None",
+        "gitbin": "git",
+        "gpgbin": "gpg",
+        "gpgflags": "",
+        "mflags": "-si",
+        "sortby": "votes",
+        "searchby": "name-desc",
+        "gitflags": "",
+        "removemake": "true",
+        "sudobin": "sudo",
+        "sudoflags": "",
+        "requestsplitn": 150,
+        "sortmode": 0,
+        "completionrefreshtime": 7,
+        "sudoloop": true,
+        "timeupdate": false,
+        "devel": true,
+        "cleanAfter": false,
+        "provides": false,
+        "pgpfetch": true,
+        "upgrademenu": true,
+        "cleanmenu": true,
+        "diffmenu": true,
+        "editmenu": false,
+        "combinedupgrade": false,
+        "useask": false,
+        "batchinstall": true
+}
+
+' > /var/tmp/yay/config.json
+
+export XDG_CONFIG_HOME="/var/tmp/"
+
+echo "Using yay config: $(yay --show --currentconfig)"
+
+yay -Syy
+yay -S ungoogled-chromium
 
 # vi: ft=sh
 
