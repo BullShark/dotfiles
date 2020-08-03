@@ -1,0 +1,12 @@
+#!/bin/bash
+#
+# sleepwalker - builds web browsers while you are sleeping
+#
+# Detect at least 30 minutes of inactivity before beginning
+# Launch yay with all the options needed to make it build non-interactively
+#
+
+yay --no-confirm
+
+# vi: ft=sh
+

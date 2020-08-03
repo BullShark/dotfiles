@@ -6,7 +6,8 @@
 
 #[[ -e ~/.zshrc ]] && source ~/.zshrc
 
-[[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
+# XXX This doesn't get executed when running gnu screen
+#[[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
