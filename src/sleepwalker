@@ -9,6 +9,8 @@
 # XXX Check if the computer has been idling for 30 minutes
 # XXX Continue if it has. Else sleep and check again.
 
+# XXX How to give the sudo password to yay when it runs in a script???
+
 export XDG_CONFIG_HOME="/var/tmp/"
 export XDG_CACHE_HOME="/var/tmp/"
 
