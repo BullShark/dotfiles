@@ -97,7 +97,7 @@ endif
 
 " My customizations below
 
-"set guifont=Consolas\ 15
+set guifont=Consolas\ 15
 "colorscheme darkspectrum 
 colorscheme molokai
 " Press space to clear search highlighting and any message already displayed.
