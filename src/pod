@@ -3,7 +3,7 @@
 # Find all downloaded podcasts, shuffle them randomly, add at most 200 to a playlist, and play them in vlc with fullscreen.
 #
 
-find ~/gPodder/Downloads/ -iname "*.mp4" -type f | shuf | head -n 200 > /tmp/podcast_shuffle.m3u
+find /run/media/bullshark/Storage/gPodder/Downloads/ -iname "*.mp4" -type f | shuf | head -n 200 > /tmp/podcast_shuffle.m3u
 vlc -f /tmp/podcast_shuffle.m3u
 
 # vi: ft=sh
