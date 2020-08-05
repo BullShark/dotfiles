@@ -1,0 +1,18 @@
+#
+# ~/.inputrc
+#
+
+set editing-mode vi
+set keymap vi
+
+$if mode=vi
+    # Normal mode.
+    set keymap vi-command
+    #"j": transpose-chars
+    # Insert mode.
+    set keymap vi-insert
+    "\C-j": next-history
+    "\C-k": previous-history
+    "\C-l": clear-screen
+$endif
+

@@ -42,6 +42,7 @@ files=(
   ~/.screenrc
   ~/.vimrc
   ~/.gvimrc
+  ~/.inputrc
   ~/.LESS_TERMCAP
   ~/.vim/colors/molokai.vim
   ~/.vim/colors/aldmeris.vim
