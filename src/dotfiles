@@ -32,6 +32,7 @@ files=(
   ~/bin/pkgfile-update
   ~/bin/backup
   ~/bin/sleepwalker
+  ~/bin/thumbnailer
   ~/.bashrc
   ~/.bash_profile
   ~/.aliases
