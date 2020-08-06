@@ -67,8 +67,8 @@ alias chol='TZ=Australia/Brisbane date'
 # Gabe's time in Italy
 alias gabe='TZ=Europe/Rome date'
 
-# Make all the aliases available when using sudo
-alias sudo='sudo '
+# Make all the aliases available when using sudo and gvim configuration
+alias sudo='sudo -E '
 
 # Supress gtk warning messages
 alias gvim='gvim $@ 2>/dev/null'

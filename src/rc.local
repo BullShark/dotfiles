@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 #
 # rc.local
 #
@@ -16,16 +16,14 @@
 #echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
 #echo 0 > /sys/devices/system/cpu/cpufreq/boost
 
-user=$(id -un -- 1000) # user with uid 1000
-
-rm -rf "/home/$user/.googleearth/Cache/*"
-rm -rf "/home/$user/.local/share/Steam/config/htmlcache/Cache/*"
-rm -rf "/home/$user/.local/share/Steam/steam/cached/*"
-rm -rf "/home/$user/.cache/*"
-rm -rf "/root/.cache/*"
-rm -rf "/tmp/*"
-rm -rf "/var/tmp/*"
-rm -rf "/var/cache/*"
+rm -rf /home/bullshark/.googleearth/Cache/*
+rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
+rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
+rm -rf /home/bullshark/.cache/*
+rm -rf /root/.cache/*
+rm -rf /tmp/*
+rm -rf /var/tmp/*
+rm -rf /var/cache/*
 
 exit 0
 
