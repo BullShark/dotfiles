@@ -24,7 +24,6 @@ alias -- -='cd $-' # Back to previous dir
 alias cls='clear'
 alias _='sudo' # Simple sudo
 alias sl='ls'
-alias dmesg='dmesg -T'
 
 # LS Fu
 #alias ls='ls --color=auto'
@@ -67,12 +66,12 @@ alias chol='TZ=Australia/Brisbane date'
 # Gabe's time in Italy
 alias gabe='TZ=Europe/Rome date'
 
-# Make all the aliases available when using sudo and gvim configuration
-alias sudo='sudo -E '
-
 # Supress gtk warning messages
 alias gvim='gvim $@ 2>/dev/null'
 alias gedit='gedit $@ 2>/dev/null'
+
+# Make all the aliases available when using sudo and gvim configuration
+alias sudo='sudo -E '
 
 # Show time
 alias dmesg='sudo dmesg -T'

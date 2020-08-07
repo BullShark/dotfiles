@@ -5,7 +5,7 @@ defbce on		# Background color erase
 defscrollback 2024	# Lots of scroll-back
 bind ' ' windowlist -b	# Space displays the list of windows
 bind '^b' '^a^a'	# Bind ^b for nested screens that would do ^a^a
-#termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
+termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
 #defmousetrack on	# Watch for mouse clicks when there are splits
 #windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
 altscreen		# Clear the screen after running bashtop or vim
