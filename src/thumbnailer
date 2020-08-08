@@ -58,9 +58,9 @@ def update_name_and_meta(thumb_path, filename, mtime, mime_type, size):
     abs_path = os.path.abspath(filename)
     # The spaces in our URI are not escaped. This is not in accordance
     # with the URI RFC2396 which is listed in the freedesktop specs,
-    # but it's what KDE currently uses 
+    # but it's what KDE currently uses
     # (cf.: https://bugs.kde.org/show_bug.cgi?id=393015)
-    kde_uri = "file://" + abs_path  
+    kde_uri = "file://" + abs_path
     kde_md5 = md5(kde_uri.encode("utf-8")).hexdigest()
     thumb_dir = os.path.dirname(thumb_path)
     kde_thumb_path = os.path.join(thumb_dir, kde_md5 + ".png")
@@ -121,8 +121,10 @@ def make_thumbnail(factory, filename):
 def thumbnail_folder(factory, folder):
     for dirpath, dirnames, filenames in os.walk(folder):
         for filename in filenames:
-            make_thumbnail(factory, os.path.join(dirpath, filename))
-
+            try:
+                make_thumbnail(factory, os.path.join(dirpath, filename))
+            except FileNotFoundError:
+                print('Something went wrong: file doesn\'t exist or broken link')
 
 def main(argv):
     factory = GnomeDesktop.DesktopThumbnailFactory()
@@ -131,7 +133,6 @@ def main(argv):
             thumbnail_folder(factory, filename)
         else:
             make_thumbnail(factory, filename)
-
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv))
