@@ -14,5 +14,6 @@ PATH=/home/bullshark/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 #Minute(0-59) Hour(0-24) Day_of_month(1-31) Month(1-12) Day_of_week(0-6) Command_to_execute
-@reboot root ~bullshark/bin/pkgfile-update
+@reboot ~bullshark/bin/pkgfile-update
+@daily ~bullshark/bin/pkgfile-update
 

@@ -14,7 +14,7 @@ PATH=/home/bullshark/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local
 # |  |  |  |  |
 # *  *  *  *  * user-name  command to be executed
 #Minute(0-59) Hour(0-24) Day_of_month(1-31) Month(1-12) Day_of_week(0-6) Command_to_execute
-@daily bullshark ping -6 -c 1 ipv6.google.com
-45 17 * * * bullshark /home/bullshark/bin/backup
-#45 17 * * * bullshark /home/bullshark/bin/sleepwalker
+@daily ping -6 -c 1 odin.root.sx
+45 17 * * * /home/bullshark/bin/backup
+#45 17 * * * /home/bullshark/bin/sleepwalker
 

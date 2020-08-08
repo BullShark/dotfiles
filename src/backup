@@ -7,8 +7,23 @@
 #    -z is to enable compression
 #    -v verbose
 #    -r indicates recursive
+#    --delete delete extraneous files from dest dir
+#    --exclude=PATTERN exclude files matching PATTERN
+#    --progress show progress during transfer
+#    --ignore-missing-args ignore missing source args without error
+#    --delete-missing-args delete missing source args from destination
+#    --max-delete=NUM don't delete more than NUM files
+#    --link-dest=DIR hardlink to files in DIR when unchanged
+#    --filter=RULE add a file-filtering RULE
+#    --munge-links munge symlinks to make them safe & unusable
+#    --verbose increase verbosity
 
-rsync -zvr dirtobackup backupdir 2>/dev/null
+#set -o errexit
+#set -o nounset
+#set -o pipefail
+
+rsync -zvr --progress --delete \
+  --exclude=".cache" dirtobackup backupdir 2>/dev/null
 
 # Backup keepass.kdb file with date in the filename.
 
