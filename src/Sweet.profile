@@ -9,8 +9,14 @@ Name=Sweet
 Parent=FALLBACK/
 
 [Interaction Options]
-AutoCopySelectedText=true
+AlternateScrolling=true
+AutoCopySelectedText=false
+MouseWheelZoomEnabled=true
 
 [Scrolling]
-HistoryMode=2
-ScrollFullPage=1
+HistoryMode=1
+HistorySize=2000
+ScrollFullPage=0
+
+[Terminal Features]
+BlinkingCursorEnabled=false
