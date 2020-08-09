@@ -1,11 +1,11 @@
 GRUB_DEFAULT=saved
 GRUB_TIMEOUT=0
 #GRUB_TIMEOUT=10
-GRUB_TIMEOUT_STYLE=hidden
+#GRUB_TIMEOUT_STYLE=hidden
 #GRUB_TIMEOUT_STYLE=menu
 GRUB_DISTRIBUTOR="Manjaro"
 GRUB_DISABLE_OS_PROBER=true
-#GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3"
+GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3"
 GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3 idle=poll sysrq_always_enabled=1 audit=1 audit_backlog_limit=8192"
 GRUB_CMDLINE_LINUX=""
 

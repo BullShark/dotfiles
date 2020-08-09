@@ -73,7 +73,7 @@ function exeicon {
 
 # Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
 function sweep {
-  sudo -i -u root bash << 'EOF'             # Execute all as root
+  /usr/bin/sudo -i -u root bash << 'EOF'             # Execute all as root
   # Remove cache files if yay is not running
   killall -q -0 yay || rm -rvf $HOME/.cache/yay/* /root/.cache/yay/*
 
@@ -106,6 +106,13 @@ EOF
 
 # View manpages in vim with vim's color scheme and less macros
 function man {
+  echo "Number of args: $#"
+  echo "Args: $@"
+  echo "1: $1"
+  echo "2: $2"
+  echo "3: $3"
+  echo
+
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
     /usr/bin/man "$@" | \
