@@ -80,8 +80,8 @@ function sweep {
   # Clear all pacman download cache and databases
   pacman -Scc --noconfirm
 
-  # Clear logs older than 3 days
-  journalctl --vacuum-time=3d
+  # Clear logs older than 20 days
+  journalctl --vacuum-time=20d
 
   # Removes old revisions of snaps
   # CLOSE ALL SNAPS BEFORE RUNNING THIS
@@ -93,33 +93,22 @@ function sweep {
 EOF
   # Yay and pamac cleanup
   yes | yay -Scc
+  yay -Yc
+
   pamac clean -k 0
 
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
-
-  # Homebrew cleanup
-  brew cleanup
-  brew cleanup --prune 0
-  brew cleanup -s
-  rm -rvf "$(brew --cache)"
 }
 
 # View manpages in vim with vim's color scheme and less macros
 function man {
-  echo "Number of args: $#"
-  echo "Args: $@"
-  echo "1: $1"
-  echo "2: $2"
-  echo "3: $3"
-  echo
-
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
     /usr/bin/man "$@" | \
       col -b | \
       /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
   else
-    man "$@"
+    /usr/bin/man "$@"
   fi
 }
 
