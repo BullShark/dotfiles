@@ -92,8 +92,8 @@ function sweep {
   #XXX http://mywiki.wooledge.org/BashProgramming/05
 EOF
   # Yay and pamac cleanup
-  yes | yay -Scc
-  yay -Yc
+#  yes | yay -Scc
+#  yay -Yc
 
   pamac clean -k 0
 
