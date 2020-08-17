@@ -1,11 +1,22 @@
-GRUB_DEFAULT=saved
+# Choose the default kernel to boot
+#GRUB_DEFAULT=saved # grub-set-default can be used with this to choose which one is saved
+#GRUB_DEFAULT=0
+GRUB_DEFAULT="gnulinux-5.7.14-1-MANJARO x64-advanced-de3d6287-a43f-467d-8bd9-da98d514d0e0"
+
+# Skip the menu or not
 GRUB_TIMEOUT=0
 #GRUB_TIMEOUT=10
-#GRUB_TIMEOUT_STYLE=hidden
+GRUB_TIMEOUT_STYLE=hidden
 #GRUB_TIMEOUT_STYLE=menu
+
+# Not sure
 GRUB_DISTRIBUTOR="Manjaro"
+
+# Don't add Windows to the grub menu
 GRUB_DISABLE_OS_PROBER=true
-GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3"
+
+# Kernel options
+#GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3"
 GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3 idle=poll sysrq_always_enabled=1 audit=1 audit_backlog_limit=8192"
 GRUB_CMDLINE_LINUX=""
 
