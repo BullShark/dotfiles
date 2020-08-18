@@ -26,14 +26,14 @@ alias _='sudo' # Simple sudo
 alias sl='ls'
 
 # LS Fu
-#alias ls='ls --color=auto'
-#alias la='ls -lhaZ'
-#alias lsa='ls -shaCF' # Does not show SE info
+alias ls='ls --color=auto'
+alias la='ls -lhaZ'
+alias lsa='ls -shaCF' # Does not show SE info
 
 # LSDeluxe
-alias ls='lsd'
+#alias ls='lsd'
 alias l='ls -l'
-alias la='ls -a'
+#alias la='ls -a'
 alias lla='ls -la'
 alias lt='ls --tree'
 
@@ -67,8 +67,8 @@ alias chol='TZ=Australia/Brisbane date'
 alias gabe='TZ=Europe/Rome date'
 
 # Supress gtk warning messages
-alias gvim='gvim $@ 2>/dev/null'
-alias gedit='gedit $@ 2>/dev/null'
+alias gvim='gvim 2>/dev/null'
+alias gedit='gedit 2>/dev/null'
 
 # Make all the aliases available when using sudo and gvim configuration
 alias sudo='sudo -E '

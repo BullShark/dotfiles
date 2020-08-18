@@ -15,7 +15,12 @@ export LESS="--RAW-CONTROL-CHARS"	# Get color support for 'less'
 # Miscellaneous
 export EDITOR="vim"
 export MANGOHUD=1
-export HOMEBREW_CLEANUP_MAX_AGE_DAYS=0
+
+# Android-dev
+export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
+export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
+export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.1"
+export PATH="$PATH:$HOME/Android/Sdk/tools"
 
 # vi: ft=sh
 

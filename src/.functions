@@ -92,10 +92,10 @@ function sweep {
   #XXX http://mywiki.wooledge.org/BashProgramming/05
 EOF
   # Yay and pamac cleanup
-#  yes | yay -Scc
-#  yay -Yc
+  yes | yay -Scc
+  yay -Yc
 
-  pamac clean -k 0
+#  pamac clean -k 0
 
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
@@ -123,8 +123,6 @@ function disable_ipv6 {
   sysctl -w net.ipv6.conf.all.disable_ipv6=1
   sysctl -w net.ipv6.conf.default.disable_ipv6=1
   sysctl -w net.ipv6.conf.lo.disable_ipv6=1
-  sysctl -w net.ipv6.conf.wlp0s20u2.disable_ipv6=1
-  sysctl -w net.ipv6.conf.enp3s0.disable_ipv6=1
 EOF
 }
 
@@ -134,16 +132,14 @@ function enable_ipv6 {
   sysctl -w net.ipv6.conf.all.disable_ipv6=0
   sysctl -w net.ipv6.conf.default.disable_ipv6=0
   sysctl -w net.ipv6.conf.lo.disable_ipv6=0
-  sysctl -w net.ipv6.conf.wlp0s20u2.disable_ipv6=0
-  sysctl -w net.ipv6.conf.enp3s0.disable_ipv6=0
   systemctl restart NetworkManager.service
 EOF
 }
 
 # Backup a copy of a file with a time stamp
 function stamp {
-  today=$(date +"%F")
-  cp -v "$1" "$1-$today"
+  now=$(date +"%F")
+  cp -v "$1" "$1-$now"
 }
 
 # Get a list of all commands from explicitly installed packages, not dependencies
@@ -151,6 +147,11 @@ function cli {
   for p in $(pacman -Qet | awk -F\  '{print $1}')
   do
     pacman -Ql "$p" | grep -E '/[s]?bin/.+'
+  done
+
+  for p in $(echo $PATH | awk -F: '{print $1}')
+  do
+    echo "$p"
   done
 }
 
