@@ -45,6 +45,9 @@ alias myip6='curl -6 icanhazip.com'
 # Weather info in colors
 alias weather='curl wttr.in'
 
+# Check what is auto starting
+alias autostart='sudo ls /etc/xdg/autostart /etc/skel/.config/autostart /root/.config/autostart $HOME/.config/autostart $HOME/.config/autostart-scripts'
+
 # Moon Phase
 alias moon='curl wttr.in/Moon'
 
@@ -106,6 +109,16 @@ alias sss='sudo ss -aloempin'
 # -P Prevent conversion of port numbers to port names
 #-------------------------------------------------------------
 alias lsofnet='sudo lsof -i -n -P'
+
+#export IFACE=wlp0s20u1
+export IFACE=enp3s0
+
+alias dnstop="sudo dnstop -l 5 $IFACE"
+alias vnstat="sudo vnstat -i $IFACE"
+alias iftop="sudo iftop -i $IFACE"
+alias tcpdump="sudo tcpdump -i $IFACE"
+alias ethtool="sudo ethtool $IFACE"
+alias iwconfig="sudo iwconfig $IFACE" # For wireless
 
 # vi: ft=sh
 
