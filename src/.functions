@@ -144,14 +144,17 @@ function stamp {
 
 # Get a list of all commands from explicitly installed packages, not dependencies
 function cli {
-  for p in $(pacman -Qet | awk -F\  '{print $1}')
-  do
-    pacman -Ql "$p" | grep -E '/[s]?bin/.+'
-  done
+#  for p in $(pacman -Qet | awk -F\  '{print $1}')
+#  do
+#    pacman -Ql "$p" | grep -E '/[s]?bin/.+'
+#  done
 
-  for p in $(echo $PATH | awk -F: '{print $1}')
+  IFS=:
+  for p in $(echo $PATH | sed 's/ /\\ /g')
   do
     echo "$p"
+    sudo ls "$p"
+    echo
   done
 }
 

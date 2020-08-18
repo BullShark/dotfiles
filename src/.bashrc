@@ -114,6 +114,12 @@ shopt -s histappend
 # Auto cd when entering just a path
 shopt -s autocd
 
+# Command line editing with built-in vi editor
+set -o vi
+
+# Notify asynchronously of background job completions
+set -o notify
+
 ##############################################################
 # ALIASES
 #
