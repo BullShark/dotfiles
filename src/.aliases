@@ -82,6 +82,9 @@ alias dmesg='sudo dmesg -T'
 # Nice formatting
 alias mount='mount | column -t'
 
+# List cameras
+alias cameras='v4l2-ctl --list-devices'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all

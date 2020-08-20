@@ -111,10 +111,11 @@ EOF
   bleachbit
   sudo bleachbit
 
-  #TODO Color and format output
+  #TODO Color and format output 
+  # See /usr/bin/browser-vacuum for examples
   RED="\e[01;31m" GRN="\e[01;32m" YLW="\e[01;33m" RST="\e[00m"
   format="$(tput cr)$(tput cuf 45)"
-  echo -en "[${YLW}bullshark${RST}] ${GRN}Scanning for test${RST}"
+  echo -en "${format}[${YLW}username${RST}] ${GRN}Scanning for test${RST}"
 
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
@@ -136,7 +137,6 @@ function man {
 # Find hosts on the lan
 function lan {
   RED="\e[01;31m" GRN="\e[01;32m" YLW="\e[01;33m" RST="\e[00m"
-  format="$(tput cr)$(tput cuf 45)"
 
   #TODO MAC OUI
   echo -e "${RED}nmap${RST}:"
@@ -172,20 +172,20 @@ function stamp {
 
 # Get a list of all commands from explicitly installed packages, not dependencies
 function cli {
-#  for p in $(pacman -Qet | awk -F\  '{print $1}')
-#  do
-#    pacman -Ql "$p" | grep -E '/[s]?bin/.+'
-#  done
-
-  sudo echo -en '' # Make sudo ask for the password before starting the loop
-
-  IFS=:
-  for p in $(echo $PATH | sed 's/ /\\ /g')
+  for p in $(pacman -Qet | awk -F\  '{print $1}')
   do
-    echo "$p:"
-    sudo ls "$p"
-    echo
+    pacman -Ql "$p" | grep -E '/[s]?bin/.+'
   done
+
+#  sudo echo -en '' # Make sudo ask for the password before starting the loop
+#
+#  IFS=:
+#  for p in $(echo $PATH | sed 's/ /\\ /g')
+#  do
+#    echo "$p:"
+#    sudo ls "$p"
+#    echo
+#  done
 }
 
 # vi: ft=sh
