@@ -29,6 +29,7 @@ for iface in `ls /sys/class/net | grep -v lo`
 do
   echo "$iface:"
   macchanger -A $iface
+  #TODO Bluetooth
 done
 
 exit 0
