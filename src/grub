@@ -1,7 +1,6 @@
 # Choose the default kernel to boot
-#GRUB_DEFAULT=saved # grub-set-default can be used with this to choose which one is saved
+GRUB_DEFAULT=saved # grub-set-default can be used with this to choose which one is saved
 #GRUB_DEFAULT=0
-GRUB_DEFAULT="gnulinux-5.7.14-1-MANJARO x64-advanced-de3d6287-a43f-467d-8bd9-da98d514d0e0"
 
 # Skip the menu or not
 GRUB_TIMEOUT=0
