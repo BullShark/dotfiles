@@ -95,12 +95,31 @@ EOF
   yes | yay -Scc
   yay -Yc
 
+  #TODO Not accepting password
 #  pamac clean -k 0
+  browser-vacuum
+
+  # Bleachbit
+  #TODO Give the cleaners to use, so it can run automatically without the gui
+  # Example:
+  # bleachbit chromium.vacuum firefox.vacuum gpodder.vacuum thunderbird.vacuumq
+  # sudo bleachbit system.localizations system.trash
+  export DISPLAY=:0
+  bleachbit --list-cleaners
+  sudo bleachbit --list-cleaners
+  bleachbit
+  sudo bleachbit
+
+  #TODO Color and format output
+  RED="\e[01;31m" GRN="\e[01;32m" YLW="\e[01;33m" RST="\e[00m"
+  format="$(tput cr)$(tput cuf 45)"
+  echo -en "[${YLW}bullshark${RST}] ${GRN}Scanning for test${RST}"
 
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
 
 # View manpages in vim with vim's color scheme and less macros
+#TODO Don't launch vim if no man pages are found
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
@@ -149,10 +168,12 @@ function cli {
 #    pacman -Ql "$p" | grep -E '/[s]?bin/.+'
 #  done
 
+  sudo echo -en '' # Make sudo ask for the password before starting the loop
+
   IFS=:
   for p in $(echo $PATH | sed 's/ /\\ /g')
   do
-    echo "$p"
+    echo "$p:"
     sudo ls "$p"
     echo
   done

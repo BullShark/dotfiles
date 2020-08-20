@@ -27,7 +27,8 @@ rm -rf /var/cache/*
 
 for iface in `ls /sys/class/net | grep -v lo`
 do
-  macchanger -b -A $iface
+  echo "$iface:"
+  macchanger -A $iface
 done
 
 exit 0
