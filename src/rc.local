@@ -25,5 +25,10 @@ rm -rf /tmp/*
 rm -rf /var/tmp/*
 rm -rf /var/cache/*
 
+for iface in `ls /sys/class/net | grep -v lo`
+do
+  macchanger -b -A $iface
+done
+
 exit 0
 
