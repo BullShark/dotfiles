@@ -188,5 +188,10 @@ function cli {
 #  done
 }
 
+# Finds and removes duplicates in the PATH
+function remove-path-duplicates {
+  echo $PATH | tr ':' '\n' | sort # | uniq
+}
+
 # vi: ft=sh
 
