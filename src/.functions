@@ -3,6 +3,13 @@
 #
 # Functions shared between bash and zsh
 
+#TODO Use Color and format in more functions
+# See /usr/bin/browser-vacuum for examples
+#format="$(tput cr)$(tput cuf 45)"
+#echo -en "${format}[${YLW}username${RST}] ${GRN}Scanning for test${RST}"
+
+RED="\e[01;31m" GRN="\e[01;32m" YLW="\e[01;33m" RST="\e[00m"
+
 #
 # # ex - archive extractor
 # # usage: ex <file>
@@ -103,19 +110,15 @@ EOF
   # Bleachbit
   #TODO Give the cleaners to use, so it can run automatically without the gui
   # Example:
-  # bleachbit chromium.vacuum firefox.vacuum gpodder.vacuum thunderbird.vacuumq
+  # bleachbit chromium.vacuum firefox.vacuum gpodder.vacuum thunderbird.vacuum
   # sudo bleachbit system.localizations system.trash
+  #
+  # And store them in a variable
   export DISPLAY=:0
   bleachbit --list-cleaners
   sudo bleachbit --list-cleaners
   bleachbit
   sudo bleachbit
-
-  #TODO Color and format output 
-  # See /usr/bin/browser-vacuum for examples
-  RED="\e[01;31m" GRN="\e[01;32m" YLW="\e[01;33m" RST="\e[00m"
-  format="$(tput cr)$(tput cuf 45)"
-  echo -en "${format}[${YLW}username${RST}] ${GRN}Scanning for test${RST}"
 
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
@@ -135,10 +138,9 @@ function man {
 }
 
 # Find hosts on the lan
+#TODO MAC OUI
+#TODO Change the nmap command
 function lan {
-  RED="\e[01;31m" GRN="\e[01;32m" YLW="\e[01;33m" RST="\e[00m"
-
-  #TODO MAC OUI
   echo -e "${RED}nmap${RST}:"
   nmap -n -sn 192.168.0.0/23 -oG - 2>&1 | awk '/Up$/{print $2}'
   echo -e "${RED}/proc/net/arp${RST}:"
@@ -198,7 +200,7 @@ function autostart {
           /root/.config/autostart \
           $HOME/.config/autostart \
           $HOME/.config/autostart-scripts \
-          /usr/share/kservices5'
+          /usr/share/kservices5
 }
 
 # vi: ft=sh
