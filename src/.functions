@@ -188,9 +188,17 @@ function cli {
 #  done
 }
 
-# Finds and removes duplicates in the PATH
-function remove-path-duplicates {
-  echo $PATH | tr ':' '\n' | sort # | uniq
+# Check what is auto starting
+#TODO SystemD stuff
+function autostart {
+#  sudo systemctl --system --all list*
+#  sudo systemctl --user   --all list*
+  sudo ls /etc/xdg/autostart \
+          /etc/skel/.config/autostart \
+          /root/.config/autostart \
+          $HOME/.config/autostart \
+          $HOME/.config/autostart-scripts \
+          /usr/share/kservices5'
 }
 
 # vi: ft=sh

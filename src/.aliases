@@ -28,12 +28,13 @@ alias sl='ls'
 # LS Fu
 alias ls='ls --color=auto'
 alias la='ls -lhaZ'
-alias lsa='ls -shaCF' # Does not show SE info
+#alias lsa='ls -shaCF' # Does not show SE info
 
 # LSDeluxe
 alias ls='lsd'
 alias l='ls -l'
 #alias la='ls -a'
+alias lsa='ls -haF' # Does not show SE info
 alias lla='ls -la'
 alias lt='ls --tree'
 
@@ -44,9 +45,6 @@ alias myip6='curl -6 icanhazip.com'
 
 # Weather info in colors
 alias weather='curl wttr.in'
-
-# Check what is auto starting
-alias autostart='sudo ls /etc/xdg/autostart /etc/skel/.config/autostart /root/.config/autostart $HOME/.config/autostart $HOME/.config/autostart-scripts /usr/share/kservices5'
 
 # Moon Phase
 alias moon='curl wttr.in/Moon'
@@ -80,6 +78,7 @@ alias sudo='sudo -E '
 alias dmesg='sudo dmesg -T'
 
 # Nice formatting
+#FIXME Messed up output because of a space in the directory name where Windows 10 is mounted
 alias mount='mount | column -t'
 
 # List cameras
