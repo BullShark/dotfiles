@@ -192,15 +192,25 @@ function cli {
 
 # Check what is auto starting
 #TODO SystemD stuff
+#TODO Check those autostart directories for every user, not just the current user
 function autostart {
 #  sudo systemctl --system --all list*
 #  sudo systemctl --user   --all list*
+#  sudo systemctl --global --all list*
   sudo ls /etc/xdg/autostart \
           /etc/skel/.config/autostart \
           /root/.config/autostart \
           $HOME/.config/autostart \
           $HOME/.config/autostart-scripts \
           /usr/share/kservices5
+}
+
+# Find all files not owned by any package except under /home and log the results
+#FIXME Change it to $HOME
+function not-owned {
+  sudo find / -mount -path /home -prune -false -o -type f -print \
+    -exec bash -c "pacman -Qo '{}' 2>&1 | grep --line-buffered 'No package owns' 2>&1 " \; 2>&1 | \
+    tee ~bullshark/files_not_owned.log
 }
 
 # vi: ft=sh
