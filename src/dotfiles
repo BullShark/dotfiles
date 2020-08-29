@@ -67,6 +67,7 @@ files=(
   /etc/default/grub
   /etc/xdg/plasma-workspace/env/envars.sh
   /usr/bin/netbeans
+  /usr/bin/generate-domains-blacklist
 )
 
 # Set the vars here

@@ -80,7 +80,7 @@ function exeicon {
 
 # Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
 function sweep {
-  /usr/bin/sudo -i -u root bash << 'EOF'             # Execute all as root
+  sudo -i -u root bash << 'EOF'             # Execute all as root
   # Remove cache files if yay is not running
   killall -q -0 yay || rm -rvf $HOME/.cache/yay/* /root/.cache/yay/*
 
@@ -124,6 +124,7 @@ EOF
 }
 
 # View manpages in vim with vim's color scheme and less macros
+#TODO This doesn't give a man page or any output: man generate-domains-blacklist
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
@@ -167,10 +168,23 @@ EOF
 }
 
 # Backup a copy of a file with a time stamp
+#TODO Add error checking
 function stamp {
   now=$(date +"%F")
-  cp -v "$1" "$1-$now"
+  command sudo cp -v "$1" "$1-$now"
 }
+
+# Makes a backup copy
+#FIXME Needs a name that's not backup (already being used for a script)
+#TODO Add error checking; Shouldn't be a $2,3,4, etc.
+function needs-a-name {
+  # Don't overwrite if the backup file already exists
+  command sudo cp -vi "$1"{,_backup}
+  # Prevent it from being read as a configuration file
+  # Example: ls /etc | grep -E '.+\.d'
+  command sudo chmod -c 0000 "$1"_backup
+}
+
 
 # Get a list of all commands from explicitly installed packages, not dependencies
 function cli {
@@ -200,17 +214,31 @@ function autostart {
   sudo ls /etc/xdg/autostart \
           /etc/skel/.config/autostart \
           /root/.config/autostart \
-          $HOME/.config/autostart \
-          $HOME/.config/autostart-scripts \
           /usr/share/kservices5
+
+  for d in `getent passwd | awk -F':' '{print $6}' | sort -u`
+  do
+    sudo ls "$d"/.config/autostart \
+            "$d"/.config/autostart-scripts
+  done
+
+}
+
+# Removes spyware from Linux
+function spyware-removal {
+  pacman -Rdd purpose \
+    firefox firefox-i18n-en-us \
+    geoclue \
+    tracker-miners tracker \
+    gfbgraph \
+    libgdata
 }
 
 # Find all files not owned by any package except under /home and log the results
-#FIXME Change it to $HOME
 function not-owned {
   sudo find / -mount -path /home -prune -false -o -type f -print \
     -exec bash -c "pacman -Qo '{}' 2>&1 | grep --line-buffered 'No package owns' 2>&1 " \; 2>&1 | \
-    tee ~bullshark/files_not_owned.log
+    tee "$HOME/files_not_owned.log"
 }
 
 # vi: ft=sh
