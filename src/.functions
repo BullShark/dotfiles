@@ -224,16 +224,6 @@ function autostart {
 
 }
 
-# Removes spyware from Linux
-function spyware-removal {
-  pacman -Rdd purpose \
-    firefox firefox-i18n-en-us \
-    geoclue \
-    tracker-miners tracker \
-    gfbgraph \
-    libgdata
-}
-
 # Find all files not owned by any package except under /home and log the results
 function not-owned {
   sudo find / -mount -path /home -prune -false -o -type f -print \
