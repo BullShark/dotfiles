@@ -16,6 +16,9 @@ export LESS="--RAW-CONTROL-CHARS"	# Get color support for 'less'
 export EDITOR="vim"
 export MANGOHUD=1
 
+# Npm
+export PATH="$PATH:$HOME/.npm/bin"
+
 # Android-dev
 export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"

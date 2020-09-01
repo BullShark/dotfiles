@@ -233,5 +233,10 @@ function not-owned {
     tee "$HOME/files_not_owned.log"
 }
 
+# Remove duplicates from the PATH
+function fixpath {
+  export PATH="`echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':' | sed 's/:$//'`"
+}
+
 # vi: ft=sh
 
