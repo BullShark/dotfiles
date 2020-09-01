@@ -125,6 +125,7 @@ EOF
 
 # View manpages in vim with vim's color scheme and less macros
 #TODO This doesn't give a man page or any output: man generate-domains-blacklist
+#FIXME "man npm" fails and "command man npm" works
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
@@ -140,6 +141,8 @@ function man {
 
 # Find hosts on the lan
 #TODO MAC OUI
+# /usr/share/macchanger/OUI.list
+# /usr/share/macchanger/wireless.list
 #TODO Change the nmap command
 function lan {
   echo -e "${RED}nmap${RST}:"
@@ -175,14 +178,13 @@ function stamp {
 }
 
 # Makes a backup copy
-#FIXME Needs a name that's not backup (already being used for a script)
 #TODO Add error checking; Shouldn't be a $2,3,4, etc.
-function needs-a-name {
+function bak {
   # Don't overwrite if the backup file already exists
-  command sudo cp -vi "$1"{,_backup}
+  sudo cp -vi "$1"{,_backup}
   # Prevent it from being read as a configuration file
   # Example: ls /etc | grep -E '.+\.d'
-  command sudo chmod -c 0000 "$1"_backup
+  chmod -c 0000 "$1"_backup
 }
 
 

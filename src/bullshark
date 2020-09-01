@@ -17,4 +17,5 @@ PATH=/home/bullshark/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local
 @daily ping -6 -c 1 odin.root.sx
 #45 17 * * * /home/bullshark/bin/backup
 #45 17 * * * /home/bullshark/bin/sleepwalker
+0 18 * * * zenity --question --text="Water plants?" --display=":0"
 
