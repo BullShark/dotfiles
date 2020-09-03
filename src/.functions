@@ -207,8 +207,7 @@ function cli {
 }
 
 # Check what is auto starting
-#TODO SystemD stuff
-#TODO Check those autostart directories for every user, not just the current user
+#TODO systemd stuff
 function autostart {
 #  sudo systemctl --system --all list*
 #  sudo systemctl --user   --all list*
@@ -218,10 +217,10 @@ function autostart {
           /root/.config/autostart \
           /usr/share/kservices5
 
-  for d in `getent passwd | awk -F':' '{print $6}' | sort -u`
+  for dir in `getent passwd | awk -F':' '{print $6}' | sort -u`
   do
-    sudo ls "$d"/.config/autostart \
-            "$d"/.config/autostart-scripts
+    sudo ls "$dir"/.config/autostart \
+            "$dir"/.config/autostart-scripts
   done
 
 }

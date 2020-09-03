@@ -112,5 +112,5 @@ if [[ $dir =~ ^(/tmp/|/var/tmp/).+ ]]; then
   rm -rf "$dir"
 fi
 
-########### # vi: ft=sh
+# vi: ft=sh
 
