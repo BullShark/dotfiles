@@ -3,10 +3,10 @@ GRUB_DEFAULT=saved # grub-set-default can be used with this to choose which one 
 #GRUB_DEFAULT=0
 
 # Skip the menu or not
-GRUB_TIMEOUT=0
-#GRUB_TIMEOUT=10
-GRUB_TIMEOUT_STYLE=hidden
-#GRUB_TIMEOUT_STYLE=menu
+#GRUB_TIMEOUT=0
+GRUB_TIMEOUT=10
+#GRUB_TIMEOUT_STYLE=hidden
+GRUB_TIMEOUT_STYLE=menu
 
 # Not sure
 GRUB_DISTRIBUTOR="Manjaro"

@@ -3,6 +3,7 @@
 #
 # Functions shared between bash and zsh
 
+#TODO Add error checking
 #TODO Use Color and format in more functions
 # See /usr/bin/browser-vacuum for examples
 #format="$(tput cr)$(tput cuf 45)"
@@ -120,6 +121,204 @@ EOF
   bleachbit
   sudo bleachbit
 
+
+audacious.cache
+audacious.log
+
+#audacious.mru
+#bash.history
+#beagle.cache
+#beagle.index
+#beagle.logs
+
+chromium.cache
+chromium.cookies
+chromium.dom
+chromium.form_history
+#chromium.history
+#chromium.passwords
+#chromium.search_engines
+#chromium.session
+#chromium.sync
+chromium.vacuum
+
+d4x.history
+
+deepscan.backup
+deepscan.ds_store
+deepscan.thumbs_db
+deepscan.tmp
+deepscan.vim_swap_root
+deepscan.vim_swap_user
+
+discord.cache
+discord.cookies
+discord.history
+discord.vacuum
+
+dnf.autoremove
+dnf.clean_all
+
+easytag.history
+easytag.logs
+
+elinks.history
+
+emesene.cache
+emesene.logs
+
+epiphany.cache
+epiphany.cookies
+epiphany.dom
+epiphany.passwords
+epiphany.places
+
+evolution.cache
+
+exaile.cache
+exaile.downloaded_podcasts
+exaile.log
+
+filezilla.mru
+
+firefox.backup
+firefox.cache
+firefox.cookies
+firefox.crash_reports
+firefox.dom
+firefox.forms
+firefox.passwords
+firefox.session_restore
+firefox.site_preferences
+firefox.url_history
+firefox.vacuum
+
+flash.cache
+flash.cookies
+
+gedit.recent_documents
+
+gftp.cache
+gftp.logs
+
+gimp.tmp
+
+gl-117.debug_logs
+
+gnome.run
+gnome.search_history
+
+google_chrome.cache
+google_chrome.cookies
+google_chrome.dom
+google_chrome.form_history
+google_chrome.history
+google_chrome.passwords
+google_chrome.search_engines
+google_chrome.session
+google_chrome.sync
+google_chrome.vacuum
+
+google_earth.temporary_files
+
+google_toolbar.search_history
+
+gpodder.cache
+gpodder.downloaded_podcasts
+gpodder.logs
+gpodder.vacuum
+
+gwenview.recent_documents
+
+hexchat.logs
+
+hippo_opensim_viewer.cache
+hippo_opensim_viewer.logs
+
+java.cache
+
+journald.clean
+
+kde.cache
+kde.recent_documents
+kde.tmp
+
+konqueror.cookies
+konqueror.current_session
+konqueror.url_history
+
+libreoffice.cache
+libreoffice.history
+
+liferea.cache
+liferea.cookies
+liferea.vacuum
+
+links2.history
+
+midnightcommander.history
+
+nexuiz.cache
+
+octave.history
+
+openofficeorg.cache
+openofficeorg.recent_documents
+
+rhythmbox.cache
+rhythmbox.history
+
+screenlets.logs
+
+sqlite3.history
+
+system.cache
+system.clipboard
+system.custom
+system.desktop_entry
+system.free_disk_space
+system.localizations
+system.memory
+system.recent_documents
+system.rotated_logs
+system.tmp
+system.trash
+
+thumbnails.cache
+
+thunderbird.cache
+thunderbird.cookies
+thunderbird.index
+#thunderbird.passwords
+thunderbird.vacuum
+
+tremulous.cache
+
+vim.history
+
+vlc.memory_dump
+vlc.mru
+
+warzone2100.logs
+
+waterfox.backup
+waterfox.cache
+waterfox.cookies
+waterfox.crash_reports
+waterfox.dom
+waterfox.forms
+waterfox.passwords
+waterfox.session_restore
+waterfox.site_preferences
+waterfox.url_history
+waterfox.vacuum
+
+wine.tmp
+winetricks.temporary_files
+x11.debug_logs
+
+xine.cache
+
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
 
@@ -129,7 +328,7 @@ EOF
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
-    command man --whatis "$@" 1>/dev/null 2>&1 || return $? # Don't launch vim if no man pages are found
+    #command man --whatis "$@" 1>/dev/null 2>&1 || return $? # Don't launch vim if no man pages are found
 
     /usr/bin/man "$@" | \
       col -b | \
@@ -171,18 +370,16 @@ EOF
 }
 
 # Backup a copy of a file with a time stamp
-#TODO Add error checking
 function stamp {
   now=$(date +"%F")
   command sudo cp -v "$1" "$1-$now"
 }
 
 # Makes a backup copy
-#TODO Add error checking; Shouldn't be a $2,3,4, etc.
 function bak {
   # Don't overwrite if the backup file already exists
   sudo cp -vi "$1"{,_backup}
-  # Prevent it from being read as a configuration file
+  # Prevent the backup from being read as a configuration file
   # Example: ls /etc | grep -E '.+\.d'
   chmod -c 0000 "$1"_backup
 }
@@ -204,6 +401,7 @@ function cli {
 #    sudo ls "$p"
 #    echo
 #  done
+
 }
 
 # Check what is auto starting
@@ -219,8 +417,13 @@ function autostart {
 
   for dir in `getent passwd | awk -F':' '{print $6}' | sort -u`
   do
-    sudo ls "$dir"/.config/autostart \
-            "$dir"/.config/autostart-scripts
+    if [ -d "$dir/.config/autostart" ] ; then
+    	sudo ls "$dir"/.config/autostart
+    fi
+
+    if [ -d "$dir/.config/autostart-scripts" ] ; then
+    	sudo ls "$dir/.config/autostart-scripts"
+    fi
   done
 
 }
