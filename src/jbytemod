@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+opts="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true"  # Fixes font problems with Java Apps in Linux
+jarpath="/home/bullshark/.apps/JByteMod-1.8.2"
+
+exec /usr/bin/java -cp "$jarpath/JByteMod-1.8.2.jar:$jarpath/plugins/\*" $opts me.grax.jbytemod.JByteMod "$@" 2>/dev/null
+

@@ -29,6 +29,7 @@ files=(
   ~/bin/gibson
   ~/bin/vpaste
   ~/bin/retroarchw
+  ~/bin/jbytemod
   ~/bin/pkgfile-update
 #  ~/bin/backup
   ~/bin/sleepwalker
