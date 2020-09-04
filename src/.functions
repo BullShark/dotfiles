@@ -88,8 +88,8 @@ function sweep {
   # Clear all pacman download cache and databases
   pacman -Scc --noconfirm
 
-  # Clear logs older than 20 days
-  journalctl --vacuum-time=20d
+  # Clear logs older than 15 days
+  journalctl --vacuum-time=15d
 
   # Removes old revisions of snaps
   # CLOSE ALL SNAPS BEFORE RUNNING THIS
@@ -110,10 +110,16 @@ EOF
 
   #TODO Bleachbit
 #  bleachbit --help
-#  bleachbit --list-cleaners
-#  sudo bleachbit --list-cleaners
+#
 #  bleachbit --preset --preview
-#  sudo bleachbit
+#  # Show enabled cleaners
+#  # Ask to proceed
+#  bleachbit --preset --clean
+#
+#  sudo bleachbit --preset --preview
+#  # Show enabled cleaners
+#  # Ask to proceed
+#  sudo bleachbit --preset --clean
 
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
