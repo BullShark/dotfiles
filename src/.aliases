@@ -26,17 +26,26 @@ alias _='sudo' # Simple sudo
 alias sl='ls'
 
 # LS Fu
-alias ls='ls --color=auto'
-alias la='ls -lhaZ'
+#alias ls='ls --color=auto'
+#alias la='ls -lhaZ'
 #alias lsa='ls -shaCF' # Does not show SE info
 
 # LSDeluxe
 alias ls='lsd'
-alias l='ls -l'
+#alias l='ls -l'
 #alias la='ls -a'
-alias lsa='ls -haF' # Does not show SE info
+#alias lsa='ls -haF' # Does not show SE info
+#alias lla='ls -la'
+#alias lt='ls --tree'
+
+# Borrowed from CentOS
+alias l='ls -l'
+alias l.='ls -d .* --color=auto'
+alias la='ls -a'
+alias ll='ls -l --color=auto'
 alias lla='ls -la'
 alias lt='ls --tree'
+
 
 # Gets WAN ip
 #alias myip='dig myip.opendns.com @resolver1.opendns.com +short'
