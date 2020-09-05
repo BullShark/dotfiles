@@ -131,7 +131,7 @@ function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
   then
     #command man --whatis "$@" 1>/dev/null 2>&1 || return $? # Don't launch vim if no man pages are found
-TODO 
+
     /usr/bin/man "$@" | \
       col -b | \
       /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
@@ -240,6 +240,12 @@ function not-owned {
 # Remove duplicates from the PATH
 function fixpath {
   export PATH="`echo $PATH | tr ':' '\n' | sort -u | tr '\n' ':' | sed 's/:$//'`"
+}
+
+# Celcius to fahrenheit
+function ctof {
+  temp=$1;
+  echo $[(${temp}*9/5)+32]
 }
 
 # vi: ft=sh
