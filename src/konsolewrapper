@@ -1,4 +1,6 @@
 #!/bin/zsh
+# Configure - Konsole > General > Remember window size
+# Must be turned off to set the dimensions
 dimensions="-p 'TerminalColumns=132' -p 'TerminalRows=43' -geometry +450+200"
 if screen -ls | grep 'No Sockets'; then
   konsole "$dimensions" -e "screen -S xyz"

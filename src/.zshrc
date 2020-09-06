@@ -107,8 +107,8 @@ source $ZSH/oh-my-zsh.sh
 unsetopt hist_verify
 
 # man zshoptions, man zshall
-unsetopt INC_APPEND_HISTORY
-setopt APPEND_HISTORY
+#unsetopt INC_APPEND_HISTORY
+#setopt APPEND_HISTORY
 
 [[ -e ~/.aliases ]] && . ~/.aliases
 
