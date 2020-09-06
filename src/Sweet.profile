@@ -15,8 +15,9 @@ MouseWheelZoomEnabled=true
 
 [Scrolling]
 HistoryMode=1
-HistorySize=2000
-ScrollFullPage=0
+HistorySize=10000
+ScrollFullPage=false
 
 [Terminal Features]
+BidiRenderingEnabled=true
 BlinkingCursorEnabled=false

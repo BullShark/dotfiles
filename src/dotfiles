@@ -70,6 +70,7 @@ files=(
   /etc/xdg/plasma-workspace/env/envars.sh
   /usr/bin/netbeans
   /usr/bin/generate-domains-blacklist
+  /etc/X11/xorg.conf.d/90-mhwd.conf
 )
 
 # Set the vars here

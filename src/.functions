@@ -4,6 +4,7 @@
 # Functions shared between bash and zsh
 
 #TODO Add error checking
+
 #TODO Use Color and format in more functions
 # See /usr/bin/browser-vacuum for examples
 #format="$(tput cr)$(tput cuf 45)"
