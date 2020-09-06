@@ -106,6 +106,10 @@ source $ZSH/oh-my-zsh.sh
 # Bash-like history expansion
 unsetopt hist_verify
 
+# man zshoptions, man zshall
+unsetopt INC_APPEND_HISTORY
+setopt APPEND_HISTORY
+
 [[ -e ~/.aliases ]] && . ~/.aliases
 
 [[ -e ~/.functions ]] && . ~/.functions
