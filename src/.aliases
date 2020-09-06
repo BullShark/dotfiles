@@ -96,6 +96,9 @@ alias mount='mount | column -t'
 # List cameras
 alias cameras='v4l2-ctl --list-devices'
 
+# Directory sort
+alias dsort='du -sh * | sort -h'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all

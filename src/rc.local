@@ -19,6 +19,8 @@
 rm -rf /home/bullshark/.googleearth/Cache/*
 rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
 rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
+rm -rf /home/bullshark/.config/Caprine/Cache/*
+rm -rf /home/bullshark/.config/Caprine/Code\ Cache/*
 rm -rf /home/bullshark/.cache/*
 rm -rf /root/.cache/*
 rm -rf /tmp/*
