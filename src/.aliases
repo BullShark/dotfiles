@@ -26,12 +26,12 @@ alias _='sudo' # Simple sudo
 alias sl='ls'
 
 # LS Fu
-#alias ls='ls --color=auto'
+alias ls='ls --color=auto'
 #alias la='ls -lhaZ'
 #alias lsa='ls -shaCF' # Does not show SE info
 
 # LSDeluxe
-alias ls='lsd'
+#alias ls='lsd'
 #alias l='ls -l'
 #alias la='ls -a'
 #alias lsa='ls -haF' # Does not show SE info
@@ -131,3 +131,4 @@ alias iwconfig="sudo iwconfig $WIFACE" # For wireless
 
 # vi: ft=sh
 
+last -a | tac
