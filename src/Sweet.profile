@@ -15,7 +15,7 @@ MouseWheelZoomEnabled=true
 
 [Scrolling]
 HistoryMode=1
-HistorySize=10000
+HistorySize=100000
 ScrollFullPage=false
 
 [Terminal Features]
