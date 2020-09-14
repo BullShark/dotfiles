@@ -90,11 +90,10 @@ alias sudo='sudo -E '
 alias dmesg='sudo dmesg -T'
 
 # Nice formatting
-#FIXME quotes in sed broken
 #XXX Change the column labels from this example
 #mount | column --table --table-columns SOURCE,TARGET,TYPE,OPTIONS,PASS,FREQ --table-right PASS,FREQ
-#/usr/bin/mount | sed 's/Windows /Windows/' | column -t
-alias mount="mount | sed 's/Windows 10/Windows_10' | column -t"
+#<file system>             <mount point>  <type>  <options>  <dump>  <pass>
+alias mount='mount | sed '"'"'s/Windows 10/Windows_10/'"'"' | column -t'
 
 # List cameras
 alias cameras='v4l2-ctl --list-devices'
