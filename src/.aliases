@@ -90,13 +90,19 @@ alias dmesg='sudo dmesg -T'
 #mount | column --table --table-columns SOURCE,TARGET,TYPE,OPTIONS,PASS,FREQ --table-right PASS,FREQ
 #<file system>             <mount point>  <type>  <options>  <dump>  <pass>
 #TODO awk to print fields and skip some fields
-alias mount='mount | sed '"'"'s/Windows 10/Windows_10/'"'"' | column -t'
+alias mount='mount | sed '"'"'s/Windows 10/Windows_10/'"'"' | awk -F'"'"' '"'"' '"'"'{print $1, $2, $3, $4, $5, $6}'"'"' | column -t'
 
 # List cameras
 alias lscam='v4l2-ctl --list-devices'
 
 # XXX Diskusage sort
 alias dsort='du -sh * | sort -h'
+
+# Find all git repos in home
+alias findrepos="find ~/ -type d -name '.git'"
+
+# Modified within an hour and exclude dot files
+alias findhour='find ~/ -mtime -1 -print | grep -vE '"'"'/home/bullshark/\..+)'"'"''
 
 #-------------------------------------------------------------
 # ss: socket statistics
