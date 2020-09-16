@@ -46,7 +46,6 @@ alias ll='ls -l --color=auto'
 alias lla='ls -la'
 alias lt='ls --tree'
 
-
 # Gets WAN ip
 #alias myip='dig myip.opendns.com @resolver1.opendns.com +short'
 alias myip='curl -4 icanhazip.com'
@@ -70,9 +69,6 @@ alias gcc-info='gcc -march=native -v -Q --help=target; echo; gcc -v -E -x c /dev
 # List of the top ten most used commands
 alias most-often='history | awk '"'"'{print $2}'"'"' | sort | uniq -c | sort -rn | head'
 
-# Chol's time in Australia
-alias chol='TZ=Australia/Brisbane date'
-
 # Gabe's time in Italy
 alias gabe='TZ=Europe/Rome date'
 
@@ -93,12 +89,13 @@ alias dmesg='sudo dmesg -T'
 #XXX Change the column labels from this example
 #mount | column --table --table-columns SOURCE,TARGET,TYPE,OPTIONS,PASS,FREQ --table-right PASS,FREQ
 #<file system>             <mount point>  <type>  <options>  <dump>  <pass>
+#TODO awk to print fields and skip some fields
 alias mount='mount | sed '"'"'s/Windows 10/Windows_10/'"'"' | column -t'
 
 # List cameras
-alias cameras='v4l2-ctl --list-devices'
+alias lscam='v4l2-ctl --list-devices'
 
-# Directory sort
+# XXX Diskusage sort
 alias dsort='du -sh * | sort -h'
 
 #-------------------------------------------------------------
@@ -128,8 +125,6 @@ alias sss='sudo ss -aloempin'
 # -P Prevent conversion of port numbers to port names
 #-------------------------------------------------------------
 alias lsofnet='sudo lsof -i -n -P'
-
-alias iwconfig="sudo iwconfig $WIFACE" # For wireless
 
 # vi: ft=sh
 

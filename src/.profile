@@ -14,7 +14,8 @@ export LESS="--RAW-CONTROL-CHARS"	# Get color support for 'less'
 
 # Miscellaneous
 export EDITOR="vim"
-export MANGOHUD=1
+export MANGOHUD="1"
+#export BROWSER="/usr/bin/chromium"
 
 # Npm
 export PATH="$PATH:$HOME/.npm/bin"
