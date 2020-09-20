@@ -44,5 +44,8 @@ stuff "su -\n"
 #stuff "repeat 'curl wttr.in' 60\n"
 #screen	-t music	2 mocp
 #screen	-t asciiquarium	2 asciiquarium
+chdir /home/bullshark/Documents/OpenVPN/config
 screen -t zsh		1
+stuff "sudo openvpn --config odin.ovpn\n"
+screen -t zsh		2
 
