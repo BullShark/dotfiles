@@ -90,7 +90,7 @@ alias dmesg='sudo dmesg -T'
 #mount | column --table --table-columns SOURCE,TARGET,TYPE,OPTIONS,PASS,FREQ --table-right PASS,FREQ
 #<file system>             <mount point>  <type>  <options>  <dump>  <pass>
 #alias mount='mount | sed '"'"'s/Windows 10/Windows_10/'"'"' | column -t'
-alias mount='mount | sed '"'"'s/Windows 10/Windows_10/'"'"' | awk -F'"'"' '"'"' '"'"'{print $1, $3, $5, $6}'"'"' | column -t --table-columns SOURCE,TARGET,TYPE,OPTIONS,PASS,FREQ --table-right PASS,FREQ'
+alias mount='mount | sed '"'"'s/Windows \(10\|8.1[ab]\)/Windows_\1/'"'"' | awk -F'"'"' '"'"' '"'"'{print $1, $3, $5, $6}'"'"' | column -t --table-columns SOURCE,TARGET,TYPE,OPTIONS,PASS,FREQ --table-right PASS,FREQ'
 
 # List cameras
 alias lscam='v4l2-ctl --list-devices'
