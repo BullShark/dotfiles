@@ -1,3 +1,4 @@
+debug on                        # Runtime debugging; Find the reason for screen getting killed
 term screen-256color	# Lots of colors
 truecolor on		# 24-bit of colors; Works in version 5
 defbce on		# Background color erase
