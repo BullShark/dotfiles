@@ -77,9 +77,11 @@ alias seck='TZ=Turkey date'
 
 # Supress gtk warning messages
 alias gvim='gvim 2>/dev/null'
+alias gvimdiff='gvimdiff 2>/dev/null'
 alias gedit='gedit 2>/dev/null'
 
 # Make all the aliases available when using sudo and gvim configuration
+#XXX Change this in visudo instead
 #alias sudo='sudo -E '
 
 # Show time

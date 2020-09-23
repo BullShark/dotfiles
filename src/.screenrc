@@ -42,7 +42,7 @@ caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000
 
 chdir /home/bullshark/Documents/OpenVPN
 screen -t openvpn	0
-stuff "sudo -T300 openvpn --config odin.ovpn\n"
+stuff "sudo openvpn --config odin.ovpn\n"
 chdir /home/bullshark
 screen -t root		1
 stuff "su -\n"
