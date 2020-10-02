@@ -3,7 +3,12 @@
 #
 # Functions shared between bash and zsh
 
-#TODO Add error checking
+#TODO Add more error checking
+# https://citizen428.net/blog/bash-error-handling-with-trap
+#XXX These work for bash, not zsh
+#set -o errtrace
+#set -o nounset
+#set -o pipefail
 
 #TODO Use Color and format in more functions
 # See /usr/bin/browser-vacuum for examples
@@ -122,20 +127,28 @@ EOF
 #  # Ask to proceed
 #  sudo bleachbit --preset --clean
 
+
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
 }
 
+
 # View manpages in vim with vim's color scheme and less macros
+
 #TODO This doesn't give a man page or any output: man generate-domains-blacklist
 #FIXME "man npm" fails and "command man npm" works
+
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
+
   then
     #command man --whatis "$@" 1>/dev/null 2>&1 || return $? # Don't launch vim if no man pages are found
 
+
     /usr/bin/man "$@" | \
+
       col -b | \
       /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+
   else
     /usr/bin/man "$@"
   fi
@@ -179,12 +192,14 @@ function stamp {
 }
 
 # Makes a backup copy
+#FIXME If the arg contains a path that's different than .
 function bak {
   # Don't overwrite if the backup file already exists
-  sudo cp -vi "$1"{,_backup}
-  # Prevent the backup from being read as a configuration file
-  # Example: ls /etc | grep -E '.+\.d'
-  sudo chmod -c 0000 "$1"_backup
+  if [[ -w . ]]; then
+    cp -vi "$1"{,_backup}
+  else
+    sudo cp -vi "$1"{,_backup}
+  fi
 }
 
 
@@ -248,6 +263,11 @@ function ctof {
   temp=$1;
   echo $[(${temp}*9/5)+32]
 }
+
+# Prevent these options from being used outside of this file
+#set +o errtrace
+#set +o nounset
+#set +o pipefail
 
 # vi: ft=sh
 

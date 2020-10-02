@@ -48,6 +48,7 @@ screen -t root		1
 stuff "su -\n"
 chdir /home/bullshark
 screen -t zsh		2
+stuff "su -c 'systemctl stop nftables.service'"
 #screen -t weather	3
 #stuff "repeat 'curl wttr.in' 60\n"
 #screen	-t music	4 mocp
