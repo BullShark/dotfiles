@@ -163,7 +163,6 @@ case "`uname`" in
         ;;
     *)
         eval launchNbexec \
-	    -J-Dswing.aatext=TRUE -J-Dawt.useSystemAAFontSettings=on \
             --jdkhome '"$netbeans_jdkhome"' \
             --branding nb \
             --clusters '"$netbeans_clusters"' \
