@@ -73,7 +73,7 @@ if has("vms")
 else
   set backup		" keep a backup file
 endif
-set history=50		" keep 50 lines of command line history
+set history=150		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 set incsearch		" do incremental searching
@@ -144,7 +144,7 @@ endif
 
 " My customizations below
 
-set guifont=Consolas\ 15
+"set guifont=Consolas\ 15
 "colorscheme darkspectrum 
 colorscheme molokai
 " Press space to clear search highlighting and any message already displayed.
@@ -163,6 +163,9 @@ set shiftwidth=2
 set softtabstop=2
 set autoindent
 set smartindent
+
+" "J" inserts two spaces after a ".", "?" or "!"
+"set joinspace
 
 " Search options
 set incsearch
@@ -191,4 +194,17 @@ nnoremap <silent> <C-l> :nohl<CR><C-l>
 " Always default yank to system clipboard
 " http://stackoverflow.com/questions/3961859/how-to-copy-to-clipboard-using-vim
 set clipboard=unnamedplus
+
+" 'formatprg' 'fp'
+" Default: ''; String; global; can use ':set'.
+" External program to use for "qq" or "Q" command (default ""). When this option is empty the internal formatting functions are used.
+" When specified, the program must take input on stdin and send output to stdout. In Unix, "fmt" is such a program. #TEXT-WIDTH# in the string is substituted by the value of textwidth option.
+" Typically set to "fmt -w #TEXT-WIDTH#" to use external program.
+"set formatprg="fmt -w #TEXT-WIDTH#"
+
+" 'equalprg' 'ep'
+" Default: ''; String; global; can use ':set'.
+"
+" External program to use for "=" command (default ""). When this option is empty the internal formatting functions are used.
+"set equalprg=""
 

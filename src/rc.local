@@ -11,27 +11,25 @@
 #
 # By default this script does nothing.
 
-# https://wiki.archlinux.org/index.php/CPU_frequency_scaling
-# Disabling Turbo Boost
-#echo 1 > /sys/devices/system/cpu/intel_pstate/no_turbo
-#echo 0 > /sys/devices/system/cpu/cpufreq/boost
-
 rm -rf /home/bullshark/.googleearth/Cache/*
 rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
 rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
 rm -rf /home/bullshark/.config/Caprine/Cache/*
 rm -rf /home/bullshark/.config/Caprine/Code\ Cache/*
 rm -rf /home/bullshark/.cache/*
+rm -rf /home/bullshark/logs/freenode*.log
+rm -rf /home/bullshark/logs/gnome*.log
+rmdir /home/bullshark/logs
 rm -rf /root/.cache/*
 rm -rf /tmp/*
 rm -rf /var/tmp/*
 rm -rf /var/cache/*
 
+#TODO Bluetooth
 for iface in `ls /sys/class/net | grep -v lo`
 do
   echo "$iface:"
   macchanger -A $iface
-  #TODO Bluetooth
 done
 
 exit 0

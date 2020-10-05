@@ -94,7 +94,7 @@ alias mount='mount | sed '"'"'s/Windows \(10\|8.1[ab]\)/Windows_\1/'"'"' | awk -
 alias lscam='v4l2-ctl --list-devices'
 
 # Disk usage sort
-alias dsort='du -sh * | sort -h'
+alias dsort='du -xsh * | sort -h'
 
 # Find all git repos in home
 alias findrepos="find ~/ -type d -name '.git'"

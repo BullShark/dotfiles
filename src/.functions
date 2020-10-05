@@ -127,8 +127,8 @@ EOF
 #  # Ask to proceed
 #  sudo bleachbit --preset --clean
 
-
   # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
+  flatpak uninstall --unused
 }
 
 

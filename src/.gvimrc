@@ -66,4 +66,5 @@ colorscheme molokai
 set guifont=Consolas\ Bold\ Italic\ 12
 
 " open all buffers in new tabs
-:au BufAdd,BufNewFile * nested tab sball
+":au BufAdd,BufNewFile * nested tab sball
+

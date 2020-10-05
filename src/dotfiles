@@ -57,10 +57,10 @@ files=(
   ~/.config/audacious/eq.preset
   ~/.local/share/audacious/Skins/n3ON_.wsz
   ~/.mozilla/icecat/k12eo3nu.default/search.json.mozlz4 #TODO Covert these to xml files and put them undser searchplugins
-  ~/Templates/Chococooky.ttf
-  ~/Templates/Chococooky.xml
-  ~/Templates/chococooky.ttf
-  ~/Templates/chococooky_bold.ttf
+  ~/Templates/ChococookyTtfFonts.tbz
+  ~/Templates/dracula-theme-for-netbeans.zip
+#  ~/Templates/Monokai\ Android\ Studio.jar
+#  ~/Templates/Monokai\ Pro\ Android\ Studio.jar
   ~/.pam_environment
   /usr/share/bleachbit/cleaners/gpodder.xml
   /var/spool/cron/root
