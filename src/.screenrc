@@ -1,39 +1,41 @@
 debug off			# Runtime debugging; Find the reason for screen getting killed
 term screen-256color		# Lots of colors
 truecolor on			# 24-bit of colors; Works in version 5
-defbce on			# Background color erase
 defshell zsh			# The dash (-bash) makes it a login shell
-defscrollback 100000		# Lots of scroll-back
+defscrollback 500000		# Lots of scroll-back
 bind ' ' windowlist -b		# Space displays the list of windows
 #bind '^b' '^a^a'		# Bind ^b for nested screens that would do ^a^a
 #termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
 defmousetrack on		# Watch for mouse clicks when there are splits
-windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
-altscreen on			# Clear the screen after running bashtop or vim
 #shelltitle "$ |zsh"		# Set the shell title
 setenv DISPLAY ':0'		# No more issues launching GUI apps
 #reptyr pid			# Attach a process in screen that was started outside of screen
 autodetach on			# Detach on hangup
 pow_detach_msg "Screen session of $LOGNAME detached." # Emulate .logout message
-hardstatus off			#
-#hardstatus firstline		# Statusbar at top
-hardstatus top right		# More convenient status messages location
-termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
 #startup_message off		# Don't display the copyright page
 #password ODSJQf.4IJN7E		# Set a reattach password: "1234" 
-defnonblock 1			# Screensaver: Use matrix.sh or asciiaquarium
-#blankerprg rain -d 100		#
-blankerprg asciiquarium -d 100	# asciiquarium, matrix.sh
-idle 30 blanker			#
-defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
-zombie "^["			# Don't kill window after the process died
+#zombie "^["			# Don't kill window after the process died
 #register [ "\033:se noai\015a"	# Prepend/append register [/] to the paste if ^a^] is pressed for working autoindent mode in vi
 #register ] "\033:se ai\015a"	# Same as above, Might break the scroll in vim
-bind ^] paste [.]		#
+#bind ^] paste [.]		#
 bind = resize =			#
 bind + resize +1		#
 bind - resize -1		#
 bind _ resize max		#
+altscreen on			# Clear the screen after running bashtop or vim
+defbce on			# Background color erase
+defnonblock 1			# Screensaver: Use matrix.sh or asciiaquarium
+blankerprg asciiquarium		# asciiquarium, matrix.sh, "rain -d 100"
+idle 30 blanker			# Timeout in seconds and program to run
+#defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
+windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
+hardstatus off			# Statusbar off
+hardstatus firstline		# Statusbar at bottom
+#hardstatus alwayslastline	# Statusbar at top
+#hardstatus top right		# More convenient status messages location
+termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
+#multiuser on			# 
+#acladd drkrieger		#
 
 # HTML Color Codes : https://www.computerhope.com/htmcolor.htm
 # String Escapes : https://www.gnu.org/software/screen/manual/html_node/String-Escapes.html
@@ -58,6 +60,19 @@ caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000
 #caption always "%{= rW} [ %S ]  %f %t %? ( %{rY} %u %{rW} ) %?"
 
 ## Default screens
+
+#chdir /home/bull/JRobo
+#screen -t JRobo         0
+#"tuff "read; ant run
+#chdir /home/bull/buttbot/trunk
+#screen -t buttbutt      1
+#stuff 'read; ./buttbot.pl conf.yml'
+#chdir /home/bull
+#screen -t infinoted     2
+#stuff "read; infinoted-0.6"
+#screen -t cod4          3
+#stuff "read; sudo su - cod4 -c '~/cod4.sh'"
+#screen -t zsh          4
 
 chdir /home/bullshark/Documents/OpenVPN
 screen -t openvpn	0
