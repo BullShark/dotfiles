@@ -104,6 +104,11 @@ function sweep {
         snap remove "$snapname" --revision="$revision"
     done
   #XXX http://mywiki.wooledge.org/BashProgramming/05
+
+  flatpak uninstall --unused
+  rm -rvf /var/lib/flatpak/.removed
+  # Flatpak also uses /var/tmp and that's cleared by /etc/rc.local on boot
+
 EOF
   # Yay and pamac cleanup
   yes | yay -Scc
@@ -126,11 +131,7 @@ EOF
 #  # Show enabled cleaners
 #  # Ask to proceed
 #  sudo bleachbit --preset --clean
-
-  # Flatpak uses /var/tmp and that's cleared by /etc/rc.local on boot
-  flatpak uninstall --unused
 }
-
 
 # View manpages in vim with vim's color scheme and less macros
 
@@ -142,7 +143,6 @@ function man {
 
   then
     #command man --whatis "$@" 1>/dev/null 2>&1 || return $? # Don't launch vim if no man pages are found
-
 
     /usr/bin/man "$@" | \
 
