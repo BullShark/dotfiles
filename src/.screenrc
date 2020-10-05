@@ -26,7 +26,7 @@ altscreen on			# Clear the screen after running bashtop or vim
 defbce on			# Background color erase
 defnonblock 1			# Screensaver: Use matrix.sh or asciiaquarium
 blankerprg asciiquarium		# asciiquarium, matrix.sh, "rain -d 100"
-idle 30 blanker			# Timeout in seconds and program to run
+idle 120 blanker			# Timeout in seconds and program to run
 #defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
 windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
 hardstatus off			# Statusbar off
@@ -35,7 +35,7 @@ hardstatus firstline		# Statusbar at bottom
 #hardstatus top right		# More convenient status messages location
 termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
 #multiuser on			# 
-#acladd drkrieger		#
+#acladd drk			#
 
 # HTML Color Codes : https://www.computerhope.com/htmcolor.htm
 # String Escapes : https://www.gnu.org/software/screen/manual/html_node/String-Escapes.html
