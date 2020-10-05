@@ -60,7 +60,7 @@ files=(
   ~/Templates/ChococookyTtfFonts.tbz
   ~/Templates/dracula-theme-for-netbeans.zip
 #  ~/Templates/Monokai\ Android\ Studio.jar
-#  ~/Templates/Monokai\ Pro\ Android\ Studio.jar
+  ~/Templates/Monokai\ Pro\ Android\ Studio.jar
   ~/.pam_environment
   /usr/share/bleachbit/cleaners/gpodder.xml
   /var/spool/cron/root
@@ -70,7 +70,8 @@ files=(
   /etc/xdg/plasma-workspace/env/envars.sh
   /usr/bin/netbeans
   /usr/bin/generate-domains-blacklist
-  /etc/X11/xorg.conf.d/90-mhwd.conf
+#  /etc/X11/xorg.conf.d/90-mhwd.conf
+  /etc/X11/mhwd.d/nvidia.conf
 )
 
 # Set the vars here
