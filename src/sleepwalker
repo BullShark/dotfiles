@@ -8,68 +8,104 @@
 
 # XXX Check if the computer has been idling for 30 minutes
 # XXX Continue if it has. Else sleep and check again.
+# XXX Build only and do not install. The sudo password should not be needed.
+# XXX yay -G ; makepkg
 
-# XXX How to give the sudo password to yay when it runs in a script???
-
-export XDG_CONFIG_HOME="/var/tmp/"
-export XDG_CACHE_HOME="/var/tmp/"
-
-mkdir -p /var/tmp/yay
-
-echo '
-
-{
-        "aururl": "https://aur.archlinux.org",
-        "buildDir": "/var/tmp/yay",
-        "absdir": "/var/tmp/yay/abs",
-        "editor": "gvim",
-        "editorflags": "-p",
-        "makepkgbin": "makepkg",
-        "makepkgconf": "/etc/makepkg.conf",
-        "pacmanbin": "pacman",
-        "pacmanconf": "/etc/pacman.conf",
-        "redownload": "yes",
-        "rebuild": "yes",
-        "answerclean": "All",
-        "answerdiff": "None",
-        "answeredit": "None",
-        "answerupgrade": "None",
-        "gitbin": "git",
-        "gpgbin": "gpg",
-        "gpgflags": "",
-        "mflags": "",
-        "sortby": "votes",
-        "searchby": "name-desc",
-        "gitflags": "",
-        "removemake": "true",
-        "sudobin": "sudo",
-        "sudoflags": "",
-        "requestsplitn": 150,
-        "sortmode": 0,
-        "completionrefreshtime": 7,
-        "sudoloop": true,
-        "timeupdate": true,
-        "devel": true,
-        "cleanAfter": false,
-        "provides": false,
-        "pgpfetch": true,
-        "upgrademenu": true,
-        "cleanmenu": true,
-        "diffmenu": true,
-        "editmenu": true,
-        "combinedupgrade": false,
-        "useask": true,
-        "batchinstall": true
+# Log everything
+function startLogging() {
+    exec 1>/dev/kmesg 2>&1
+    #exec 2>&1 | logger --priority 1 --skip-empty
+    echo "$0: Logging on"
 }
 
-' > /var/tmp/yay/config.json
+# Stop logging everything
+function stopLogging() {
+    echo "$0: Logging off"
+    exec 1>/dev/stdout
+    exec 2>/dev/stderr
+}
 
-echo "Using yay config: $(yay --show --currentconfig)"
+# Create the Yay config used for building
+function createYayConfig() {
+    export XDG_CONFIG_HOME="/var/tmp/"
+    export XDG_CACHE_HOME="/var/tmp/"
 
+    mkdir -p /var/tmp/yay
+
+    echo '
+
+    {
+            "aururl": "https://aur.archlinux.org",
+            "buildDir": "/var/tmp/yay",
+            "absdir": "/var/tmp/yay/abs",
+            "editor": "gvim",
+            "editorflags": "-p",
+            "makepkgbin": "makepkg",
+            "makepkgconf": "/etc/makepkg.conf",
+            "pacmanbin": "pacman",
+            "pacmanconf": "/etc/pacman.conf",
+            "redownload": "yes",
+            "rebuild": "yes",
+            "answerclean": "All",
+            "answerdiff": "None",
+            "answeredit": "None",
+            "answerupgrade": "None",
+            "gitbin": "git",
+            "gpgbin": "gpg",
+            "gpgflags": "",
+            "mflags": "",
+            "sortby": "votes",
+            "searchby": "name-desc",
+            "gitflags": "",
+            "removemake": "true",
+            "sudobin": "sudo",
+            "sudoflags": "",
+            "requestsplitn": 150,
+            "sortmode": 0,
+            "completionrefreshtime": 7,
+            "sudoloop": true,
+            "timeupdate": true,
+            "devel": true,
+            "cleanAfter": false,
+            "provides": false,
+            "pgpfetch": true,
+            "upgrademenu": true,
+            "cleanmenu": true,
+            "diffmenu": true,
+            "editmenu": true,
+            "combinedupgrade": false,
+            "useask": true,
+            "batchinstall": true
+    }
+
+    ' > /var/tmp/yay/config.json
+
+    echo "Using yay config: $(yay --show --currentconfig)"
+}
+
+startLogging
+stopLogging
+createYayConfig
+
+# Perform yay specific operations. Downloads PKGBUILD from ABS or AUR.
 yay -Y --gendb
+
+# Update the package database
 yay -Syy
-yay -S ungoogled-chromium
-yay -Su
+
+# Change to temp
+mkdir -p /var/tmp/yay
+
+# Download the PKGBUILD
+yay -G ungoogled-chromium
+
+# Set the priority used for building, low or high resources
+
+# Download the source and build it
+makepkg --nocolor --syncdeps # --noconfirm
+
+# Copy the built package and place it on the desktop
+cp -v *tar ~bullshark/Desktop
 
 # vi: ft=sh
 
