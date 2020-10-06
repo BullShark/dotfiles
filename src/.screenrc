@@ -24,8 +24,8 @@ bind - resize -1		#
 bind _ resize max		#
 altscreen on			# Clear the screen after running bashtop or vim
 defbce on			# Background color erase
-defnonblock 1			# Screensaver: Use matrix.sh or asciiaquarium
-blankerprg asciiquarium		# asciiquarium, matrix.sh, "rain -d 100"
+defnonblock 1			# Prevent an app that's not responding from blocking input to screen
+blankerprg matrix.sh		# Screensaver: asciiquarium, matrix.sh, "rain -d 100"
 idle 600 blanker		# Timeout in seconds and program to run
 #defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
 windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
@@ -34,8 +34,8 @@ hardstatus firstline		# Statusbar at bottom
 #hardstatus alwayslastline	# Statusbar at top
 #hardstatus top right		# More convenient status messages location
 termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
-#multiuser on			# 
-#acladd drk			#
+#multiuser on			# Allow other users to attach to my user's screen session
+#acladd drk			# Add user drk to the acl to allow him to attach my shared screen
 
 # HTML Color Codes : https://www.computerhope.com/htmcolor.htm
 # String Escapes : https://www.gnu.org/software/screen/manual/html_node/String-Escapes.html
@@ -45,10 +45,8 @@ termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hards
 
 # Cyan		#00FFFF
 # White		#FFFFFF
-# Blue		#0000FF
-# Lighter Blue	#1d99f3
+# Light Blue	#1d99f3
 # Red		#FF0000
-# Red 2		#ed1515
 
 # Hardstatus and caption string for version 0.5 git
 backtick 0 5 5 "/bin/date" '+%a %d %b %Y%t%t%T'
@@ -58,6 +56,15 @@ caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000
 # Hardstatus and caption string for version 0.4 stable
 #hardstatus string '%{= bW}%-Lw%{= rW}%50>%n%f* %t%{= bW}%+Lw%< %{= bd}%-=%D %d %M %Y %c:%s%{-}'
 #caption always "%{= rW} [ %S ]  %f %t %? ( %{rY} %u %{rW} ) %?"
+
+# Powerline
+# Readme and instructions: https://github.com/bseibold/screen-powerline
+#defutf8 on
+#utf8 on on
+#startup_message off
+#term "screen-256color"
+#caption always "%{kY} %n%f* %t %?%{YR}%{kR} %u %{Rb}%:%{Yb}%?%?%F%{.b}%:%{.w}%?%="
+#hardstatus alwayslastline "%{bk} %S %{kb} $LOGNAME %{bk} %H %?%{kb}%{kY} %-Lw%{Yk}%:%{Yb}%{Yk}%?%{Yk} %n%f* %t %{kY}%+Lw %-="
 
 ## Default screens
 

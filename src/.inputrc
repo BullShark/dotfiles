@@ -2,6 +2,14 @@
 # ~/.inputrc
 #
 
+# Use a builtin internal pager like more for screenfuls of completion
+set page-completions on
+# Display history lines that have been modified with a *
+set mark-modified-lines on
+# Match hidden files with file completion
+set match-hidden-files on
+
+# Vim
 set editing-mode vi
 set keymap vi
 
