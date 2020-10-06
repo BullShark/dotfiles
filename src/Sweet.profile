@@ -12,10 +12,12 @@ Parent=FALLBACK/
 AlternateScrolling=true
 AutoCopySelectedText=false
 MouseWheelZoomEnabled=true
+TrimLeadingSpacesInSelectedText=true
+TrimTrailingSpacesInSelectedText=true
 
 [Scrolling]
 HistoryMode=1
-HistorySize=100000
+HistorySize=500000
 ScrollFullPage=false
 
 [Terminal Features]

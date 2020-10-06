@@ -2,7 +2,7 @@ debug off			# Runtime debugging; Find the reason for screen getting killed
 term screen-256color		# Lots of colors
 truecolor on			# 24-bit of colors; Works in version 5
 defshell zsh			# The dash (-bash) makes it a login shell
-defscrollback 500000		# Lots of scroll-back
+defscrollback 500000		# Lots of scroll-back; Uses ~10mb of memory if my math is correct
 bind ' ' windowlist -b		# Space displays the list of windows
 #bind '^b' '^a^a'		# Bind ^b for nested screens that would do ^a^a
 #termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
@@ -26,7 +26,7 @@ altscreen on			# Clear the screen after running bashtop or vim
 defbce on			# Background color erase
 defnonblock 1			# Screensaver: Use matrix.sh or asciiaquarium
 blankerprg asciiquarium		# asciiquarium, matrix.sh, "rain -d 100"
-idle 120 blanker			# Timeout in seconds and program to run
+idle 600 blanker		# Timeout in seconds and program to run
 #defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
 windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
 hardstatus off			# Statusbar off

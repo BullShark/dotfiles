@@ -106,6 +106,8 @@ source $ZSH/oh-my-zsh.sh
 
 # Bash-like history expansion
 unsetopt hist_verify
+export SAVEHIST=500000
+export HISTSIZE=500000
 
 # man zshoptions, man zshall
 #unsetopt INC_APPEND_HISTORY
