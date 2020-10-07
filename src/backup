@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash #-o errexit,nounset,pipefail
 
 #
 # Home Directory Backup Script
@@ -18,19 +18,50 @@
 #    --munge-links munge symlinks to make them safe & unusable
 #    --verbose increase verbosity
 
-#set -o errexit
-#set -o nounset
-#set -o pipefail
-
 rsync -zvr --progress --delete \
   --exclude=".cache" dirtobackup backupdir 2>/dev/null
-
-# Backup keepass.kdb file with date in the filename.
 
 #XXX Encrypt backup
 tar --listed-incremental=/run/media/bullshark/Storage/Backup/snapshot \
   -cJpf /run/media/bullshark/Storage/Backup/home-backup-`date +%d-%m-%Y`.tar.xz \
   /home/bullshark/{Documents,Downloads,Pictures,Music,.config,.Xresources,.xinitrc,.i3,.mozilla,.zshrc}
+
+# Make globbing * and .* behave
+GLOBIGNORE=".:.."
+shopt -u dotglob
+
+# Backup a copy of a file with a time stamp
+function stamp {
+  now=$(date +"%F")
+
+  cp -v "$1" "$1-$now"
+  retval="$1-$now"
+
+  #debugging
+  echo "\$1: $1"
+  echo "dirname: $(dirname $1)"
+  echo "basename: $(basename $1)"
+  echo "retval: $retval"
+}
+
+#
+# Backup keepass.kdb file with date in the filename.
+#
+stamp /run/media/bullshark/Storage/Passwords.kdbx
+$backup_file=$retval
+echo "backup_file: $backup_file"
+
+#TODO ssh key
+scp /run/media/bullshark/Storage/"$backup_file" bull@odin.root.sx:/home/bull/
+status="$?"
+echo "status: $status"
+
+# Do not delete if we have the wrong directory
+#TODO Do not delete if it's the original file
+#TODO Must be under tmp or /run/media/bullshark/Storage and not the original file
+if [[ $backup_file =~ ^(/tmp/|/var/tmp/).+ ]]; then
+#  rm -rf "$dir"
+fi
 
 # vi: ft=sh
 

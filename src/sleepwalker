@@ -7,7 +7,7 @@
 #
 
 # XXX Check if the computer has been idling for 30 minutes
-# XXX Continue if it has. Else sleep and check again.
+# XXX Continue if it has. Else sleep and check again. Or exit and let cron start the script to check again.
 # XXX Build only and do not install. The sudo password should not be needed.
 # XXX yay -G ; makepkg
 
@@ -21,8 +21,8 @@ function startLogging() {
 # Stop logging everything
 function stopLogging() {
     echo "$0: Logging off"
-    exec 1>/dev/stdout
-    exec 2>/dev/stderr
+    exec 1>/dev/tty
+    exec 2>/dev/tty
 }
 
 # Create the Yay config used for building
@@ -83,6 +83,8 @@ function createYayConfig() {
     echo "Using yay config: $(yay --show --currentconfig)"
 }
 
+set -xv
+
 startLogging
 stopLogging
 createYayConfig
@@ -105,7 +107,9 @@ yay -G ungoogled-chromium
 makepkg --nocolor --syncdeps # --noconfirm
 
 # Copy the built package and place it on the desktop
-cp -v *tar ~bullshark/Desktop
+cp -v *.pkg.tar.xz *.src.tar.gz ~bullshark/Desktop
+
+# /etc/makepkg.conf
 
 # vi: ft=sh
 

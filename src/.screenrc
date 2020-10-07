@@ -25,8 +25,8 @@ bind _ resize max		#
 altscreen on			# Clear the screen after running bashtop or vim
 defbce on			# Background color erase
 defnonblock 1			# Prevent an app that's not responding from blocking input to screen
-blankerprg matrix.sh		# Screensaver: asciiquarium, matrix.sh, "rain -d 100"
-idle 600 blanker		# Timeout in seconds and program to run
+#blankerprg matrix.sh		# Screensaver: asciiquarium, matrix.sh, "rain -d 100"
+#idle 600 blanker		# Timeout in seconds and program to run
 #defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
 windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
 hardstatus off			# Statusbar off
@@ -50,6 +50,12 @@ termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hards
 
 # Hardstatus and caption string for version 0.5 git
 backtick 0 5 5 "/bin/date" '+%a %d %b %Y%t%t%T'
+# GPU Temp
+#backtick 0 5 5 "/usr/bin/nvidia-smi" '--query-gpu=temperature.gpu --format=csv,noheader,nounits'
+# Fan Speed in RPM
+#backtick 0 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeedRPM[FAN-0]''
+# Fan Speed in %
+#backtick 0 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeed[FAN-0]''
 hardstatus string '%{#ffffff;#1d99f3}%-Lw%{#ffffff;#ff0000}%50>%n%f* %t%{#ffffff;#1d99f3}%+Lw%< %{#ffffff;#1d99f3}%-=%{#ffffff;#1d99f3}%0`%{-}'
 caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000} ) %?"
 

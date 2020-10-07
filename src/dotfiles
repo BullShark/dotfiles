@@ -31,7 +31,7 @@ files=(
   ~/bin/retroarchw
   ~/bin/jbytemod
   ~/bin/pkgfile-update
-#  ~/bin/backup
+  ~/bin/backup
   ~/bin/sleepwalker
   ~/bin/thumbnailer
   ~/.bashrc
@@ -59,7 +59,7 @@ files=(
   ~/.mozilla/icecat/k12eo3nu.default/search.json.mozlz4 #TODO Covert these to xml files and put them undser searchplugins
   ~/Templates/ChococookyTtfFonts.tbz
   ~/Templates/dracula-theme-for-netbeans.zip
-#  ~/Templates/Monokai\ Android\ Studio.jar
+  ~/Templates/Monokai\ Android\ Studio.jar
   ~/Templates/Monokai\ Pro\ Android\ Studio.jar
   ~/.pam_environment
   /usr/share/bleachbit/cleaners/gpodder.xml
@@ -70,8 +70,8 @@ files=(
   /etc/xdg/plasma-workspace/env/envars.sh
   /usr/bin/netbeans
   /usr/bin/generate-domains-blacklist
-#  /etc/X11/xorg.conf.d/90-mhwd.conf
   /etc/X11/mhwd.d/nvidia.conf
+  /etc/X11/xorg.conf
 )
 
 # Set the vars here
