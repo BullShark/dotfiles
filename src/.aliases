@@ -93,7 +93,11 @@ alias mount='mount | sed '"'"'s/Windows \(10\|8.1[ab]\)/Windows_\1/'"'"' | awk -
 # List cameras
 alias lscam='v4l2-ctl --list-devices'
 
+# Make globbing * and .* behave
+#GLOBIGNORE=".:.." 
+#shopt -u dotglob	#FIXME Works in bash, not zsh
 # Disk usage sort
+#alias dsort='du -xsh * .* | sort -h'
 alias dsort='du -xsh * | sort -h'
 
 # Find all git repos in home

@@ -63,7 +63,7 @@ files=(
   ~/Templates/Monokai\ Pro\ Android\ Studio.jar
   ~/.pam_environment
   /usr/share/bleachbit/cleaners/gpodder.xml
-  /var/spool/cron/root
+#  /var/spool/cron/root
   /var/spool/cron/bullshark
   /etc/rc.local
   /etc/default/grub

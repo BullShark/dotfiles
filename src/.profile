@@ -26,5 +26,10 @@ export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.1"
 export PATH="$PATH:$HOME/Android/Sdk/tools"
 
+# Silence these messages 'Picked up _JAVA_OPTIONS=...'
+_SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
+unset _JAVA_OPTIONS
+alias java='java "$_SILENT_JAVA_OPTIONS"'
+
 # vi: ft=sh
 
