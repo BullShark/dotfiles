@@ -2,7 +2,7 @@ debug off			# Runtime debugging; Find the reason for screen getting killed
 term screen-256color		# Lots of colors
 truecolor on			# 24-bit of colors; Works in version 5
 defshell zsh			# The dash (-bash) makes it a login shell
-defscrollback 500000		# Lots of scroll-back; Uses ~10mb of memory if my math is correct
+defscrollback 50000		# Lots of scroll-back
 bind ' ' windowlist -b		# Space displays the list of windows
 #bind '^b' '^a^a'		# Bind ^b for nested screens that would do ^a^a
 #termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
@@ -49,13 +49,13 @@ termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hards
 # Red		#FF0000
 
 # Hardstatus and caption string for version 0.5 git
-backtick 0 5 5 "/bin/date" '+%a %d %b %Y%t%t%T'
+#backtick 0 5 5 "/bin/date" '+%a %d %b %Y%t%t%T'
 # GPU Temp
-#backtick 0 5 5 "/usr/bin/nvidia-smi" '--query-gpu=temperature.gpu --format=csv,noheader,nounits'
+#backtick 1 5 5 "/usr/bin/nvidia-smi" '--query-gpu=temperature.gpu --format=csv,noheader,nounits'
 # Fan Speed in RPM
-#backtick 0 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeedRPM[FAN-0]''
+#backtick 2 5 5 "/usr/bin/nvidia-settings" '--display=:0 --terse -q "[fan:0]/GPUCurrentFanSpeedRPM[FAN-0]"'
 # Fan Speed in %
-#backtick 0 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeed[FAN-0]''
+#backtick 3 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeed[FAN-0]''
 hardstatus string '%{#ffffff;#1d99f3}%-Lw%{#ffffff;#ff0000}%50>%n%f* %t%{#ffffff;#1d99f3}%+Lw%< %{#ffffff;#1d99f3}%-=%{#ffffff;#1d99f3}%0`%{-}'
 caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000} ) %?"
 
