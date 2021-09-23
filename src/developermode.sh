@@ -119,8 +119,8 @@ function dodns {
 
 	cat << 'END' > /etc/resolv.conf
 #AdGuardHome
-nameserver 45.58.55.78
-nameserver 2602:ffc5:30::1:a899
+nameserver 152.89.107.76
+nameserver 2a03:4000:39:883:5811:19ff:fe2d:ce39
 
 options edns0 single-request-reopen
 END
