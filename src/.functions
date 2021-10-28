@@ -114,23 +114,25 @@ EOF
   yes | yay -Scc
   yay -Yc
 
-  #TODO Not accepting password
-#  pamac clean -k 0
+#  browser-vacuum
 
-  browser-vacuum
-
-  #TODO Bleachbit
-#  bleachbit --help
-#
-#  bleachbit --preset --preview
-#  # Show enabled cleaners
-#  # Ask to proceed
-#  bleachbit --preset --clean
-#
-#  sudo bleachbit --preset --preview
-#  # Show enabled cleaners
-#  # Ask to proceed
-#  sudo bleachbit --preset --clean
+  bleachbit --clean \
+    system.localizations \
+    system.recent_documents \
+    system.rotated_logs \
+    system.tmp \
+    system.trash \
+    thumbnails.cache \
+    system.cache \
+    kde.cache \
+    journald.clean \
+    java.cache \
+    deepscan.tmp \
+    deepscan.thumbs_db \
+    deepscan.ds_store \
+    apt.clean \
+    apt.autoremove \
+    apt.autoclean
 }
 
 # View manpages in vim with vim's color scheme and less macros
@@ -147,7 +149,7 @@ function man {
     /usr/bin/man "$@" | \
 
       col -b | \
-      /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+      /usr/share/vim/vim81/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
 
   else
     /usr/bin/man "$@"
