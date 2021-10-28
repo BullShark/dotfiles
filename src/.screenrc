@@ -30,8 +30,8 @@ defnonblock 1			# Prevent an app that's not responding from blocking input to sc
 #defhstatus "screen: ^En (^Et)"	# Set every new windows hardstatus line to somenthing descriptive
 windowlist string "%4n %h%=%f"	# Name fix in windowlist that only shows "bash"
 hardstatus off			# Statusbar off
-hardstatus firstline		# Statusbar at bottom
-#hardstatus alwayslastline	# Statusbar at top
+#hardstatus firstline		# Statusbar at bottom
+hardstatus alwayslastline	# Statusbar at top
 #hardstatus top right		# More convenient status messages location
 termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
 #multiuser on			# Allow other users to attach to my user's screen session
@@ -56,12 +56,12 @@ termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hards
 #backtick 2 5 5 "/usr/bin/nvidia-settings" '--display=:0 --terse -q "[fan:0]/GPUCurrentFanSpeedRPM[FAN-0]"'
 # Fan Speed in %
 #backtick 3 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeed[FAN-0]''
-hardstatus string '%{#ffffff;#1d99f3}%-Lw%{#ffffff;#ff0000}%50>%n%f* %t%{#ffffff;#1d99f3}%+Lw%< %{#ffffff;#1d99f3}%-=%{#ffffff;#1d99f3}%0`%{-}'
-caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000} ) %?"
+#hardstatus string '%{#ffffff;#1d99f3}%-Lw%{#ffffff;#ff0000}%50>%n%f* %t%{#ffffff;#1d99f3}%+Lw%< %{#ffffff;#1d99f3}%-=%{#ffffff;#1d99f3}%0`%{-}'
+#caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000} ) %?"
 
 # Hardstatus and caption string for version 0.4 stable
-#hardstatus string '%{= bW}%-Lw%{= rW}%50>%n%f* %t%{= bW}%+Lw%< %{= bd}%-=%D %d %M %Y %c:%s%{-}'
-#caption always "%{= rW} [ %S ]  %f %t %? ( %{rY} %u %{rW} ) %?"
+hardstatus string '%{= bW}%-Lw%{= rW}%50>%n%f* %t%{= bW}%+Lw%< %{= bd}%-=%D %d %M %Y %c:%s%{-}'
+caption always "%{= rW} [ %S ]  %f %t %? ( %{rY} %u %{rW} ) %?"
 
 # Powerline
 # Readme and instructions: https://github.com/bseibold/screen-powerline
@@ -87,9 +87,8 @@ caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000
 #stuff "read; sudo su - cod4 -c '~/cod4.sh'"
 #screen -t zsh          4
 
-chdir /home/bullshark/Documents/OpenVPN
-screen -t openvpn	0
-stuff "sudo openvpn --config odin.ovpn\n"
+chdir /home/bullshark
+screen -t zsh	0
 chdir /home/bullshark
 screen -t root		1
 stuff "su -\n"

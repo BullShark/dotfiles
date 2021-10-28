@@ -4,7 +4,7 @@
 #
 
 # Proton
-export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton 5.0"
+export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton 3.7"
 [[ -f ~/.proton ]] && export STEAM_COMPAT_DATA_PATH="~/.proton"
 
 # Man pages
@@ -15,10 +15,13 @@ export LESS="--RAW-CONTROL-CHARS"	# Get color support for 'less'
 # Miscellaneous
 export EDITOR="vim"
 export MANGOHUD="1"
+# Netbeans Building Project Fix:
+# https://stackoverflow.com/questions/6448163/a-fatal-error-has-been-detected-by-the-java-runtime-environment-sigsegv-libjvm/7515836
+export LD_BIND_NOW=1
 #export BROWSER="/usr/bin/chromium"
 
 # Npm
-export PATH="$PATH:$HOME/.npm/bin"
+#export PATH="$PATH:$HOME/.npm/bin"
 
 # Android-dev
 export PATH="$PATH:$HOME/Android/Sdk/tools/bin"

@@ -113,6 +113,9 @@ export HISTSIZE=500000
 #unsetopt INC_APPEND_HISTORY
 #setopt APPEND_HISTORY
 
+# Java font-fix needed for Netbeans
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
+
 [[ -e ~/.aliases ]] && . ~/.aliases
 
 [[ -e ~/.functions ]] && . ~/.functions

@@ -20,6 +20,11 @@
 # resolve symlinks
 #
 
+# Java font-fix needed for Netbeans
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
+export JAVA_HOME='/usr/lib/jvm/java-17-jdk/'
+export PATH="$JAVA_HOME/bin:$PATH"
+
 PRG=$0
 
 while [ -h "$PRG" ]; do
@@ -152,7 +157,7 @@ launchNbexec() {
 case "`uname`" in
     Darwin*)
         eval launchNbexec \
-            --jdkhome '"$netbeans_jdkhome"' \
+            --jdkhome '/usr/lib/jvm/java-16-jdk/' \
             -J-Xdock:name=NetBeans \
             '"-J-Xdock:icon=$basedir/nb/netbeans.icns"' \
             --branding nb \
@@ -163,7 +168,7 @@ case "`uname`" in
         ;;
     *)
         eval launchNbexec \
-            --jdkhome '"$netbeans_jdkhome"' \
+            --jdkhome '/usr/lib/jvm/java-16-jdk/' \
             --branding nb \
             --clusters '"$netbeans_clusters"' \
             -J-Dnetbeans.importclass=org.netbeans.upgrade.AutoUpgrade \

@@ -34,6 +34,9 @@ files=(
   ~/bin/backup
   ~/bin/sleepwalker
   ~/bin/thumbnailer
+  ~/bin/spinners
+  ~/bin/iptables.sh
+  ~/Code/spinners.c 
   ~/.bashrc
   ~/.bash_profile
   ~/.aliases
@@ -56,20 +59,18 @@ files=(
   ~/.local/share/konsole/Sweet-Mars.profile
   ~/.config/audacious/eq.preset
   ~/.local/share/audacious/Skins/n3ON_.wsz
-  ~/.mozilla/icecat/k12eo3nu.default/search.json.mozlz4 #TODO Covert these to xml files and put them undser searchplugins
+  ~/.mozilla/firefox/yw6fxijw.default-release/search.json.mozlz4
   ~/Templates/ChococookyTtfFonts.tbz
   ~/Templates/dracula-theme-for-netbeans.zip
   ~/Templates/Monokai\ Android\ Studio.jar
   ~/Templates/Monokai\ Pro\ Android\ Studio.jar
   ~/.pam_environment
+  ~/.Apps/netbeans-12.4/netbeans/bin/netbeans
   /usr/share/bleachbit/cleaners/gpodder.xml
 #  /var/spool/cron/root
   /var/spool/cron/bullshark
-  /etc/rc.local
   /etc/default/grub
   /etc/xdg/plasma-workspace/env/envars.sh
-  /usr/bin/netbeans
-  /usr/bin/generate-domains-blacklist
   /etc/X11/mhwd.d/nvidia.conf
   /etc/X11/xorg.conf
 )

@@ -108,8 +108,14 @@ function sweep {
   flatpak uninstall --unused
   rm -rvf /var/lib/flatpak/.removed
   # Flatpak also uses /var/tmp and that's cleared by /etc/rc.local on boot
-  
-  # For use on the server
+
+EOF
+  # Yay and pamac cleanup
+  yes | yay -Scc
+  yay -Yc
+
+#  browser-vacuum
+
   bleachbit --clean \
     system.localizations \
     system.recent_documents \
@@ -127,14 +133,6 @@ function sweep {
     apt.clean \
     apt.autoremove \
     apt.autoclean
-EOF
-
-  # Yay and pamac cleanup
-  yes | yay -Scc
-  yay -Yc
-
-#  browser-vacuum
-
 }
 
 # View manpages in vim with vim's color scheme and less macros

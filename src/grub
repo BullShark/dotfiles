@@ -1,10 +1,10 @@
 # Choose the default kernel to boot
 GRUB_DEFAULT=saved # grub-set-default can be used with this to choose which one is saved
-#GRUB_DEFAULT=0
+# Skip the menu or not
 
 # Skip the menu or not
 #GRUB_TIMEOUT=0
-GRUB_TIMEOUT=10
+GRUB_TIMEOUT=5
 #GRUB_TIMEOUT_STYLE=hidden
 GRUB_TIMEOUT_STYLE=menu
 
@@ -14,9 +14,9 @@ GRUB_DISTRIBUTOR="Manjaro"
 # Don't add Windows to the grub menu
 GRUB_DISABLE_OS_PROBER=true
 
-# Kernel options
-#GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3"
-GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=343334a0-f4d3-4f25-be43-cbce2ff14a6e:luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e root=/dev/mapper/luks-343334a0-f4d3-4f25-be43-cbce2ff14a6e apparmor=1 security=apparmor udev.log_priority=3 idle=poll sysrq_always_enabled=1 audit=1 audit_backlog_limit=8192"
+#GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=dfb3a888-626d-4267-ae1d-8eaa34fa976c:luks-dfb3a888-626d-4267-ae1d-8eaa34fa976c root=/dev/mapper/luks-dfb3a888-626d-4267-ae1d-8eaa34fa976c apparmor=1 security=apparmor udev.log_priority=3"
+
+GRUB_CMDLINE_LINUX_DEFAULT="quiet cryptdevice=UUID=dfb3a888-626d-4267-ae1d-8eaa34fa976c:luks-dfb3a888-626d-4267-ae1d-8eaa34fa976c root=/dev/mapper/luks-dfb3a888-626d-4267-ae1d-8eaa34fa976c apparmor=1 security=apparmor udev.log_priority=3 apparmor=1 security=apparmor udev.log_priority=3 idle=poll sysrq_always_enabled=1 audit=1"
 GRUB_CMDLINE_LINUX=""
 
 # If you want to enable the save default function, uncomment the following
@@ -50,6 +50,9 @@ GRUB_GFXPAYLOAD_LINUX=keep
 # Uncomment to disable generation of recovery mode menu entries
 GRUB_DISABLE_RECOVERY=true
 
+# Uncomment this option to enable os-prober execution in the grub-mkconfig command
+GRUB_DISABLE_OS_PROBER=false
+
 # Uncomment and set to the desired menu colors.  Used by normal and wallpaper
 # modes only.  Entries specified as foreground/background.
 GRUB_COLOR_NORMAL="light-gray/black"
@@ -61,4 +64,11 @@ GRUB_THEME="/usr/share/grub/themes/manjaro/theme.txt"
 
 # Uncomment to get a beep at GRUB start
 #GRUB_INIT_TUNE="480 440 1"
+
+# Uncomment to ensure that the root filesystem is mounted read-only so that
+# systemd-fsck can run the check automatically. We use 'fsck' by default, which
+# needs 'rw' as boot parameter, to avoid delay in boot-time. 'fsck' needs to be
+# removed from 'mkinitcpio.conf' to make 'systemd-fsck' work.
+# See also Arch-Wiki: https://wiki.archlinux.org/index.php/Fsck#Boot_time_checking
+#GRUB_ROOT_FS_RO=true
 GRUB_ENABLE_CRYPTODISK=y

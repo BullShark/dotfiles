@@ -107,7 +107,7 @@ alias findrepos="find ~/ -type d -name '.git'"
 alias onehour='find ~/ -mtime -1 -print | grep -vE '"'"'/home/bullshark/\..+)'"'"''
 
 # When you need to run all three many times during development
-alias cleanbuildrun='ant clean && ant jar && ant run'
+alias cleanbuildrun='./gradlew clean && ./gradlew build && ./gradlew run'
 alias cbr=cleanbuildrun
 
 # Unlock, edit, lock
@@ -121,6 +121,16 @@ alias myalias='alias | grep -vE "yay|pacman|git"'
 
 # Show the current playing mp3 in clementine
 alias findmp3='lsof -p $(pidof clementine) | grep -E '/.+\.mp3''
+
+# Display output in a table
+# Example: command | ct
+alias ct='column -t'
+
+# Path in human readable format
+alias path="echo $PATH | tr ':' '\n'"
+
+# Simple HTTP Server
+alias webup='python3 -m http.server 8080'
 
 #-------------------------------------------------------------
 # ss: socket statistics
