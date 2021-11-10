@@ -5,7 +5,8 @@
 
 # Proton
 export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton 3.7"
-[[ -f ~/.proton ]] && export STEAM_COMPAT_DATA_PATH="~/.proton"
+#[[ -f ~/.proton ]] && export STEAM_COMPAT_DATA_PATH="~/.proton"
+export STEAM_COMPAT_DATA_PATH="~/.proton"
 
 # Man pages
 export MANPAGER='less -s -M +Gg'	# Display percentage in the document

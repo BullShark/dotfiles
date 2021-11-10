@@ -88,10 +88,10 @@ caption always "%{= rW} [ %S ]  %f %t %? ( %{rY} %u %{rW} ) %?"
 #screen -t zsh          4
 
 chdir /home/bullshark
-screen -t zsh	0
-chdir /home/bullshark
-screen -t root		1
+screen -t root		0
 stuff "su -\n"
+chdir /home/bullshark
+screen -t zsh		1
 chdir /home/bullshark
 screen -t zsh		2
 #screen	-t music	3 mocp

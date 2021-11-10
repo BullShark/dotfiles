@@ -72,8 +72,8 @@ alias most-often='history | awk '"'"'{print $2}'"'"' | sort | uniq -c | sort -rn
 # Gabe's time in Italy
 alias gabe='TZ=Europe/Rome date'
 
-# Obfu's time in Turkey
-alias seck='TZ=Turkey date'
+# Sajid's time in Pakistan
+alias sajid='TZ=Asia/Karachi date'
 
 # Supress gtk warning messages
 alias gvim='gvim 2>/dev/null'
