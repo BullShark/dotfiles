@@ -73,6 +73,7 @@ files=(
   /etc/xdg/plasma-workspace/env/envars.sh
   /etc/X11/mhwd.d/nvidia.conf
   /etc/X11/xorg.conf
+  /etc/resolv.conf
 )
 
 # Set the vars here
