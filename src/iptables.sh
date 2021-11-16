@@ -20,22 +20,22 @@ ip6tables -A INPUT -p TCP --dport ssh -j ACCEPT
 #ip6tables -A INPUT -p TCP --dport 25 -j ACCEPT
 
 # Allow Apache
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-ip6tables -A INPUT -p TCP --dport http -j ACCEPT
+#iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+#ip6tables -A INPUT -p TCP --dport http -j ACCEPT
 
 # Allow AdGuard Home
-iptables -A INPUT -p tcp --dport 53 -j ACCEPT
-ip6tables -A INPUT -p tcp --dport 53 -j ACCEPT
-iptables -A INPUT -p udp --dport 53 -j ACCEPT
-ip6tables -A INPUT -p udp --dport 53 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
-ip6tables -A INPUT -p tcp --dport 8080 -j ACCEPT
+#iptables -A INPUT -p tcp --dport 53 -j ACCEPT
+#ip6tables -A INPUT -p tcp --dport 53 -j ACCEPT
+#iptables -A INPUT -p udp --dport 53 -j ACCEPT
+#ip6tables -A INPUT -p udp --dport 53 -j ACCEPT
+#iptables -A INPUT -p tcp --dport 8080 -j ACCEPT
+#ip6tables -A INPUT -p tcp --dport 8080 -j ACCEPT
 
 # Mumble Server
-iptables -A INPUT -p tcp --dport 64738 -j ACCEPT
-ip6tables -A INPUT -p tcp --dport 64738 -j ACCEPT
-iptables -A INPUT -p udp --dport 64738 -j ACCEPT
-ip6tables -A INPUT -p udp --dport 64738 -j ACCEPT
+#iptables -A INPUT -p tcp --dport 64738 -j ACCEPT
+#ip6tables -A INPUT -p tcp --dport 64738 -j ACCEPT
+#iptables -A INPUT -p udp --dport 64738 -j ACCEPT
+#ip6tables -A INPUT -p udp --dport 64738 -j ACCEPT
 
 # Ping
 iptables -A INPUT -p icmp --icmp-type 3 -j ACCEPT
