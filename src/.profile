@@ -27,7 +27,7 @@ export LD_BIND_NOW=1
 # Android-dev
 export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.1"
+export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.2"
 export PATH="$PATH:$HOME/Android/Sdk/tools"
 
 # Silence these messages 'Picked up _JAVA_OPTIONS=...'
