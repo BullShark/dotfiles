@@ -1,5 +1,6 @@
 debug off			# Runtime debugging; Find the reason for screen getting killed
-term screen-256color		# Lots of colors
+#term screen-256color		# Lots of colors
+term screen                     # Should get rid of problems with copy/paste
 truecolor on			# 24-bit of colors; Works in version 5
 defshell zsh			# The dash (-bash) makes it a login shell
 defscrollback 50000		# Lots of scroll-back

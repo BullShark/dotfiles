@@ -386,11 +386,11 @@ function cli {
 }
 
 # Check what is auto starting
-#TODO systemd stuff
 function autostart {
-#  sudo systemctl --system --all list*
-#  sudo systemctl --user   --all list*
-#  sudo systemctl --global --all list*
+  systemctl --system list-unit-files | grep enabled
+  systemctl --user list-unit-files | grep enabled
+  systemctl --global list-unit-files | grep enabled
+
   sudo ls /etc/xdg/autostart \
           /etc/skel/.config/autostart \
           /root/.config/autostart \
