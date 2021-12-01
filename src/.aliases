@@ -97,8 +97,8 @@ alias lscam='v4l2-ctl --list-devices'
 #GLOBIGNORE=".:.." 
 #shopt -u dotglob	#FIXME Works in bash, not zsh
 # Disk usage sort
-#alias dsort='du -xsh * .* | sort -h'
-alias dsort='du -xsh * | sort -h'
+#alias dsort='du -xsh * | sort -h'
+alias dsort='du -xsh * .* | sort -h'
 
 # Find all git repos in home
 alias findrepos="find ~/ -type d -name '.git'"
