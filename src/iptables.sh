@@ -15,6 +15,10 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -p tcp --dport 22 -j ACCEPT
 ip6tables -A INPUT -p TCP --dport ssh -j ACCEPT
 
+# KDE Connect
+iptables -A INPUT -p tcp --dport 1716 -j ACCEPT
+ip6tables -A INPUT -p tcp --dport 1716 -j ACCEPT
+
 # Allow Postfix (Don't become a spam relay)
 #iptables -A INPUT -p tcp --dport 25 -j ACCEPT
 #ip6tables -A INPUT -p TCP --dport 25 -j ACCEPT

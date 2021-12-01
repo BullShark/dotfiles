@@ -132,6 +132,9 @@ alias path="echo $PATH | tr ':' '\n'"
 # Simple HTTP Server
 alias webup='python3 -m http.server 8080'
 
+# List all user accounts alphabetically
+alias lsusers='cut -d: -f1 < /etc/passwd | sort | xargs'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all
