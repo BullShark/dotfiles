@@ -1,5 +1,15 @@
 #!/bin/bash
- 
+
+bullshark="70.123.216.149"
+bullshark6="2603:8081:4c0e:700::3"
+bullshark_hamachi="25.5.244.225"
+drk="184.155.55.186"
+lan="$lan"
+lan6="2603:8081:4c0e/64"
+localhost="127.0.0.1"
+localhost6="::1"
+iface="enp3s0"
+
 iptables -F
 iptables -X
 iptables -Z
@@ -14,67 +24,100 @@ iptables -A INPUT -i lo -j ACCEPT
 # Allow SSH
 iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j DROP
-ip6tables -A INPUT -p tcp --dport 22 -j DROP
 
 # KDE Connect
 iptables -A INPUT -p tcp -m state --state NEW --dport 1716 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --dport 1716 -j ACCEPT
-iptables -A INPUT -p tcp --dport 1716 -j DROP
-ip6tables -A INPUT -p tcp --dport 1716 -j DROP
 
 # Samba (LAN)
-iptables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 137 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 137 -j ACCEPT
-iptables -A INPUT -p tcp --dport 137 -j DROP
-ip6tables -A INPUT -p tcp --dport 137 -j DROP
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 137 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 138 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACCEPT
 
-iptables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 138 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 138 -j ACCEPT
-iptables -A INPUT -p tcp --dport 138 -j DROP
-ip6tables -A INPUT -p tcp --dport 138 -j DROP
-
-iptables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 139 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 139 -j ACCEPT
-iptables -A INPUT -p tcp --dport 139 -j DROP
-ip6tables -A INPUT -p tcp --dport 139 -j DROP
-
+# WireGuard
+#iptables -A INPUT -p udp -m state --state NEW --dport 5555 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --dport 5555 -j ACCEPT
 
 # Allow Postfix (Don't become a spam relay)
-iptables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 25 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source 192.168.0.1/24 --dport 25 -j ACCEPT
-iptables -A INPUT -p tcp -m state --state NEW --source 127.0.0.1 --dport 25 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source ::1 --dport 25 -j ACCEPT
-iptables -A INPUT -p tcp --dport 25 -j DROP
-ip6tables -A INPUT -p tcp --dport 25 -j DROP
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 25 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 25 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 25 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 25 -j ACCEPT
+
+# Dovecot
+#iptables -A INPUT -p tcp -m state --state NEW --dport 143 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 143 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --dport 993 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 993 -j ACCEPT
 
 # Allow Apache
 #iptables -A INPUT -p tcp -m state --state NEW --dport 80 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --dport 80 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j DROP
-ip6tables -A INPUT -p tcp --dport 80 -j DROP
+
+# Apache HTTPS
+#iptables -A INPUT -p tcp -m state --state NEW --dport 443 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 443 -j ACCEPT
+
+# Python Flask
+#iptables -A INPUT -p tcp -m state --state NEW --dport 5000 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 5000 -j ACCEPT
 
 # Allow AdGuard Home
 #iptables -A INPUT -p tcp -m state --state NEW --dport 53 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --dport 53 -j ACCEPT
-iptables -A INPUT -p tcp --dport 53 -j DROP
-ip6tables -A INPUT -p tcp --dport 53 -j DROP
-
 #iptables -A INPUT -p udp -m state --state NEW --dport 53 -j ACCEPT
 #ip6tables -A INPUT -p udp -m state --state NEW --dport 53 -j ACCEPT
-iptables -A INPUT -p udp --dport 53 -j DROP
-ip6tables -A INPUT -p udp --dport 53 -j DROP
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 8080 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 8080 -j ACCEPT
 
-#iptables -A INPUT -p tcp -m state --state NEW --dport 8080 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 8080 -j ACCEPT
-iptables -A INPUT -p tcp --dport 8080 -j DROP
-ip6tables -A INPUT -p tcp --dport 8080 -j DROP
+# Mumble Server
+#iptables -A INPUT -p tcp -m state --state NEW --dport 64738 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 64738 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --dport 64738 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --dport 64738 -j ACCEPT
+
+# CraftBukkit
+#iptables -A INPUT -p tcp -m state --state NEW --dport 25565 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 25565 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --dport 25565 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --dport 25565 -j ACCEPT
+
+# Mysql (localhost only)
+#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 3306 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 3306 -j ACCEPT
+
+# Postgresql (localhost only)
+#iptables -A INPUT -p tcp -m state --state NEW -s $localhost --dport 5432 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW -s $localhost6 --dport 5432 -j ACCEPT
+
+# Matrix
+#iptables -A INPUT -p tcp -m state --state NEW --dport 8008 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 8008 -j ACCEPT
 
 # Netcat Reverse Shell
-#iptables -A INPUT -p tcp -m state --state NEW --dport 1337 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 1337 -j ACCEPT
-iptables -A INPUT -p tcp --dport 1337 -j DROP
-ip6tables -A INPUT -p tcp --dport 1337 -j DROP
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 1337 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 1337 -j ACCEPT
+
+# Cockpit
+#iptables -A INPUT -p tcp -m state --state NEW --dport 9090 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 9090 -j ACCEPT
+
+# Webmin
+#iptables -A INPUT -p tcp -m state --state NEW --dport 10000 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 10000 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --dport 10000 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --dport 10000 -j ACCEPT
+
+# Log Blocked Traffic
+iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+
+# Block IPv6 in IPv4
+iptables -A INPUT -p 41 -j DROP
+iptables -A FORWARD -p 41 -j DROP
 
 # Ping
 iptables -A INPUT -p icmp --icmp-type 3 -j ACCEPT
@@ -89,7 +132,19 @@ ip6tables -Z
 ip6tables -P INPUT DROP
 ip6tables -P FORWARD DROP
 ip6tables -P OUTPUT ACCEPT
- 
+
+# Anti-spoofing
+ip6tables -A INPUT ! -i lo -s $lan6/128 -j DROP
+ip6tables -A INPUT -i $ -s FC00::/7 -j DROP
+ip6tables -A FORWARD -s $lan6/128 -j DROP
+ip6tables -A FORWARD -i $iface -s FC00::/7 -j DROP
+
+# Block tunnel prefixes
+ip6tables -A INPUT -s 2002::/16 -j DROP
+ip6tables -A INPUT -s 2001:0::/32 -j DROP
+ip6tables -A FORWARD -s 2002::/16 -j DROP
+ip6tables -A FORWARD -s 2001:0::/32 -j DROP
+
 ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -i lo -j ACCEPT
 ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP 
