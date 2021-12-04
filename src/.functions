@@ -354,8 +354,7 @@ function lan {
   echo -e "${RED}/proc/net/arp${RST}:"
   for line in $(grep -v '00:00:00:00:00:00' /proc/net/arp);
   do
-    echo $line
-    #echo -en "\t$(echo $line | awk -F" " '{print $4}' | oui)\n"
+    oui $line
   done
 }
 
