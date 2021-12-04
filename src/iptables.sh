@@ -26,23 +26,28 @@ iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 
-# Might get noisy
-iptables -A INPUT -s $lan -j LOG --log-level 4
+# Might get noisy (info message)
+iptables -A INPUT -s $lan -j LOG -m limit --limit 5/min --log-prefix "iptables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
+ip6tables -A INPUT -s $lan6 -j LOG -m limit --limit 5/min --log-prefix "ip6tables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
  
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
 # Allow SSH
-iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
 
 # KDE Connect (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 1716 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT
+iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 1716 -j ACCEPT
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT
 
 # Samba (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 137 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT
+iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 137 -j ACCEPT
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 138 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACCEPT
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT
