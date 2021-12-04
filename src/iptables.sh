@@ -1,13 +1,16 @@
 #!/bin/bash
+#set -x
+#set -v
 
 bullshark="70.123.216.149"
 bullshark6="2603:8081:4c0e:700::3"
 bullshark_hamachi="25.5.244.225"
 drk="184.155.55.186"
-lan="$lan"
-lan6="2603:8081:4c0e/64"
-localhost="127.0.0.1"
+lan="192.168.0.0/24"
+lan6="fe80::/64"
+localhost="127.0.0.0/8"
 localhost6="::1"
+local_net6="FC00::/7"
 iface="enp3s0"
 
 iptables -F
@@ -21,9 +24,9 @@ iptables -P OUTPUT ACCEPT
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
-# Allow SSH
-iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
+# Allow SSH (Limit to 2 connections)
+iptables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 2 --dport 22 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 2 --dport 22 -j ACCEPT
 
 # KDE Connect
 iptables -A INPUT -p tcp -m state --state NEW --dport 1716 -j ACCEPT
@@ -53,13 +56,13 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 #iptables -A INPUT -p tcp -m state --state NEW --dport 993 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --dport 993 -j ACCEPT
 
-# Allow Apache
-#iptables -A INPUT -p tcp -m state --state NEW --dport 80 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 80 -j ACCEPT
+# Allow Apache (Limit to 15 connections)
+#iptables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 15 --dport 80 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 15 --dport 80 -j ACCEPT
 
 # Apache HTTPS
-#iptables -A INPUT -p tcp -m state --state NEW --dport 443 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 443 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 15 --dport 443 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 15 --dport 443 -j ACCEPT
 
 # Python Flask
 #iptables -A INPUT -p tcp -m state --state NEW --dport 5000 -j ACCEPT
@@ -113,7 +116,11 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 
 # Log Blocked Traffic
 iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
-ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
+ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied: " --log-level 7
+
+# Log Any Forwarding Traffic
+iptables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "iptables FORWARD denied: " --log-level 7
+ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 7
 
 # Block IPv6 in IPv4
 iptables -A INPUT -p 41 -j DROP
@@ -134,10 +141,10 @@ ip6tables -P FORWARD DROP
 ip6tables -P OUTPUT ACCEPT
 
 # Anti-spoofing
-ip6tables -A INPUT ! -i lo -s $lan6/128 -j DROP
-ip6tables -A INPUT -i $ -s FC00::/7 -j DROP
-ip6tables -A FORWARD -s $lan6/128 -j DROP
-ip6tables -A FORWARD -i $iface -s FC00::/7 -j DROP
+ip6tables -A INPUT ! -i lo -s $lan6 -j DROP
+ip6tables -A INPUT -i $ -s $local_net6 -j DROP
+ip6tables -A FORWARD -s $lan6 -j DROP
+ip6tables -A FORWARD -i $iface -s $local_net6 -j DROP
 
 # Block tunnel prefixes
 ip6tables -A INPUT -s 2002::/16 -j DROP
