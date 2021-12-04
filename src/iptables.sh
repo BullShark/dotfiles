@@ -114,8 +114,6 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 #ip6tables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark6 9090 -j ACCEPT
 
 # Webmin
-#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 25 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 25 -j ACCEPT
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 10000 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark6 10000 -j ACCEPT
 #iptables -A INPUT -p udp -m state --state NEW --dport --source $bullshark 10000 -j ACCEPT
