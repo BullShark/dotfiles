@@ -10,7 +10,7 @@ lan="192.168.0.0/24"
 lan6="fe80::/64"
 localhost="127.0.0.0/8"
 localhost6="::1"
-local_net6="FC00::/7"
+local_net6="fc00::/7"
 iface="enp3s0"
 
 iptables -F
@@ -43,7 +43,7 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 # WireGuard (Bullshark and Drk)
 #iptables -A INPUT -p udp -m state --state NEW --source $bullshark --dport 5555 -j ACCEPT
 #ip6tables -A INPUT -p udp -m state --state NEW --source $bullshark6 --dport 5555 -j ACCEPT
-#iptables -A INPUT -p udp -m state --state NEW --source $drk6 --dport 5555 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --source $drk --dport 5555 -j ACCEPT
 
 # Allow Postfix (Don't become a spam relay)
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 25 -j ACCEPT
@@ -110,14 +110,14 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 1337 -j ACCEPT
 
 # Cockpit
-#iptables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark 9090 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark6 9090 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 9090 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 9090 -j ACCEPT
 
 # Webmin
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 10000 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark6 10000 -j ACCEPT
-#iptables -A INPUT -p udp -m state --state NEW --dport --source $bullshark 10000 -j ACCEPT
-#ip6tables -A INPUT -p udp -m state --state NEW --dport --source $bullshark6 10000 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 10000 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --source $bullshark --dport 10000 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --source $bullshark6 --dport 10000 -j ACCEPT
 
 # Log Blocked Traffic
 iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
