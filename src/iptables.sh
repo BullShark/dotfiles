@@ -16,6 +16,7 @@ localhost="127.0.0.0/8"
 localhost6="::1"
 local_net6="fc00::/7"
 iface="enp3s0"
+#iface="eth0"
 
 iptables -F
 iptables -X
@@ -24,11 +25,14 @@ iptables -Z
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
+
+# Might get noisy
+iptables -A INPUT -s $lan -j LOG --log-level 4
  
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 
-# Allow SSH (Limit to 2 connections)
+# Allow SSH
 iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
 
@@ -43,6 +47,14 @@ iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 138 -j ACCEP
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACCEPT
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACCEPT
+
+# Avahi Daemon (Used by my TV)
+iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 5353 -j ACCEPT
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 5353 -j ACCEPT
+
+# Android Debugger ADB
+iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 5037 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 5037 -j ACCEPT
 
 # WireGuard (Bullshark and Drk)
 #iptables -A INPUT -p udp -m state --state NEW --source $bullshark --dport 5555 -j ACCEPT
@@ -124,12 +136,12 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 #ip6tables -A INPUT -p udp -m state --state NEW --source $bullshark6 --dport 10000 -j ACCEPT
 
 # Log Blocked Traffic
-iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 4
-ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied: " --log-level 4
+iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
+ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
 # Log Any Forwarding Traffic
-iptables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "iptables FORWARD denied: " --log-level 4
-ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 4
+iptables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "iptables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
+ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
 # Block IPv6 in IPv4
 iptables -A INPUT -p 41 -j DROP
