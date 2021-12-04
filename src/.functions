@@ -322,12 +322,41 @@ function man {
   fi
 }
 
-# Find hosts on the lan
+#
+# Runs MAC address against IEEE OUI list
+# to return device vendor name.
+# 
+# Usage:
+# > oui 64:01:3c:08:c6:b5
+#
+function oui {
+  if [[ $1 =~ ":" ]]
+  then
+    mac=$(sed "s/:/-/g" <<< ${1^^})
+  elif [[ $1 =~ "." ]]
+  then
+    mac=$(sed "s/\.//g; s/../&-/g" <<< ${1^^})
+  else
+    mac=${1^^}
+  fi
+
+  #mac=$(echo $mac | cut -c-8)
+  echo $mac
+
+  # http://standards-oui.ieee.org/oui/oui.txt
+  curl -s https://linuxnet.ca/ieee/oui.txt | grep $mac | awk '!($2="")'
+}
+
+# Find hosts on the lan and does oui lookup on each
 function lan {
   echo -e "${RED}nmap${RST}:"
   nmap -n -sn 192.168.0.0/23 -oG - 2>&1 | awk '/Up$/{print $2}'
   echo -e "${RED}/proc/net/arp${RST}:"
-  grep -v '00:00:00:00:00:00' /proc/net/arp
+  for line in $(grep -v '00:00:00:00:00:00' /proc/net/arp);
+  do
+    echo $line
+    #echo -en "\t$(echo $line | awk -F" " '{print $4}' | oui)\n"
+  done
 }
 
 # Disable ipv6 - Useful for connecting to an ipv4 only vpn and preventing ipv6 leakage
@@ -425,6 +454,11 @@ function fixpath {
 function ctof {
   temp=$1;
   echo $[(${temp}*9/5)+32]
+}
+
+# List modules
+function lsmodules {
+  find /lib/modules/`uname -r`/ -type f -iname '*.o' -or -iname '*.ko' | less
 }
 
 # Prevent these options from being used outside of this file

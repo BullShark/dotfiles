@@ -36,6 +36,7 @@ files=(
   ~/bin/thumbnailer
   ~/bin/spinners
   ~/bin/iptables.sh
+  ~/bin/iptables-allow-everything.sh
   ~/Code/spinners.c 
   ~/.bashrc
   ~/.bash_profile
