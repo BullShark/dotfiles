@@ -28,9 +28,9 @@ iptables -A INPUT -i lo -j ACCEPT
 iptables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 2 --dport 22 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 2 --dport 22 -j ACCEPT
 
-# KDE Connect
-iptables -A INPUT -p tcp -m state --state NEW --dport 1716 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --dport 1716 -j ACCEPT
+# KDE Connect (LAN)
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 1716 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT
 
 # Samba (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 137 -j ACCEPT
@@ -40,9 +40,10 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACC
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACCEPT
 
-# WireGuard
-#iptables -A INPUT -p udp -m state --state NEW --dport 5555 -j ACCEPT
-#ip6tables -A INPUT -p udp -m state --state NEW --dport 5555 -j ACCEPT
+# WireGuard (Bullshark and Drk)
+#iptables -A INPUT -p udp -m state --state NEW --source $bullshark --dport 5555 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --source $bullshark6 --dport 5555 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --source $drk6 --dport 5555 -j ACCEPT
 
 # Allow Postfix (Don't become a spam relay)
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 25 -j ACCEPT
@@ -50,11 +51,15 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 #iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 25 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 25 -j ACCEPT
 
-# Dovecot
-#iptables -A INPUT -p tcp -m state --state NEW --dport 143 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 143 -j ACCEPT
-#iptables -A INPUT -p tcp -m state --state NEW --dport 993 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 993 -j ACCEPT
+# Dovecot (LAN and BullShark)
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 143 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 143 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 143 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 143 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 993 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 993 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 993 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 993 -j ACCEPT
 
 # Allow Apache (Limit to 15 connections)
 #iptables -A INPUT -p tcp -m state --state NEW -m connlimit --connlimit-above 15 --dport 80 -j ACCEPT
@@ -105,14 +110,16 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACC
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 1337 -j ACCEPT
 
 # Cockpit
-#iptables -A INPUT -p tcp -m state --state NEW --dport 9090 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 9090 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark 9090 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark6 9090 -j ACCEPT
 
 # Webmin
-#iptables -A INPUT -p tcp -m state --state NEW --dport 10000 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --dport 10000 -j ACCEPT
-#iptables -A INPUT -p udp -m state --state NEW --dport 10000 -j ACCEPT
-#ip6tables -A INPUT -p udp -m state --state NEW --dport 10000 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 25 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 25 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 10000 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport --source $bullshark6 10000 -j ACCEPT
+#iptables -A INPUT -p udp -m state --state NEW --dport --source $bullshark 10000 -j ACCEPT
+#ip6tables -A INPUT -p udp -m state --state NEW --dport --source $bullshark6 10000 -j ACCEPT
 
 # Log Blocked Traffic
 iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 7
