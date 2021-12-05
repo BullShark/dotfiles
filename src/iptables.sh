@@ -38,28 +38,28 @@ iptables -A INPUT -i lo -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT
 
 # KDE Connect (LAN)
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 1716 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT
-iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 1716 -j ACCEPT
-ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 1716 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 1716 -j ACCEPT
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT
 
 # Samba (LAN)
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 137 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT
-iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 137 -j ACCEPT
-ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 138 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACCEPT
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 137 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 137 -j ACCEPT
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 137 -j ACCEPT
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 137 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 138 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 138 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 139 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 139 -j ACCEPT
 
 # Avahi Daemon (Used by my TV)
-iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 5353 -j ACCEPT
-ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 5353 -j ACCEPT
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 5353 -j ACCEPT
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 5353 -j ACCEPT
 
 # Android Debugger ADB
-iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 5037 -j ACCEPT
-ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 5037 -j ACCEPT
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 5037 -j ACCEPT
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 5037 -j ACCEPT
 
 # WireGuard (Bullshark and Drk)
 #iptables -A INPUT -p udp -m state --state NEW --source $bullshark --dport 5555 -j ACCEPT
@@ -67,20 +67,16 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 5037
 #iptables -A INPUT -p udp -m state --state NEW --source $drk --dport 5555 -j ACCEPT
 
 # Allow Postfix (BullShark and LAN)
-#iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 25 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 25 -j ACCEPT
-#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 25 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 25 -j ACCEPT
+#iptables -A INPUT -p tcp -m state --state NEW --dport 25 -j ACCEPT
+#ip6tables -A INPUT -p tcp -m state --state NEW --dport 25 -j ACCEPT
 
-# Dovecot (LAN and BullShark)
+# Dovecot (BullShark)
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 143 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 143 -j ACCEPT
 #iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 143 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 143 -j ACCEPT
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 993 -j ACCEPT
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 993 -j ACCEPT
-#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 993 -j ACCEPT
-#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 993 -j ACCEPT
 
 # Allow Apache
 #iptables -A INPUT -p tcp -m state --state NEW --dport 80 -j ACCEPT

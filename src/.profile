@@ -30,6 +30,9 @@ export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
 export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.2"
 export PATH="$PATH:$HOME/Android/Sdk/tools"
 
+# Gem for fpm
+export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+
 # Silence these messages 'Picked up _JAVA_OPTIONS=...'
 _SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
 unset _JAVA_OPTIONS
