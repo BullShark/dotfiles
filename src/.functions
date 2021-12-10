@@ -107,205 +107,39 @@ function sweep {
 
   flatpak uninstall --unused
   rm -rvf /var/lib/flatpak/.removed
-  # Flatpak also uses /var/tmp
+  # Flatpak also uses /var/tmp and that's cleared by /etc/rc.local on boot
 
-  # Clear cache directories
-  rm -rf /home/bullshark/.googleearth/Cache/*
-  rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
-  rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
-  rm -rf /home/bullshark/.config/Caprine/Cache/*
-  rm -rf /home/bullshark/.config/Caprine/Code\ Cache/*
-  rm -rf /home/bullshark/.cache/*
-  rm -rf /root/.cache/*
-  rm -rf /tmp/*
-  rm -rf /var/tmp/*
-  rm -rf /var/cache/*
-
-  # Do it as root
-  bleachbit --clean \
-    audacious.cache \
-    audacious.log \
-    audacious.mru \
-    chromium.cache \
-    chromium.cookies \
-    chromium.dom \
-    chromium.form_history \
-    chromium.site_preferences \
-    chromium.sync \
-    chromium.vacuum \
-    deepscan.backup \
-    deepscan.ds_store \
-    deepscan.thumbs_db \
-    deepscan.tmp \
-    discord.cache \
-    discord.cookies \
-    discord.history \
-    discord.vacuum \
-    evolution.cache \
-    filezilla.mru \
-    firefox.cache \
-    firefox.cookies \
-    firefox.crash_reports \
-    firefox.dom \
-    firefox.forms \
-    firefox.site_preferences \
-    firefox.vacuum \
-    gimp.tmp \
-    google_chrome.cache \
-    google_chrome.cookies \
-    google_chrome.dom \
-    google_chrome.form_history \
-    google_chrome.search_engines \
-    google_chrome.site_preferences \
-    google_chrome.sync \
-    google_chrome.vacuum \
-    google_earth.temporary_files \
-    gpodder.cache \
-    gpodder.downloaded_podcasts \
-    gpodder.logs \
-    gpodder.vacuum \
-    gvfs.metadata \
-    journald.clean \
-    java.cache \
-    kde.cache \
-    kde.tmp \
-    kodi_xbmc.crashlog \
-    kodi_xbmc.th-music \
-    kodi_xbmc.th-pics \
-    kodi_xbmc.th-video \
-    kodi_xbmc.tmp \
-    libreoffice.history \
-    marble.cache \
-    marble.maps \
-    marble.routing \
-    marble.tracking \
-    nexuiz.cache \
-    notify-osd.logs \
-    openofficeorg.cache \
-    openofficeorg.recent_documents \
-    skype.chat_logs \
-    skype.installers \
-    system.cache \
-    system.desktop_entry \
-    system.localizations \
-    system.recent_documents \
-    system.rotated_logs \
-    system.tmp \
-    system.trash \
-    thumbnails.cache \
-    thunderbird.cache \
-    thunderbird.cookies \
-    thunderbird.index \
-    thunderbird.passwords \
-    thunderbird.sessionjson \
-    thunderbird.vacuum \
-    trashes.trashes_removeable \
-    vlc.memory_dump \
-    vlc.mru \
-    wine.tmp \
-    winetricks.temporary_files \
-    x11.debug_logs \
-    zoom.cache \
-    zoom.logs \
-    zoom.recordings
 EOF
-
   # Yay and pamac cleanup
   yes | yay -Scc
   yay -Yc
 
-  browser-vacuum
+#  browser-vacuum
 
-  # Do it as non root
   bleachbit --clean \
-    audacious.cache \
-    audacious.log \
-    audacious.mru \
-    chromium.cache \
-    chromium.cookies \
-    chromium.dom \
-    chromium.form_history \
-    chromium.site_preferences \
-    chromium.sync \
-    chromium.vacuum \
-    deepscan.backup \
-    deepscan.ds_store \
-    deepscan.thumbs_db \
-    deepscan.tmp \
-    discord.cache \
-    discord.cookies \
-    discord.history \
-    discord.vacuum \
-    evolution.cache \
-    filezilla.mru \
-    firefox.cache \
-    firefox.cookies \
-    firefox.crash_reports \
-    firefox.dom \
-    firefox.forms \
-    firefox.site_preferences \
-    firefox.vacuum \
-    gimp.tmp \
-    google_chrome.cache \
-    google_chrome.cookies \
-    google_chrome.dom \
-    google_chrome.form_history \
-    google_chrome.search_engines \
-    google_chrome.site_preferences \
-    google_chrome.sync \
-    google_chrome.vacuum \
-    google_earth.temporary_files \
-    gpodder.cache \
-    gpodder.downloaded_podcasts \
-    gpodder.logs \
-    gpodder.vacuum \
-    gvfs.metadata \
-    journald.clean \
-    java.cache \
-    kde.cache \
-    kde.tmp \
-    kodi_xbmc.crashlog \
-    kodi_xbmc.th-music \
-    kodi_xbmc.th-pics \
-    kodi_xbmc.th-video \
-    kodi_xbmc.tmp \
-    libreoffice.history \
-    marble.cache \
-    marble.maps \
-    marble.routing \
-    marble.tracking \
-    nexuiz.cache \
-    notify-osd.logs \
-    openofficeorg.cache \
-    openofficeorg.recent_documents \
-    skype.chat_logs \
-    skype.installers \
-    system.cache \
-    system.desktop_entry \
     system.localizations \
     system.recent_documents \
     system.rotated_logs \
     system.tmp \
     system.trash \
     thumbnails.cache \
-    thunderbird.cache \
-    thunderbird.cookies \
-    thunderbird.index \
-    thunderbird.passwords \
-    thunderbird.sessionjson \
-    thunderbird.vacuum \
-    trashes.trashes_removeable \
-    vlc.memory_dump \
-    vlc.mru \
-    wine.tmp \
-    winetricks.temporary_files \
-    x11.debug_logs \
-    zoom.cache \
-    zoom.logs \
-    zoom.recordings
+    system.cache \
+    kde.cache \
+    journald.clean \
+    java.cache \
+    deepscan.tmp \
+    deepscan.thumbs_db \
+    deepscan.ds_store \
+    apt.clean \
+    apt.autoremove \
+    apt.autoclean
 }
 
 # View manpages in vim with vim's color scheme and less macros
+
+#TODO This doesn't give a man page or any output: man generate-domains-blacklist
+#FIXME "man npm" fails and "command man npm" works
+
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
 
@@ -315,47 +149,23 @@ function man {
     /usr/bin/man "$@" | \
 
       col -b | \
-      /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+      /usr/share/vim/vim81/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
 
   else
     /usr/bin/man "$@"
   fi
 }
 
-#
-# Runs MAC address against IEEE OUI list
-# to return device vendor name.
-# 
-# Usage:
-# > oui 64:01:3c:08:c6:b5
-#
-function oui {
-  if [[ $1 =~ ":" ]]
-  then
-    mac=$(sed "s/:/-/g" <<< ${1^^})
-  elif [[ $1 =~ "." ]]
-  then
-    mac=$(sed "s/\.//g; s/../&-/g" <<< ${1^^})
-  else
-    mac=${1^^}
-  fi
-
-  #mac=$(echo $mac | cut -c-8)
-  echo $mac
-
-  # http://standards-oui.ieee.org/oui/oui.txt
-  curl -s https://linuxnet.ca/ieee/oui.txt | grep $mac | awk '!($2="")'
-}
-
-# Find hosts on the lan and does oui lookup on each
+# Find hosts on the lan
+#TODO MAC OUI
+# /usr/share/macchanger/OUI.list
+# /usr/share/macchanger/wireless.list
+#TODO Change the nmap command
 function lan {
   echo -e "${RED}nmap${RST}:"
   nmap -n -sn 192.168.0.0/23 -oG - 2>&1 | awk '/Up$/{print $2}'
   echo -e "${RED}/proc/net/arp${RST}:"
-  for line in $(grep -v '00:00:00:00:00:00' /proc/net/arp);
-  do
-    oui $line
-  done
+  grep -v '00:00:00:00:00:00' /proc/net/arp
 }
 
 # Disable ipv6 - Useful for connecting to an ipv4 only vpn and preventing ipv6 leakage
@@ -383,7 +193,8 @@ function stamp {
   sudo cp -v "$1" "$1-$now"
 }
 
-# Makes a backup copy, Must be in the same dir as the file to backup
+# Makes a backup copy
+#FIXME If the arg contains a path that's different than .
 function bak {
   # Don't overwrite if the backup file already exists
   if [[ -w . ]]; then
@@ -414,11 +225,11 @@ function cli {
 }
 
 # Check what is auto starting
+#TODO systemd stuff
 function autostart {
-  systemctl --system list-unit-files | grep enabled
-  systemctl --user list-unit-files | grep enabled
-  systemctl --global list-unit-files | grep enabled
-
+#  sudo systemctl --system --all list*
+#  sudo systemctl --user   --all list*
+#  sudo systemctl --global --all list*
   sudo ls /etc/xdg/autostart \
           /etc/skel/.config/autostart \
           /root/.config/autostart \
@@ -453,11 +264,6 @@ function fixpath {
 function ctof {
   temp=$1;
   echo $[(${temp}*9/5)+32]
-}
-
-# List modules
-function lsmodules {
-  find /lib/modules/`uname -r`/ -type f -iname '*.o' -or -iname '*.ko' | less
 }
 
 # Prevent these options from being used outside of this file

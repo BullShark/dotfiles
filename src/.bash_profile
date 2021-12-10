@@ -15,9 +15,7 @@ fi
 
 # stop bash saving duplicates to the history
 export HISTCONTROL=ignoredups
- 
-# sdkman
-source "/home/bullshark/.sdkman/bin/sdkman-init.sh"
 
-# vi: ft=sh
+# sdkman
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 

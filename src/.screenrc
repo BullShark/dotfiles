@@ -1,22 +1,21 @@
 debug off			# Runtime debugging; Find the reason for screen getting killed
-#term screen-256color		# Lots of colors
-term screen                     # Should get rid of problems with copy/paste
+term screen			# Lots of colors
 truecolor on			# 24-bit of colors; Works in version 5
 defshell zsh			# The dash (-bash) makes it a login shell
 defscrollback 50000		# Lots of scroll-back
 bind ' ' windowlist -b		# Space displays the list of windows
 #bind '^b' '^a^a'		# Bind ^b for nested screens that would do ^a^a
-#termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
+termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
 defmousetrack on		# Watch for mouse clicks when there are splits
 #shelltitle "$ |zsh"		# Set the shell title
-setenv DISPLAY ':0'		# No more issues launching GUI apps
+#setenv DISPLAY ':0'		# No more issues launching GUI apps
 #reptyr pid			# Attach a process in screen that was started outside of screen
 autodetach on			# Detach on hangup
 pow_detach_msg "Screen session of $LOGNAME detached." # Emulate .logout message
 #startup_message off		# Don't display the copyright page
 #password ODSJQf.4IJN7E		# Set a reattach password: "1234" 
 #zombie "^["			# Don't kill window after the process died
-#register [ "\033:se noai\015a"	# Prepend/append register [/] to the paste if ^a^] is pressed for working autoindent mode in vi
+register [ "\033:se noai\015a"	# Prepend/append register [/] to the paste if ^a^] is pressed for working autoindent mode in vi
 #register ] "\033:se ai\015a"	# Same as above, Might break the scroll in vim
 #bind ^] paste [.]		#
 bind = resize =			#

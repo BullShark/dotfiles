@@ -27,16 +27,20 @@ export LD_BIND_NOW=1
 # Android-dev
 export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
 export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.2"
+export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.1"
 export PATH="$PATH:$HOME/Android/Sdk/tools"
-
-# Gem for fpm
-export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
 # Silence these messages 'Picked up _JAVA_OPTIONS=...'
 _SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
 unset _JAVA_OPTIONS
 alias java='java "$_SILENT_JAVA_OPTIONS"'
+
+# More Java
+export JAVA_HOME="/opt/jdk-16.0.1"
+export PATH="$PATH:/opt/jdk-16.0.1/bin"
+
+# Best editor
+export EDITOR="vim"
 
 # vi: ft=sh
 
