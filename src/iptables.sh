@@ -18,6 +18,42 @@ local_net6="fc00::/7"
 #iface="enp3s0"
 iface="eth0"
 
+##################################################################%%%%%%%%
+# IPv6
+##################################################################%%%%%%%%
+
+ip6tables -F
+ip6tables -X
+ip6tables -Z
+ 
+ip6tables -P INPUT DROP
+ip6tables -P FORWARD DROP
+ip6tables -P OUTPUT ACCEPT
+
+# Anti-spoofing
+ip6tables -A INPUT ! -i lo -s $lan6 -j DROP
+ip6tables -A INPUT -i $ -s $local_net6 -j DROP
+ip6tables -A FORWARD -s $lan6 -j DROP
+ip6tables -A FORWARD -i $iface -s $local_net6 -j DROP
+
+# Block tunnel prefixes
+ip6tables -A INPUT -s 2002::/16 -j DROP
+ip6tables -A INPUT -s 2001:0::/32 -j DROP
+ip6tables -A FORWARD -s 2002::/16 -j DROP
+ip6tables -A FORWARD -s 2001:0::/32 -j DROP
+
+# This has already been done above and should come before the opening port rules
+ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+ip6tables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
+ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP 
+ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
+ip6tables -A INPUT -p udp -m conntrack --ctstate NEW -j REJECT --reject-with icmp6-port-unreachable
+ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j REJECT --reject-with tcp-reset
+
+##################################################################%%%%%%%%
+# IPv4
+##################################################################%%%%%%%%
+
 iptables -F
 iptables -X
 iptables -Z
@@ -31,31 +67,31 @@ iptables -A INPUT -j LOG -m limit --limit 5/min --log-prefix "iptables INPUT: " 
 ip6tables -A INPUT -j LOG -m limit --limit 5/min --log-prefix "ip6tables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
  
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-iptables -A INPUT -i lo -j ACCEPT
+iptables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
 
 # Allow SSH
 iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT -m comment --comment "SSH"
 ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT -m comment --comment "SSH"
 
 # KDE Connect (LAN)
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
+#iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 
 # Samba (LAN)
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 137 -j ACCEPT -m comment --comment "Samba"
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT -m comment --comment "Samba"
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 138 -j ACCEPT -m comment --comment "Samba"
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACCEPT -m comment --comment "Samba"
-iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT -m comment --comment "Samba"
-ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACCEPT -m comment --comment "Samba"
+#iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 137 -j ACCEPT -m comment --comment "Samba"
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 137 -j ACCEPT -m comment --comment "Samba"
+#iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 138 -j ACCEPT -m comment --comment "Samba"
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 138 -j ACCEPT -m comment --comment "Samba"
+#iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 139 -j ACCEPT -m comment --comment "Samba"
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --dport 139 -j ACCEPT -m comment --comment "Samba"
 
 # Avahi Daemon (Used by my TV)
-iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 5353 -j ACCEPT -m comment --comment "Avahi"
-ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
+#iptables -A INPUT -p udp -m state --state NEW --source $lan --dport 5353 -j ACCEPT -m comment --comment "Avahi"
+#ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
 
 # Android Debugger ADB
-iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 5037 -j ACCEPT -m comment --comment "ADB"
-ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 5037 -j ACCEPT -m comment --comment "ADB"
+#iptables -A INPUT -p tcp -m state --state NEW --source $localhost --dport 5037 -j ACCEPT -m comment --comment "ADB"
+#ip6tables -A INPUT -p tcp -m state --state NEW --source $localhost6 --dport 5037 -j ACCEPT -m comment --comment "ADB"
 
 # WireGuard (Bullshark and Drk)
 iptables -A INPUT -p udp -m state --state NEW --source $bullshark --dport 5555 -j ACCEPT -m comment --comment "Wireguard"
@@ -152,30 +188,3 @@ iptables -A INPUT -p icmp --icmp-type 11 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 12 -j ACCEPT
 iptables -A INPUT -p tcp --syn --dport 113 -j REJECT --reject-with tcp-reset
  
-ip6tables -F
-ip6tables -X
-ip6tables -Z
- 
-ip6tables -P INPUT DROP
-ip6tables -P FORWARD DROP
-ip6tables -P OUTPUT ACCEPT
-
-# Anti-spoofing
-ip6tables -A INPUT ! -i lo -s $lan6 -j DROP
-ip6tables -A INPUT -i $ -s $local_net6 -j DROP
-ip6tables -A FORWARD -s $lan6 -j DROP
-ip6tables -A FORWARD -i $iface -s $local_net6 -j DROP
-
-# Block tunnel prefixes
-ip6tables -A INPUT -s 2002::/16 -j DROP
-ip6tables -A INPUT -s 2001:0::/32 -j DROP
-ip6tables -A FORWARD -s 2002::/16 -j DROP
-ip6tables -A FORWARD -s 2001:0::/32 -j DROP
-
-ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-ip6tables -A INPUT -i lo -j ACCEPT
-ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP 
-ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
-ip6tables -A INPUT -p udp -m conntrack --ctstate NEW -j REJECT --reject-with icmp6-port-unreachable
-ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j REJECT --reject-with tcp-reset
-
