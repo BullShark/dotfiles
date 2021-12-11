@@ -60,6 +60,7 @@ ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied:
 # Log Any Forwarding Traffic (log level: kernel warning)
 ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
+# Ping and INVALID packets
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -p udp -m conntrack --ctstate NEW -j REJECT --reject-with icmp6-port-unreachable
 ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j REJECT --reject-with tcp-reset
