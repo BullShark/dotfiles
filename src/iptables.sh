@@ -1,5 +1,3 @@
-
-
 #!/bin/bash
 # Suggested:
 #   Put this in /etc/rsyslog.conf
