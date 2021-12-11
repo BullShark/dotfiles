@@ -8,6 +8,10 @@
 #set -x
 #set -v
 
+##################################################################%%%%%%%%
+# Global variables
+##################################################################%%%%%%%%
+
 bullshark="70.123.216.149"
 bullshark6="2603:8081:4c0e:700::3"
 bullshark_hamachi="25.5.244.225"
@@ -196,3 +200,4 @@ iptables -A INPUT -p icmp --icmp-type 3 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 11 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 12 -j ACCEPT
 iptables -A INPUT -p tcp --syn --dport 113 -j REJECT --reject-with tcp-reset
+
