@@ -2,7 +2,7 @@
 # Suggested:
 #   Put this in /etc/rsyslog.conf
 #   And iptables logs will have it's own file
-#   kern.warning /var/log/iptables.log
+#   kern.warning /var/log/iptables.log 
 #set -x
 #set -v
 
@@ -10,10 +10,12 @@
 # Global variables
 ##################################################################%%%%%%%%
 
-bullshark="70.123.216.149"
-bullshark6="2603:8081:4c0e:700::3"
-bullshark_hamachi="25.5.244.225"
-drk="184.155.55.186"
+bullshark="70.112.0.0/12"
+bullshark6="2603:8000::/24"
+bullshark_hamachi="25.0.0.0/8"
+bullshark_5g_mobile="172.32.0.0/11"
+bullshark_5g_mobile6="2607:fb90::/28"
+drk="184.155.0.0/16"
 lan="192.168.0.0/16" # 192.168.0.0–192.168.255.255
 lan6="fe80::/64"
 localhost="127.0.0.0/8"
@@ -29,7 +31,7 @@ iface="eth0"
 ip6tables -F
 ip6tables -X
 ip6tables -Z
-
+ 
 ip6tables -P INPUT DROP
 ip6tables -P FORWARD DROP
 ip6tables -P OUTPUT ACCEPT
@@ -52,7 +54,7 @@ ip6tables -A FORWARD -s 2001:0::/32 -j DROP
 # This has already been done above and should come before the opening port rules
 ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
-ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP
+ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP 
 
 # Log Blocked Traffic (log level: kernel warning)
 ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
@@ -60,7 +62,6 @@ ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied:
 # Log Any Forwarding Traffic (log level: kernel warning)
 ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
-# Ping and INVALID packets
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -p udp -m conntrack --ctstate NEW -j REJECT --reject-with icmp6-port-unreachable
 ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j REJECT --reject-with tcp-reset
@@ -72,20 +73,21 @@ ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --
 iptables -F
 iptables -X
 iptables -Z
-
+ 
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 
 # Might get noisy (info message)
 iptables -A INPUT -j LOG -m limit --limit 5/min --log-prefix "iptables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
-
+ 
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
 
 # Allow SSH
-iptables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT -m comment --comment "SSH"
-ip6tables -A INPUT -p tcp -m state --state NEW --dport 22 -j ACCEPT -m comment --comment "SSH"
+iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 22 -j ACCEPT -m comment --comment "SSH"
+ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 22 -j ACCEPT -m comment --comment "SSH"
+iptables -A INPUT -p tcp -m state --state NEW --source $drk --dport 22 -j ACCEPT -m comment --comment "SSH"
 
 # KDE Connect (LAN)
 #iptables -A INPUT -p tcp -m state --state NEW --source $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
@@ -199,4 +201,4 @@ iptables -A INPUT -p icmp --icmp-type 3 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 11 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 12 -j ACCEPT
 iptables -A INPUT -p tcp --syn --dport 113 -j REJECT --reject-with tcp-reset
-
+ 
