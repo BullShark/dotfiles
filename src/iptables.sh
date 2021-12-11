@@ -1,8 +1,10 @@
+
+
 #!/bin/bash
 # Suggested:
 #   Put this in /etc/rsyslog.conf
 #   And iptables logs will have it's own file
-#   kern.warning /var/log/iptables.log 
+#   kern.warning /var/log/iptables.log
 #set -x
 #set -v
 
@@ -25,10 +27,13 @@ iface="eth0"
 ip6tables -F
 ip6tables -X
 ip6tables -Z
- 
+
 ip6tables -P INPUT DROP
 ip6tables -P FORWARD DROP
 ip6tables -P OUTPUT ACCEPT
+
+# Might get noisy (info message)
+ip6tables -A INPUT -j LOG -m limit --limit 5/min --log-prefix "ip6tables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
 # Anti-spoofing
 ip6tables -A INPUT ! -i lo -s $lan6 -j DROP
@@ -45,7 +50,14 @@ ip6tables -A FORWARD -s 2001:0::/32 -j DROP
 # This has already been done above and should come before the opening port rules
 ip6tables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 ip6tables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
-ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP 
+ip6tables -A INPUT -m conntrack --ctstate INVALID -j DROP
+
+# Log Blocked Traffic (log level: kernel warning)
+ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
+
+# Log Any Forwarding Traffic (log level: kernel warning)
+ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
+
 ip6tables -A INPUT -p ipv6-icmp -j ACCEPT
 ip6tables -A INPUT -p udp -m conntrack --ctstate NEW -j REJECT --reject-with icmp6-port-unreachable
 ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j REJECT --reject-with tcp-reset
@@ -57,15 +69,14 @@ ip6tables -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --
 iptables -F
 iptables -X
 iptables -Z
- 
+
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 iptables -P OUTPUT ACCEPT
 
 # Might get noisy (info message)
 iptables -A INPUT -j LOG -m limit --limit 5/min --log-prefix "iptables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
-ip6tables -A INPUT -j LOG -m limit --limit 5/min --log-prefix "ip6tables INPUT: " --log-level 6 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
- 
+
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
 
@@ -172,11 +183,9 @@ ip6tables -A INPUT -p udp -m state --state NEW --source $bullshark6 --dport 1000
 
 # Log Blocked Traffic (log level: kernel warning)
 iptables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "iptables denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
-ip6tables -A INPUT -m limit --limit 5/min -j LOG --log-prefix "ip6tables denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
 # Log Any Forwarding Traffic (log level: kernel warning)
 iptables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "iptables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
-ip6tables -A FORWARD -m limit --limit 5/min -j LOG --log-prefix "ip6tables FORWARD denied: " --log-level 4 --log-tcp-sequence --log-tcp-options --log-ip-options --log-uid
 
 # Block IPv6 in IPv4
 iptables -A INPUT -p 41 -j DROP -m comment --comment "IPv6 in IPv4"
@@ -187,4 +196,3 @@ iptables -A INPUT -p icmp --icmp-type 3 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 11 -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 12 -j ACCEPT
 iptables -A INPUT -p tcp --syn --dport 113 -j REJECT --reject-with tcp-reset
- 
