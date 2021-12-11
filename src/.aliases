@@ -31,7 +31,7 @@ alias sl='ls'
 #alias lsa='ls -shaCF' # Does not show SE info
 
 # LSDeluxe
-#alias ls='lsd'
+alias ls='lsd'
 #alias l='ls -l'
 #alias la='ls -a'
 alias lsa='ls -haF' # Does not show SE info
@@ -97,8 +97,8 @@ alias lscam='v4l2-ctl --list-devices'
 #GLOBIGNORE=".:.." 
 #shopt -u dotglob	#FIXME Works in bash, not zsh
 # Disk usage sort
-#alias dsort='du -xsh * .* | sort -h'
 alias dsort='du -xsh * | sort -h'
+#alias dsort='du -xsh * .* | sort -h'
 
 # Find all git repos in home
 alias findrepos="find ~/ -type d -name '.git'"
@@ -107,8 +107,8 @@ alias findrepos="find ~/ -type d -name '.git'"
 alias onehour='find ~/ -mtime -1 -print | grep -vE '"'"'/home/bullshark/\..+)'"'"''
 
 # When you need to run all three many times during development
-alias pullcleanbuildrun='git pull && ./gradlew clean && ./gradlew build && ./gradlew run'
-alias cbr=pullcleanbuildrun
+alias cleanbuildrun='./gradlew clean && ./gradlew build && ./gradlew run'
+alias cbr=cleanbuildrun
 
 # Unlock, edit, lock
 alias vr='sudo chattr -i /etc/resolv.conf && sudo vim /etc/resolv.conf && sudo chattr +i /etc/resolv.conf'
@@ -131,6 +131,12 @@ alias path="echo $PATH | tr ':' '\n'"
 
 # Simple HTTP Server
 alias webup='python3 -m http.server 8080'
+
+# List all user accounts alphabetically
+alias lsusers='cut -d: -f1 < /etc/passwd | sort | xargs'
+
+# See what's on the local network and get hardware info from their mac addys
+alias netd='sudo netdiscover -i enp3s0'
 
 #-------------------------------------------------------------
 # ss: socket statistics
