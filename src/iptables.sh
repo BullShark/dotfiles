@@ -87,6 +87,8 @@ iptables -A INPUT -i lo -j ACCEPT -m comment --comment "Localhost lo interface"
 # Allow SSH
 iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 22 -j ACCEPT -m comment --comment "SSH"
 ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 22 -j ACCEPT -m comment --comment "SSH"
+iptables -A INPUT -p tcp -m state --state NEW --source $bullshark_5g_mobile --dport 22 -j ACCEPT -m comment --comment "SSH"
+ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark_5g_mobile6 --dport 22 -j ACCEPT -m comment --comment "SSH"
 iptables -A INPUT -p tcp -m state --state NEW --source $drk --dport 22 -j ACCEPT -m comment --comment "SSH"
 
 # KDE Connect (LAN)
