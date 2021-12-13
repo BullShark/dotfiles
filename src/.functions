@@ -386,24 +386,22 @@ function bak {
   fi
 }
 
-
 # Get a list of all commands from explicitly installed packages, not dependencies
 function cli {
   for p in $(pacman -Qet | awk -F\  '{print $1}')
   do
     pacman -Ql "$p" | grep -E '/[s]?bin/.+'
   done
+}
 
-#  sudo echo -en '' # Make sudo ask for the password before starting the loop
-#
-#  IFS=:
-#  for p in $(echo $PATH | sed 's/ /\\ /g')
-#  do
-#    echo "$p:"
-#    sudo ls "$p"
-#    echo
-#  done
-
+# Similar as above
+function lscmds() {
+  for p in $(echo $PATH | sed 's/:/ /g')
+  do
+    echo "$p:"
+    sudo ls "$p"
+    echo
+  done
 }
 
 # Check what is auto starting

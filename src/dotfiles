@@ -71,7 +71,7 @@ files=(
 #  /var/spool/cron/root
   /var/spool/cron/bullshark
   /etc/default/grub
-  /etc/xdg/plasma-workspace/env/envars.sh
+#  /etc/xdg/plasma-workspace/env/envars.sh
   /etc/X11/mhwd.d/nvidia.conf
   /etc/X11/xorg.conf
   /etc/resolv.conf

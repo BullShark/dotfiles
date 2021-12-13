@@ -33,10 +33,13 @@ export PATH="$PATH:$HOME/Android/Sdk/tools"
 # Gem for fpm
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
+# Antialiasing for fonts with Java
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --enable-preview'
+
 # Silence these messages 'Picked up _JAVA_OPTIONS=...'
-_SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
-unset _JAVA_OPTIONS
-alias java='java "$_SILENT_JAVA_OPTIONS"'
+#_SILENT_JAVA_OPTIONS="$_JAVA_OPTIONS"
+#unset _JAVA_OPTIONS
+#alias java='java "$_SILENT_JAVA_OPTIONS"'
 
 # vi: ft=sh
 

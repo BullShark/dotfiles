@@ -158,9 +158,6 @@ function xdebug {
 
 ##############################################################
 
-# Java font-fix needed for Netbeans
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
-
 [[ -e ~/.aliases ]] && . ~/.aliases
 
 [[ -e ~/.functions ]] && . ~/.functions

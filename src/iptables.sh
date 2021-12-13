@@ -94,6 +94,8 @@ iptables -A INPUT -p tcp -m state --state NEW --source $drk --dport 22 -j ACCEPT
 # KDE Connect (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 
 # Samba (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 137 -j ACCEPT -m comment --comment "Samba"

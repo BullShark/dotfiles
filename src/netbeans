@@ -21,8 +21,8 @@
 #
 
 # Java font-fix needed for Netbeans
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
-export JAVA_HOME='/usr/lib/jvm/java-16-openjdk/'
+#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
+export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
 export PATH="$JAVA_HOME/bin:$PATH"
 
 PRG=$0
