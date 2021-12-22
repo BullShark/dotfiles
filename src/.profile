@@ -25,13 +25,15 @@ export BROWSER="/usr/bin/chromium"
 #export PATH="$PATH:$HOME/.npm/bin"
 
 # Android-dev
-export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
-export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.2"
-export PATH="$PATH:$HOME/Android/Sdk/tools"
+if [[ -f ~/Android/Sdk/ ]]; then
+    export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
+    export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
+    export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.2"
+    export PATH="$PATH:$HOME/Android/Sdk/tools"
+fi
 
 # Gem for fpm
-export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
+[[ -f ~/.local/share/gem/ruby/3.0.0/bin ]] && export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
 # Set here instead of netbeans script
 export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
@@ -46,8 +48,8 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --e
 #alias java='java "$_SILENT_JAVA_OPTIONS"'
 
 # Turn ally (accessibility) features off to avoid getting an error message
-export NO_AT_BRIDGE=1
-unset DBUS_SESSION_BUS_ADDRESS
+#export NO_AT_BRIDGE=1
+#unset DBUS_SESSION_BUS_ADDRESS
 
 # vi: ft=sh
 

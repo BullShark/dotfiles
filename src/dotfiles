@@ -67,7 +67,6 @@ files=(
   ~/Templates/Monokai\ Android\ Studio.jar
   ~/Templates/Monokai\ Pro\ Android\ Studio.jar
   ~/.pam_environment
-  ~/.Apps/netbeans-12.4/netbeans/bin/netbeans
   /usr/share/bleachbit/cleaners/gpodder.xml
 #  /var/spool/cron/root
   /var/spool/cron/bullshark

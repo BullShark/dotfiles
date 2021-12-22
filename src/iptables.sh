@@ -21,6 +21,7 @@ lan6="fe80::/64"
 multicast="224.0.0.0/4"
 multicast6="ff02::fb"
 broadcast="192.168.0.255"
+local_broadcast="255.255.255.255"
 localhost="127.0.0.0/8"
 localhost6="::1/128"
 local_net6="fc00::/7"
@@ -101,8 +102,7 @@ iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan -
 ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 1739 -j ACCEPT -m comment --comment "KDE Connect"
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $multicast --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
-
-# 12/22/21 8:49 AM	manjaro	kernel	[40886.386214] iptables denied: IN=enp3s0 OUT= MAC=ff:ff:ff:ff:ff:ff:60:b7:6e:46:74:bc:08:00 SRC=192.168.0.175 DST=255.255.255.255 LEN=1904 TOS=0x00 PREC=0x00 TTL=64 ID=14626 PROTO=UDP SPT=48604 DPT=1716 LEN=1884 
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $local_broadcast --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 
 # Samba (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 137 -j ACCEPT -m comment --comment "Samba"
@@ -120,9 +120,8 @@ iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan -
 ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $multicast --sport 5353 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
 
-# TV Miracast
-iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 15600 -j ACCEPT -m comment --comment "TV Miracast"
-ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 15600 -j ACCEPT -m comment --comment "TV Miracast"
+# TV Miracast and Samsung SmartThings App
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $broadcast --dport 15600 -j ACCEPT -m comment --comment "TV Miracast"
 
 # Android Debugger ADB
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 5037 -j ACCEPT -m comment --comment "ADB"

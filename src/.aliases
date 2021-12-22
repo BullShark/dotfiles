@@ -120,8 +120,11 @@ alias last='last -a | tac'
 alias myalias='alias | grep -vE "yay|pacman|git"'
 
 # Show just my custom functions from this file, not ohmyzsh aliases
-#alias myfunctions="compgen -A function | grep -P '^[^\s_][A-Za-z0-9_-]+' | grep -Ev 'git|omz|comp'"
-alias myfunctions="typeset -f | grep -E '^[^_][A-Za-z0-9_-]+ \(\)' | awk -F' ' '{print $1}'"
+if [ -n "$ZSH_VERSION" ]; then
+   alias myfunctions='grep -E '\''^function [A-Za-z0-9_-]+'\'' ~/.functions | awk -F'\'' '\'' '\''{print $2}'\'''
+elif [ -n "$BASH_VERSION" ]; then
+  alias myfunctions="typeset -F | sed 's/declare -f //' | grep -Ev '_sdk'"
+fi
 
 # Show the current playing mp3 in clementine
 alias findmp3='lsof -p $(pidof clementine) | grep -E '/.+\.mp3''
