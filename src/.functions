@@ -87,7 +87,12 @@ function exeicon {
 
 # Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
 function sweep {
-  sudo -i -u root bash << 'EOF'             # Execute all as root
+
+  # Turn ally (accessibility) features off to avoid getting an error message
+  export NO_AT_BRIDGE=1
+  unset DBUS_SESSION_BUS_ADDRESS
+
+  sudo -E -u root bash << 'EOF'             # Execute all as root
 
   # Do it as root
   bleachbit --clean \
@@ -178,7 +183,7 @@ function sweep {
     zoom.recordings
 
   # Do it as non root
-  sudo -u "$(getent passwd 1000 | awk -F: '{print $1}')" \
+  sudo -E -u "$(getent passwd 1000 | awk -F: '{print $1}')" \
   bleachbit --clean \
     audacious.cache \
     audacious.log \
@@ -283,7 +288,7 @@ function sweep {
     done
   #XXX http://mywiki.wooledge.org/BashProgramming/05
 
-  flatpak uninstall --unused
+  yes | flatpak uninstall --unused
   rm -rvf /var/lib/flatpak/.removed
   # Flatpak also uses /var/tmp
 
@@ -295,7 +300,7 @@ function sweep {
   rm -rf /home/bullshark/.config/Caprine/Code\ Cache/*
   rm -rf /home/bullshark/.cache/*
   rm -rf /root/.cache/*
-  rm -rf /tmp/*
+  find /tmp -type f ! -name '.veracrypt*' -delete
   rm -rf /var/tmp/*
   rm -rf /var/cache/*
 
