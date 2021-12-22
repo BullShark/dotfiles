@@ -37,7 +37,8 @@ files=(
   ~/bin/spinners
   ~/bin/iptables.sh
   ~/bin/iptables-allow-everything.sh
-  ~/Code/spinners.c 
+#  ~/Code/spinners.c 
+  ~/Code/Github/MyProjects/dotfiles/src/spinners.c
   ~/.bashrc
   ~/.bash_profile
   ~/.aliases

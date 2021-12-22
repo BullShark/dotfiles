@@ -351,6 +351,22 @@ function lan {
   done
 }
 
+# Find all git repos in home and update them
+function update-all-repos {
+
+  for dir in $(find ~/ -type d -name '.git'); do
+
+    repo=$(echo $dir | sed "s/\.git$//")
+
+    cd $repo
+    echo "Repo: $repo"
+    #echo "pwd: $(pwd)"
+
+    git pull
+
+  done
+}
+
 # Disable ipv6 - Useful for connecting to an ipv4 only vpn and preventing ipv6 leakage
 function disable_ipv6 {
   sudo -i -u root bash << 'EOF'             # Execute all as root
