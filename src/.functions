@@ -421,6 +421,8 @@ function lscmds() {
 
 # Check what is auto starting
 function autostart {
+  sudo -v
+
   systemctl --system list-unit-files | grep enabled
   systemctl --user list-unit-files | grep enabled
   systemctl --global list-unit-files | grep enabled
