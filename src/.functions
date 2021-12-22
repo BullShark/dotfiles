@@ -360,7 +360,6 @@ function update-all-repos {
 
     cd $repo
     echo "Repo: $repo"
-    #echo "pwd: $(pwd)"
 
     git pull
 
