@@ -315,20 +315,13 @@ EOF
 
 # View manpages in vim with vim's color scheme and less macros
 function man {
-  if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
+  if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' && $(command man -w "$@" 1>/dev/null 2>&1; echo $?) == 0 ]]
   then
 
-    # Don't launch vim if no man pages are found
-    if command man -w "$@" 1>/dev/null 2>&1; then
       /usr/bin/man "$@" | \
 
         col -b | \
         /usr/share/vim/vim??/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
-
-    else
-      /usr/bin/man "$@"
-
-    fi
 
   else
     /usr/bin/man "$@"
