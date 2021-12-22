@@ -88,38 +88,6 @@ function exeicon {
 # Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
 function sweep {
   sudo -i -u root bash << 'EOF'             # Execute all as root
-  # Remove cache files if yay is not running
-  killall -q -0 yay || rm -rvf $HOME/.cache/yay/* /root/.cache/yay/*
-
-  # Clear all pacman download cache and databases
-  pacman -Scc --noconfirm
-
-  # Clear logs older than 15 days
-  journalctl --vacuum-time=15d
-
-  # Removes old revisions of snaps
-  # CLOSE ALL SNAPS BEFORE RUNNING THIS
-  snap list --all | awk '/disabled/{print $1, $3}' |
-    while read snapname revision; do
-        snap remove "$snapname" --revision="$revision"
-    done
-  #XXX http://mywiki.wooledge.org/BashProgramming/05
-
-  flatpak uninstall --unused
-  rm -rvf /var/lib/flatpak/.removed
-  # Flatpak also uses /var/tmp
-
-  # Clear cache directories
-  rm -rf /home/bullshark/.googleearth/Cache/*
-  rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
-  rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
-  rm -rf /home/bullshark/.config/Caprine/Cache/*
-  rm -rf /home/bullshark/.config/Caprine/Code\ Cache/*
-  rm -rf /home/bullshark/.cache/*
-  rm -rf /root/.cache/*
-  rm -rf /tmp/*
-  rm -rf /var/tmp/*
-  rm -rf /var/cache/*
 
   # Do it as root
   bleachbit --clean \
@@ -208,15 +176,9 @@ function sweep {
     zoom.cache \
     zoom.logs \
     zoom.recordings
-EOF
-
-  # Yay and pamac cleanup
-  yes | yay -Scc
-  yay -Yc
-
-  browser-vacuum
 
   # Do it as non root
+  sudo -u "$(getent passwd 1000 | awk -F: '{print $1}')" \
   bleachbit --clean \
     audacious.cache \
     audacious.log \
@@ -303,22 +265,69 @@ EOF
     zoom.cache \
     zoom.logs \
     zoom.recordings
+
+  # Remove cache files if yay is not running
+  killall -q -0 yay || rm -rvf $HOME/.cache/yay/* /root/.cache/yay/*
+
+  # Clear all pacman download cache and databases
+  pacman -Scc --noconfirm
+
+  # Clear logs older than 15 days
+  journalctl --vacuum-time=15d
+
+  # Removes old revisions of snaps
+  # CLOSE ALL SNAPS BEFORE RUNNING THIS
+  snap list --all | awk '/disabled/{print $1, $3}' |
+    while read snapname revision; do
+        snap remove "$snapname" --revision="$revision"
+    done
+  #XXX http://mywiki.wooledge.org/BashProgramming/05
+
+  flatpak uninstall --unused
+  rm -rvf /var/lib/flatpak/.removed
+  # Flatpak also uses /var/tmp
+
+  # Clear cache directories
+  rm -rf /home/bullshark/.googleearth/Cache/*
+  rm -rf /home/bullshark/.local/share/Steam/config/htmlcache/Cache/*
+  rm -rf /home/bullshark/.local/share/Steam/steam/cached/*
+  rm -rf /home/bullshark/.config/Caprine/Cache/*
+  rm -rf /home/bullshark/.config/Caprine/Code\ Cache/*
+  rm -rf /home/bullshark/.cache/*
+  rm -rf /root/.cache/*
+  rm -rf /tmp/*
+  rm -rf /var/tmp/*
+  rm -rf /var/cache/*
+
+EOF
+
+  # Yay and pamac cleanup
+  yes | yay -Scc
+  yay -Yc
+
+  browser-vacuum
 }
 
 # View manpages in vim with vim's color scheme and less macros
 function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' ]]
-
   then
-    #command man --whatis "$@" 1>/dev/null 2>&1 || return $? # Don't launch vim if no man pages are found
 
-    /usr/bin/man "$@" | \
+    # Don't launch vim if no man pages are found
+    if command man -w "$@" 1>/dev/null 2>&1; then
+      /usr/bin/man "$@" | \
 
-      col -b | \
-      /usr/share/vim/vim??/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+        col -b | \
+        /usr/share/vim/vim??/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+
+    else
+      /usr/bin/man "$@"
+
+    fi
 
   else
     /usr/bin/man "$@"
+
   fi
 }
 
