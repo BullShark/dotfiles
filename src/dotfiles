@@ -82,7 +82,8 @@ files=(
 github_user="BullShark"
 github_project="dotfiles"
 dir="/var/tmp"
-repo="https://github.com/$github_user/$github_project.git"
+#repo="https://github.com/$github_user/$github_project.git"
+repo="git@github.com:$github_user/$github_project.git"
 
 # Make globbing * and .* behave
 GLOBIGNORE=".:.."

@@ -18,7 +18,9 @@ bullshark_5g_mobile6="2607:fb90::/28"
 drk="184.155.0.0/16"
 lan="192.168.0.0/16" # 192.168.0.0–192.168.255.255
 lan6="fe80::/64"
-multicast="224.0.0.251"
+multicast="224.0.0.0/4"
+multicast6="ff02::fb"
+broadcast="192.168.0.255"
 localhost="127.0.0.0/8"
 localhost6="::1/128"
 local_net6="fc00::/7"
@@ -105,10 +107,14 @@ iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan -
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 138 -j ACCEPT -m comment --comment "Samba"
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 139 -j ACCEPT -m comment --comment "Samba"
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 139 -j ACCEPT -m comment --comment "Samba"
+# Samba (Broadcast)
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $broadcast --sport 137 --dport 137 -j ACCEPT -m comment --comment "Samba"
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $broadcast --sport 138 --dport 138 -j ACCEPT -m comment --comment "Samba"
 
 # Avahi Daemon (Used by my TV)
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 5353 -j ACCEPT -m comment --comment "Avahi"
 ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $multicast --sport 5353 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
 
 # TV Miracast
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 15600 -j ACCEPT -m comment --comment "TV Miracast"

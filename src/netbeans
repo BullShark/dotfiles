@@ -20,11 +20,6 @@
 # resolve symlinks
 #
 
-# Java font-fix needed for Netbeans
-#export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
-export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
-export PATH="$JAVA_HOME/bin:$PATH"
-
 PRG=$0
 
 while [ -h "$PRG" ]; do
@@ -142,12 +137,12 @@ launchNbexec() {
         sh=/bin/bash
     fi
     if [ "${founduserdir}" = "yes" ]; then
-        exec $sh "$nbexec" "$@"
+        exec $sh "$nbexec" --jdkhome '/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/' "$@"
     else
         if [ "${foundcachedir}" = "yes" ]; then
-            exec $sh "$nbexec" --userdir "${userdir}" "$@"
+            exec $sh "$nbexec" --userdir "${userdir}" --jdkhome '/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/' "$@"
         else
-            exec $sh "$nbexec" --userdir "${userdir}" --cachedir "${cachedir}" "$@"
+            exec $sh "$nbexec" --userdir "${userdir}" --cachedir "${cachedir}" --jdkhome '/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/' "$@"
         fi
     fi
 }
@@ -157,7 +152,7 @@ launchNbexec() {
 case "`uname`" in
     Darwin*)
         eval launchNbexec \
-            --jdkhome '/usr/lib/jvm/java-16-jdk/' \
+            --jdkhome '"$netbeans_jdkhome"' \
             -J-Xdock:name=NetBeans \
             '"-J-Xdock:icon=$basedir/nb/netbeans.icns"' \
             --branding nb \
@@ -168,7 +163,8 @@ case "`uname`" in
         ;;
     *)
         eval launchNbexec \
-            --jdkhome '/usr/lib/jvm/java-16-jdk/' \
+#            --jdkhome '"$netbeans_jdkhome"' \
+            --jdkhome '/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/' \
             --branding nb \
             --clusters '"$netbeans_clusters"' \
             -J-Dnetbeans.importclass=org.netbeans.upgrade.AutoUpgrade \

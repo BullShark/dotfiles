@@ -33,6 +33,10 @@ export PATH="$PATH:$HOME/Android/Sdk/tools"
 # Gem for fpm
 export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
+# Set here instead of netbeans script
+export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
+export PATH="$JAVA_HOME/bin:$PATH"
+
 # Antialiasing for fonts with Java
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --enable-preview'
 
