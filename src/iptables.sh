@@ -18,6 +18,7 @@ bullshark_5g_mobile6="2607:fb90::/28"
 drk="184.155.0.0/16"
 lan="192.168.0.0/16" # 192.168.0.0–192.168.255.255
 lan6="fe80::/64"
+multicast="224.0.0.251"
 localhost="127.0.0.0/8"
 localhost6="::1/128"
 local_net6="fc00::/7"
@@ -108,6 +109,10 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan
 # Avahi Daemon (Used by my TV)
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 5353 -j ACCEPT -m comment --comment "Avahi"
 ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 5353 -j ACCEPT -m comment --comment "Avahi"
+
+# TV Miracast
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 15600 -j ACCEPT -m comment --comment "TV Miracast"
+ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 15600 -j ACCEPT -m comment --comment "TV Miracast"
 
 # Android Debugger ADB
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 5037 -j ACCEPT -m comment --comment "ADB"

@@ -95,6 +95,10 @@ function sweep {
 
   sudo -E -u root bash << 'EOF'             # Execute all as root
 
+  # We must close them before cleaning
+  kill -9 $(pidof firefox) 2>/dev/null
+  kill -9 $(pidof chromium) 2>/dev/null
+
   # Do it as root
   bleachbit --clean \
     audacious.cache \
@@ -311,10 +315,7 @@ EOF
   yes | yay -Scc
   yay -Yc
 
-  # We must close them before cleaning
-  pkill firefox
-  pkill chromium
-
+  # We closed Firefox and Chromium earlier already
   browser-vacuum
 }
 
@@ -419,7 +420,7 @@ function bak {
 }
 
 # Get a list of all commands from explicitly installed packages, not dependencies
-function cli {
+function mycmds {
   for p in $(pacman -Qet | awk -F\  '{print $1}')
   do
     pacman -Ql "$p" | grep -E '/[s]?bin/.+'
@@ -481,7 +482,7 @@ function ctof {
 }
 
 # List modules
-function lsmodules {
+function lsmods {
   find /lib/modules/`uname -r`/ -type f -iname '*.o' -or -iname '*.ko' | less
 }
 
