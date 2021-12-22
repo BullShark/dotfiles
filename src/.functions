@@ -332,7 +332,7 @@ function man {
 # Runs MAC address against IEEE OUI list
 # to return device vendor name
 function oui {
-  mac=$(echo "$1" | sed s/[:-]//g | tr "[a-f]" "[A-F]" | grep -Eo "^[0-9A-F]{6}")
+  mac=$(echo "$1" | sed 's/[:-]//g' | tr "[a-f]" "[A-F]" | grep -Eo "^[0-9A-F]{6}")
   #echo $mac
 
   # http://standards-oui.ieee.org/oui/oui.txt
