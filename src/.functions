@@ -5,6 +5,7 @@
 
 #TODO Add more error checking
 # https://citizen428.net/blog/bash-error-handling-with-trap
+
 #XXX These work for bash, not zsh
 #set -o errtrace
 #set -o nounset
@@ -310,6 +311,10 @@ EOF
   yes | yay -Scc
   yay -Yc
 
+  # We must close them before cleaning
+  pkill firefox
+  pkill chromium
+
   browser-vacuum
 }
 
@@ -318,7 +323,7 @@ function man {
   if [[ $# != 0 && $1 != '-k' && $1 != '-h' && $1 != '--help' && $(command man -w "$@" 1>/dev/null 2>&1; echo $?) == 0 ]]
   then
 
-      /usr/bin/man "$@" | \
+      /usr/bin/man "$@" 2>/dev/null | \
 
         col -b | \
         /usr/share/vim/vim??/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
@@ -346,7 +351,7 @@ function oui {
 # Find hosts on the lan and does oui lookup on each
 function lan {
   echo -e "${RED}nmap${RST}:"
-  nmap -n -sn 192.168.0.0/24 -oG - 2>&1 | awk '/Up$/{print $2}'
+  nmap -n -sn 192.168.0.0/23 -oG - 2>&1 | awk '/Up$/{print $2}'
   echo -e "${RED}/proc/net/arp${RST}:"
   for token in $(grep -v '00:00:00:00:00:00' /proc/net/arp | tail -n +2 | awk -F' ' '{print $1, $4}' | sed 1d);
   do

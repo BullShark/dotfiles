@@ -41,5 +41,9 @@ export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --e
 #unset _JAVA_OPTIONS
 #alias java='java "$_SILENT_JAVA_OPTIONS"'
 
+# Turn ally (accessibility) features off to avoid getting an error message
+export NO_AT_BRIDGE=1
+unset DBUS_SESSION_BUS_ADDRESS
+
 # vi: ft=sh
 
