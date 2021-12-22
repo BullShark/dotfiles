@@ -315,7 +315,7 @@ function man {
     /usr/bin/man "$@" | \
 
       col -b | \
-      /usr/share/vim/vim82/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
+      /usr/share/vim/vim??/macros/less.sh -R -c 'set ft=man nomod nolist nonumber' -
 
   else
     /usr/bin/man "$@"
