@@ -99,6 +99,10 @@ iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan -
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
 ip6tables -A INPUT -p udp -m state --state NEW --source $lan6 --destination $lan6 --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 1739 -j ACCEPT -m comment --comment "KDE Connect"
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $multicast --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
+
+# 12/22/21 8:49 AM	manjaro	kernel	[40886.386214] iptables denied: IN=enp3s0 OUT= MAC=ff:ff:ff:ff:ff:ff:60:b7:6e:46:74:bc:08:00 SRC=192.168.0.175 DST=255.255.255.255 LEN=1904 TOS=0x00 PREC=0x00 TTL=64 ID=14626 PROTO=UDP SPT=48604 DPT=1716 LEN=1884 
 
 # Samba (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 137 -j ACCEPT -m comment --comment "Samba"
