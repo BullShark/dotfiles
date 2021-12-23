@@ -145,6 +145,9 @@ alias lsusers='cut -d: -f1 < /etc/passwd | sort | xargs'
 # See what's on the local network and get hardware info from their mac addys
 alias netd='sudo netdiscover -i enp3s0'
 
+# Module parameters for wifi
+alias modparams='systool -vm 88XXau'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all

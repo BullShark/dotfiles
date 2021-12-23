@@ -484,8 +484,9 @@ function ctof {
 # List modules
 function lsmods {
   # /usr/src/rtl8812au-5.9.3.2.r10.g6ef5d8f/8812au.ko
+  # /lib/modules/5.14.21-2-MANJARO/updates/dkms/88XXau.ko.xz
 
-  find /lib/modules/`uname -r`/ /usr/src/ -type f -iname '*.o' -or -iname '*.ko' | less
+  find /lib/modules/`uname -r`/ /usr/src/ -type f -iname '*.o' -or -iname '*.ko' -or -iname '*.ko.xz' | less
 }
 
 # Prevent these options from being used outside of this file
