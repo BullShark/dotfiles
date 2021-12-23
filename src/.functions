@@ -428,7 +428,7 @@ function mycmds {
 }
 
 # Similar as above
-function lscmds() {
+function lscmds {
   for p in $(echo $PATH | sed 's/:/ /g')
   do
     echo "$p:"
