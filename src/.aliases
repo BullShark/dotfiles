@@ -60,6 +60,9 @@ alias moon='curl wttr.in/Moon'
 # Run youtube-dl for music without looking at --help every time
 alias yt-audio='youtube-dl -x --audio-quality 0 --audio-format mp3 --add-metadata'
 
+# Write those tags to file
+alias youtube-dl='youtube-dl --add-metadata'
+
 # Use larger units
 alias iostat='iostat --human'
 
