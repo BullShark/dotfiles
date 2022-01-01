@@ -98,6 +98,7 @@ function sweep {
   # We must close them before cleaning
   kill -HUP $(pidof firefox) 2>/dev/null
   kill -HUP $(pidof chromium) 2>/dev/null
+  kill -HUP $(pidof discord) 2>/dev/null
 
   # Do it as root
   bleachbit --clean \

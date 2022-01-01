@@ -35,7 +35,7 @@ hardstatus off			# Statusbar off
 hardstatus alwayslastline	# Statusbar at top
 #hardstatus top right		# More convenient status messages location
 termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
-mousetrack off			# Make copy and paste with the mouse work
+defmousetrack off		# Make copy and paste with the mouse work
 #multiuser on			# Allow other users to attach to my user's screen session
 #acladd drk			# Add user drk to the acl to allow him to attach my shared screen
 

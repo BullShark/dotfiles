@@ -111,9 +111,17 @@ iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan -
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 138 -j ACCEPT -m comment --comment "Samba"
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 139 -j ACCEPT -m comment --comment "Samba"
 ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 139 -j ACCEPT -m comment --comment "Samba"
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 445 -j ACCEPT -m comment --comment "Samba"
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 445 -j ACCEPT -m comment --comment "Samba"
+
 # Samba (Broadcast)
+iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $broadcast --sport 136 --dport 136 -j ACCEPT -m comment --comment "Samba"
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $broadcast --sport 137 --dport 137 -j ACCEPT -m comment --comment "Samba"
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $broadcast --sport 138 --dport 138 -j ACCEPT -m comment --comment "Samba"
+
+# Cups Printer
+iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 631 -j ACCEPT -m comment --comment "Cups Printer"
+ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan6 --dport 631 -j ACCEPT -m comment --comment "Cups Printer"
 
 # Avahi Daemon (Used by my TV)
 iptables -A INPUT -p udp -m state --state NEW --source $lan --destination $lan --dport 5353 -j ACCEPT -m comment --comment "Avahi"

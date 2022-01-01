@@ -151,6 +151,9 @@ alias netd='sudo netdiscover -i enp3s0'
 # Module parameters for wifi
 alias modparams='systool -vm 88XXau'
 
+# apt-file find lib.so (Uses regex)
+alias apt-file='sudo pacman -Fx'
+
 #-------------------------------------------------------------
 # ss: socket statistics
 # -a all
