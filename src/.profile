@@ -4,7 +4,7 @@
 #
 
 # Proton
-export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton 3.7"
+#export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton 3.7"
 #[[ -f ~/.proton ]] && export STEAM_COMPAT_DATA_PATH="~/.proton"
 export STEAM_COMPAT_DATA_PATH="~/.proton"
 
@@ -35,9 +35,9 @@ fi
 # Gem for fpm
 [[ -f ~/.local/share/gem/ruby/3.0.0/bin ]] && export PATH="$PATH:$HOME/.local/share/gem/ruby/3.0.0/bin"
 
-# Set here instead of netbeans script
-export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
-export PATH="$JAVA_HOME/bin:$PATH"
+# Only update the PATH if JAVA_HOME is set
+[[ -f /home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca ]] && export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
+[[ -z JAVA_HOME ]] && export PATH="$JAVA_HOME/bin:$PATH"
 
 # Antialiasing for fonts with Java
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --enable-preview'
