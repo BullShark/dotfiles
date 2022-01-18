@@ -447,9 +447,10 @@ function autostart {
   systemctl --user list-unit-files | grep enabled
   systemctl --global list-unit-files | grep enabled
 
-  sudo ls /etc/xdg/autostart \
+  sudo -E ls /etc/xdg/autostart \
           /etc/skel/.config/autostart \
           /root/.config/autostart \
+          $HOME/.config/autostart \
           /usr/share/kservices5
 
   for dir in `getent passwd | awk -F':' '{print $6}' | sort -u`
