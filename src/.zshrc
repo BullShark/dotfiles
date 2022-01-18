@@ -113,14 +113,13 @@ export HISTSIZE=500000
 #unsetopt INC_APPEND_HISTORY
 #setopt APPEND_HISTORY
 
-# Java font-fix needed for Netbeans
-export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
-
 [[ -e ~/.aliases ]] && . ~/.aliases
 
 [[ -e ~/.functions ]] && . ~/.functions
 
+[[ -e ~/.profile ]] && . ~/.profile
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+

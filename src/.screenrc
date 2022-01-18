@@ -7,7 +7,6 @@ defscrollback 50000		# Lots of scroll-back
 bind ' ' windowlist -b		# Space displays the list of windows
 #bind '^b' '^a^a'		# Bind ^b for nested screens that would do ^a^a
 #termcapinfo xterm* ti@:te@	# Scroll using scrollbar of Konsole or xterm instead
-defmousetrack on		# Watch for mouse clicks when there are splits
 #shelltitle "$ |zsh"		# Set the shell title
 setenv DISPLAY ':0'		# No more issues launching GUI apps
 #reptyr pid			# Attach a process in screen that was started outside of screen
@@ -35,6 +34,7 @@ hardstatus off			# Statusbar off
 hardstatus alwayslastline	# Statusbar at top
 #hardstatus top right		# More convenient status messages location
 termcapinfo xterm 'hs:ts=\E]2;:fs=\007:ds=\E]2;screen\007'	# Special xterm hardstatus: Use the window title.
+#defmousetrack on		# Watch for mouse clicks when there are splits
 defmousetrack off		# Make copy and paste with the mouse work
 #multiuser on			# Allow other users to attach to my user's screen session
 #acladd drk			# Add user drk to the acl to allow him to attach my shared screen
