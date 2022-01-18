@@ -430,10 +430,11 @@ function mycmds {
 
 # Similar as above
 function lscmds {
-  for p in $(echo $PATH | sed 's/:/ /g')
+  IFS=$(printf '\n.'); IFS=${IFS%.}
+  for p in $(echo $PATH | sed -e 's/:/\n/g')
   do
     echo "$p:"
-    sudo ls "$p"
+    ls "$p"
     echo
   done
 }

@@ -4,7 +4,7 @@
 #
 
 # Proton
-[[ -d "$HOME/.local/share/Steam/steamapps/common/Proton - Experimental/" ]] && export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton - Experimental/"
+[[ -d "$HOME/.local/share/Steam/steamapps/common/Proton - Experimental" ]] && export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton - Experimental"
 [[ -d ~/.proton ]] && export STEAM_COMPAT_DATA_PATH="~/.proton"
 
 # Man pages
@@ -19,7 +19,7 @@ export EDITOR="vim"
 # Netbeans Building Project Fix:
 # https://stackoverflow.com/questions/6448163/a-fatal-error-has-been-detected-by-the-java-runtime-environment-sigsegv-libjvm/7515836
 # Can netbeans be found in a bin directory? Then it is installed.
-if locate --regex '.*bin/netbeans$'; then
+if locate --regex '.*bin/netbeans$' 1>/dev/null 2>&1 ; then
     export LD_BIND_NOW="1"
 fi
 
@@ -37,7 +37,7 @@ if [[ -d ~/Android/Sdk/ ]]; then
 fi
 
 # Only update the PATH if JAVA_HOME is set
-[[ -d /home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca ]] && export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/16.0.2.fx-librca/'
+[[ -d "/home/bullshark/.sdkman/candidates/java/current" ]] && export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/current'
 [[ -n JAVA_HOME ]] && export PATH="$JAVA_HOME/bin:$PATH"
 
 # Antialiasing for fonts with Java
