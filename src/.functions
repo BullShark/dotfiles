@@ -434,7 +434,7 @@ function lscmds {
   for p in $(echo $PATH | sed -e 's/:/\n/g')
   do
     echo "$p:"
-    ls "$p"
+    sudo ls --color=auto "$p"
     echo
   done
 }
@@ -443,23 +443,35 @@ function lscmds {
 function autostart {
   sudo -v
 
+  echo -e "${RED}Systemd:${RST}"
   systemctl --system list-unit-files | grep enabled
   systemctl --user list-unit-files | grep enabled
   systemctl --global list-unit-files | grep enabled
 
-  sudo -E ls /etc/xdg/autostart \
-          /etc/skel/.config/autostart \
-          /root/.config/autostart \
-          $HOME/.config/autostart \
-          /usr/share/kservices5
+  echo -e "\n${RED}/etc/xdg/autostart:${RST}"
+  sudo ls --color=auto "/etc/xdg/autostart"
+
+  echo -e "\n${RED}/etc/skel/.config/autostart:${RST}"
+  sudo ls --color=auto "/etc/skel/.config/autostart"
+
+  echo -e "\n${RED}/root/.config/autostart:${RST}"
+  sudo ls --color=auto "/root/.config/autostart"
+
+  echo -e "\n${RED}$HOME/.config/autostart:${RST}"
+  sudo -E ls --color=auto "$HOME/.config/autostart"
+
+  echo -e "\n${RED}/usr/share/kservices5:${RST}"
+  sudo ls --color=auto "/usr/share/kservices5"
 
   for dir in `getent passwd | awk -F':' '{print $6}' | sort -u`
   do
     if [ -d "$dir/.config/autostart" ] ; then
+        echo -e "\n${RED}$dir/.config/autostart:${RST}"
     	sudo ls "$dir"/.config/autostart
     fi
 
     if [ -d "$dir/.config/autostart-scripts" ] ; then
+        echo -e "\n${RED}$dir/.config/autostart-scripts:${RST}"
     	sudo ls "$dir/.config/autostart-scripts"
     fi
   done
