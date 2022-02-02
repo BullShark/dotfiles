@@ -71,7 +71,7 @@ ZSH_THEME="mh"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # XXX ls ~/.oh-my-zsh/plugins
-plugins=(git adb archlinux)
+plugins=(git adb archlinux colorize github gradle mvn nmap pip screen sdk sudo systemd web-search)
 
 source $ZSH/oh-my-zsh.sh
 

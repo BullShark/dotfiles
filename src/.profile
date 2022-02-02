@@ -32,7 +32,7 @@ fi
 if [[ -d ~/Android/Sdk/ ]]; then
     export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
     export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-    export PATH="$PATH:$HOME/Android/Sdk/build-tools/30.0.2"
+    export PATH="$PATH:$HOME/Android/Sdk/build-tools/31.0.0"
     export PATH="$PATH:$HOME/Android/Sdk/tools"
 fi
 
