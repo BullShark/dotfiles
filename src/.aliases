@@ -155,7 +155,7 @@ alias modparams='systool -vm 88XXau'
 alias apt-file='sudo pacman -Fx'
 
 # Binary clock
-alias binclock='watch '"'"'echo "obase=2;$(date +%s)" | bc'"'"''
+alias binclock='watch -n1 '"'"'echo "obase=2;$(date +%s)" | bc'"'"''
 
 #-------------------------------------------------------------
 # ss: socket statistics

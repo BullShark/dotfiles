@@ -58,6 +58,8 @@ defmousetrack off		# Make copy and paste with the mouse work
 #backtick 2 5 5 "/usr/bin/nvidia-settings" '--display=:0 --terse -q "[fan:0]/GPUCurrentFanSpeedRPM[FAN-0]"'
 # Fan Speed in %
 #backtick 3 5 5 "/usr/bin/nvidia-settings" '--terse -q '[fan:0]/GPUCurrentFanSpeed[FAN-0]''
+# Binary Clock
+#backtick 1 5 5 watch -t 'echo "obase=2;$(date +%s)" | bc'
 #hardstatus string '%{#ffffff;#1d99f3}%-Lw%{#ffffff;#ff0000}%50>%n%f* %t%{#ffffff;#1d99f3}%+Lw%< %{#ffffff;#1d99f3}%-=%{#ffffff;#1d99f3}%0`%{-}'
 #caption always "%{#ffffff;#ff0000} [ %S ]  %f %t %? ( %{rY} %u %{#ffffff;#ff0000} ) %?"
 

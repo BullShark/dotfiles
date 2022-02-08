@@ -16,6 +16,7 @@ bullshark_hamachi="25.0.0.0/8"
 bullshark_5g_mobile="172.32.0.0/11"
 bullshark_5g_mobile6="2607:fb90::/28"
 drk="184.155.0.0/16"
+franklin="73.38.104.154"
 lan="192.168.0.0/16" # 192.168.0.0–192.168.255.255
 lan6="fe80::/64"
 multicast="224.0.0.0/4"
@@ -94,6 +95,7 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 22 -
 iptables -A INPUT -p tcp -m state --state NEW --source $bullshark_5g_mobile --dport 22 -j ACCEPT -m comment --comment "SSH"
 ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark_5g_mobile6 --dport 22 -j ACCEPT -m comment --comment "SSH"
 iptables -A INPUT -p tcp -m state --state NEW --source $drk --dport 22 -j ACCEPT -m comment --comment "SSH"
+iptables -A INPUT -p tcp -m state --state NEW --source $franklin --dport 22 -j ACCEPT -m comment --comment "SSH"
 
 # KDE Connect (LAN)
 iptables -A INPUT -p tcp -m state --state NEW --source $lan --destination $lan --dport 1716 -j ACCEPT -m comment --comment "KDE Connect"
@@ -205,6 +207,7 @@ ip6tables -A INPUT -p tcp -m state --state NEW --source $lan6 --destination $lan
 # Cockpit (BullShark)
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 9090 -j ACCEPT -m comment --comment "Cockpit"
 #ip6tables -A INPUT -p tcp -m state --state NEW --source $bullshark6 --dport 9090 -j ACCEPT -m comment --comment "Cockpit"
+#iptables -A INPUT -p tcp -m state --state NEW --source $franklin --dport 9090 -j ACCEPT -m comment --comment "Cockpit"
 
 # Webmin (BullShark)
 #iptables -A INPUT -p tcp -m state --state NEW --source $bullshark --dport 10000 -j ACCEPT -m comment --comment "Webmin"
