@@ -137,7 +137,7 @@ alias findmp3='lsof -p $(pidof clementine) | grep -E '/.+\.mp3''
 alias ct='column -t'
 
 # Path in human readable format
-alias path="echo $PATH | tr ':' '\n'"
+alias path="echo ${PATH} | tr ':' '\n'"
 
 # Simple HTTP Server
 alias webup='python3 -m http.server 8080'
@@ -156,6 +156,9 @@ alias apt-file='sudo pacman -Fx'
 
 # Binary clock
 alias binclock='watch -n1 '"'"'echo "obase=2;$(date +%s)" | bc'"'"''
+
+# Network summary
+alias netsum='tail -n +2 /proc/net/dev | tr -d '"'"':,|'"'"' | awk '"'"'{print $1 " " $2 " " $10}'"'"' | numfmt --to=iec --header=1 --field=2,3 | ct'
 
 #-------------------------------------------------------------
 # ss: socket statistics

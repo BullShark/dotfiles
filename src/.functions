@@ -87,11 +87,14 @@ function exeicon {
 }
 
 # Clean temporary files created by pacman, pamac, octopi, yay, flatpak, snap, and brew
+#TODO Add up the total amount of spacew recovered
 function sweep {
 
   # Turn ally (accessibility) features off to avoid getting an error message
   export NO_AT_BRIDGE=1
   unset DBUS_SESSION_BUS_ADDRESS
+  
+  size_before_kb=$(df -BK / | tail -1 | awk '{print $4}' | grep -Eo '^[0-9]+')
 
   sudo -E -u root bash << 'EOF'             # Execute all as root
 
@@ -318,6 +321,12 @@ EOF
 
   # We closed Firefox and Chromium earlier already
   browser-vacuum
+
+  size_after_kb=$(df -BK / | tail -1 | awk '{print $4}' | grep -Eo '^[0-9]+')
+
+  space_recovered_mb=$(echo "scale=2; $(($size_after_kb - $size_before_kb)) / 1024^1" | bc)
+
+  echo -e "\n${RED}Total Space Recovered:${RST} ${space_recovered_gb}G"
 }
 
 # View manpages in vim with vim's color scheme and less macros
