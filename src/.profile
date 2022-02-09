@@ -5,12 +5,12 @@
 
 # Proton
 [[ -d "$HOME/.local/share/Steam/steamapps/common/Proton - Experimental" ]] && export PATH="$PATH:$HOME/.local/share/Steam/steamapps/common/Proton - Experimental"
-[[ -d ~/.proton ]] && export STEAM_COMPAT_DATA_PATH="~/.proton"
+[[ -d "$HOME/.proton" ]] && export STEAM_COMPAT_DATA_PATH="$HOME/.proton"
 
 # Man pages
 export MANPAGER='less -s -M +Gg'	# Display percentage in the document
 export LESS="--RAW-CONTROL-CHARS"	# Get color support for 'less'
-[[ -f ~/.LESS_TERMCAP ]] && . ~/.LESS_TERMCAP	# Use colors for less, man, etc.
+[[ -f "$HOME/.LESS_TERMCAP" ]] && . "$HOME/.LESS_TERMCAP"	# Use colors for less, man, etc.
 
 # Miscellaneous
 export EDITOR="vim"
@@ -38,7 +38,7 @@ fi
 
 # Only update the PATH if JAVA_HOME is set
 [[ -d "/home/bullshark/.sdkman/candidates/java/current" ]] && export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/current'
-[[ -n JAVA_HOME ]] && export PATH="$JAVA_HOME/bin:$PATH"
+[[ -n "$JAVA_HOME" ]] && export PATH="$JAVA_HOME/bin:$PATH"
 
 # Antialiasing for fonts with Java
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --enable-preview'
