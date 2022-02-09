@@ -3,13 +3,13 @@
 #
 # Functions shared between bash and zsh
 
-#TODO Add more error checking
-# https://citizen428.net/blog/bash-error-handling-with-trap
-
-#XXX These work for bash, not zsh
+# These work for bash, not zsh
 #set -o errtrace
 #set -o nounset
 #set -o pipefail
+
+#TODO Add more error checking
+# https://citizen428.net/blog/bash-error-handling-with-trap
 
 #TODO Use Color and format in more functions
 # See /usr/bin/browser-vacuum for examples
