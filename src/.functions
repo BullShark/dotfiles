@@ -326,7 +326,8 @@ EOF
 
   space_recovered_mb=$(echo "scale=2; $(($size_after_kb - $size_before_kb)) / 1024^1" | bc)
 
-  echo -e "\n${RED}Total Space Recovered:${RST} ${space_recovered_gb}G"
+  #FIXME Reports 3.66G when it should be close to 0
+#  echo -e "\nTotal Space Recovered: ${YLW}${space_recovered_gb}G${RST}"
 }
 
 # View manpages in vim with vim's color scheme and less macros
