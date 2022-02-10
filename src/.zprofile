@@ -2,7 +2,7 @@
 # ~/.zprofile
 #
 
-[[ -f ~/.profile ]] && emulate sh -c 'source ~/.profile'
+[[ -f "$HOME/.profile" ]] && emulate sh -c "source '$HOME/.profile'"
 
 [[ -f /usr/share/doc/pkgfile/command-not-found.zsh ]] && . /usr/share/doc/pkgfile/command-not-found.zsh
 

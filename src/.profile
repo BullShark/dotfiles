@@ -19,7 +19,7 @@ export EDITOR="vim"
 # Netbeans Building Project Fix:
 # https://stackoverflow.com/questions/6448163/a-fatal-error-has-been-detected-by-the-java-runtime-environment-sigsegv-libjvm/7515836
 # Can netbeans be found in a bin directory? Then it is installed.
-if locate --regex '.*bin/netbeans$' 1>/dev/null 2>&1 ; then
+if locate --limit 1 --regex '.*bin/netbeans$' 1>/dev/null 2>&1 ; then
     export LD_BIND_NOW="1"
 fi
 
