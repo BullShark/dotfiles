@@ -501,30 +501,32 @@ function autostart {
       tee "$HOME/files_not_owned.log"
   }
 
-  # Remove duplicates from the PATH
+  # Remove duplicates, non existant directories, and trailing colons from the PATH
   function fixpath {
 
     # Remove duplicates from PATH
-    PATH="$(echo "$PATH" | tr ':' '\n' | sort -u | tr '\n' ':' | sed 's/:$//')"
+    export PATH="$(echo "$PATH" | tr ':' '\n' | sort -u | tr '\n' ':' | sed 's/:$//')"
 
     # Remove references to directories that do not exist.
     tmp=""
     IFS=$(printf '\n.'); IFS=${IFS%.}
-    for p in $(echo "${PATH//:/$'\n'}")
+    for p in $(echo "${PATH}" | tr ':' '\n')
     do
 
-      if [[ ! -d "$p" ]]; then
-        continue
-      else
+      if [[ -d "$p" ]]; then
+        echo "${GRN}p:${RST} ${p}"
         tmp="$p:$tmp"
+      else
+        echo "${GRN}p (non-existant):${RST} ${p}"
+        continue
       fi
 
     done
     
+    # Let's see what tmp looks like.
+    echo "${GRN}tmp:${RST} ${tmp}"
     # Remove trailing colon characters from tmp and set it to PATH
-    PATH=$(echo ${tmp} | sed -e 's/^:*//' -e 's/:*$//')
-
-    export PATH
+    export PATH=$(echo ${tmp} | sed -e 's/^:*//' -e 's/:*$//')
   }
 
   # Celcius to fahrenheit
