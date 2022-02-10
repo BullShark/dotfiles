@@ -1,3 +1,4 @@
+#!/usr/bin/zsh
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -74,7 +75,7 @@ ZSH_THEME="mh"
 #plugins=(git adb archlinux colorize github gradle mvn nmap pip screen sdk sudo systemd web-search)
 plugins=(git adb archlinux)
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # User configuration
 
@@ -114,11 +115,11 @@ export HISTSIZE=500000
 #unsetopt INC_APPEND_HISTORY
 #setopt APPEND_HISTORY
 
-[[ -e ~/.aliases ]] && . ~/.aliases
+[[ -e "$HOME/.aliases" ]] && . "$HOME/.aliases"
 
-[[ -e ~/.functions ]] && . ~/.functions
+[[ -e "$HOME/.functions" ]] && . "$HOME/.functions"
 
-[[ -e ~/.profile ]] && . ~/.profile
+[[ -e "$HOME/.profile" ]] && . "$HOME/.profile"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"

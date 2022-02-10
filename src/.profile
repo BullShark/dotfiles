@@ -32,14 +32,9 @@ fi
 if [[ -d ~/Android/Sdk/ ]]; then
     export PATH="$PATH:$HOME/Android/Sdk/tools/bin"
     export PATH="$PATH:$HOME/Android/Sdk/platform-tools"
-    #export PATH=$PATH:$HOME/Android/Sdk/build-tools/32.[0-9].[0-9]
     export PATH="$PATH:$HOME/Android/Sdk/build-tools/32.0.0"
     export PATH="$PATH:$HOME/Android/Sdk/tools"
 fi
-
-# Only update the PATH if JAVA_HOME is set
-[[ -d "/home/bullshark/.sdkman/candidates/java/current" ]] && export JAVA_HOME='/home/bullshark/.sdkman/candidates/java/current'
-[[ -n "$JAVA_HOME" ]] && export PATH="$JAVA_HOME/bin:$PATH"
 
 # Antialiasing for fonts with Java
 export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp -Dswing.aatext=true --enable-preview'
