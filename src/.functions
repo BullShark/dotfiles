@@ -374,7 +374,7 @@ function lan {
       echo -en "$token\t"
     elif [[ $token =~ ^([A-Za-z0-9]{2}:){5}[A-Za-z0-9]{2} ]]; then
       manufacturer=$(oui "$token")
-      if [ -n "$manufacturer" ]; then
+      if [[ -n "$manufacturer" ]]; then
         echo "$manufacturer"
       else
         echo Unknown
@@ -446,7 +446,8 @@ function mycmds {
 # Similar as above
 function lscmds {
   IFS=$(printf '\n.'); IFS=${IFS%.}
-  for p in $(echo "${PATH//:/$'\n'}")
+  #for p in $(echo "${PATH//:/$'\n'}")
+  for p in "${PATH//:/$'\n'}"
   do
     echo "$p:"
     sudo ls --color=auto "$p"
@@ -480,12 +481,12 @@ function autostart {
 
   for dir in $(getent passwd | awk -F':' '{print $6}' | sort -u)
     do
-      if [ -d "$dir/.config/autostart" ] ; then
+      if [[ -d "$dir/.config/autostart" ]] ; then
           echo -e "\n${RED}$dir/.config/autostart:${RST}"
           sudo ls "$dir"/.config/autostart
       fi
 
-      if [ -d "$dir/.config/autostart-scripts" ] ; then
+      if [[ -d "$dir/.config/autostart-scripts" ]] ; then
           echo -e "\n${RED}$dir/.config/autostart-scripts:${RST}"
           sudo ls "$dir/.config/autostart-scripts"
       fi
@@ -502,7 +503,27 @@ function autostart {
 
   # Remove duplicates from the PATH
   function fixpath {
+
+    # Remove duplicates from PATH
     PATH="$(echo "$PATH" | tr ':' '\n' | sort -u | tr '\n' ':' | sed 's/:$//')"
+
+    # Remove references to directories that do not exist.
+    tmp=""
+    IFS=$(printf '\n.'); IFS=${IFS%.}
+    for p in $(echo "${PATH//:/$'\n'}")
+    do
+
+      if [[ ! -d "$p" ]]; then
+        continue
+      else
+        tmp="$p:$tmp"
+      fi
+
+    done
+    
+    # Remove trailing colon characters from tmp and set it to PATH
+    PATH=$(echo ${tmp} | sed -e 's/^:*//' -e 's/:*$//')
+
     export PATH
   }
 
