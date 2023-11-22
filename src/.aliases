@@ -58,7 +58,7 @@ alias weather='curl wttr.in'
 alias moon='curl wttr.in/Moon'
 
 # Run youtube-dl for music without looking at --help every time
-alias yt-audio='youtube-dl -x --audio-quality 0 --audio-format mp3 --add-metadata'
+alias yt-audio='yt-dlp --yes-playlist --continue --progress -x --audio-quality 0 --audio-format mp3 --add-metadata --xattrs'
 
 # Write those tags to file
 alias youtube-dl='youtube-dl --add-metadata'
